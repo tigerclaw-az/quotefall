@@ -16,7 +16,7 @@ var safe = {
 	},
 	clean: [
 		settings.dirs.app + '/css/main.css',
-		settings.dirs.app + 'js/tpl.js',
+		settings.dirs.app + 'js/lib',
 		'./' + settings.dirs.dist
 	],
 	styles: {
@@ -37,7 +37,7 @@ var safe = {
 	},
 	js: {
 		source: [appDir + '/js/*.js'],
-		dist: appDir + '/js'
+		dist: appDir + '/js/lib'
 	},
 	html: {
 		source: appDir + '/*.html',
