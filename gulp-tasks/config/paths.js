@@ -14,11 +14,17 @@ var safe = {
 	bower: {
 		source: appDir + '/bower_components'
 	},
+	clean: [
+		settings.dirs.app + '/css/main.css',
+		settings.dirs.app + 'js/tpl.js',
+		'./' + settings.dirs.dist
+	],
 	styles: {
 		source: {
 			all: [appDir + '/sass/**/*.scss'],
 			main: [appDir + '/sass/main.scss']
 		},
+		wiredep: appDir + '/css',
 		dist: distDir + '/css'
 	},
 	images: {

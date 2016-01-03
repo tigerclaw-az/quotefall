@@ -1,5 +1,4 @@
 'use strict';
-// generated on 2015-12-31 using generator-gulp-foundation 0.0.3
 
 var gulp = require('gulp');
 var options = require('./gulp-tasks/config/options');
@@ -30,8 +29,6 @@ gulp.task('styles', function () {
         .pipe($.size());
 });
 
-//gulp.task('styles-watch', ['styles'], reload);
-
 gulp.task('js', function () {
     return gulp.src(paths.js.source)
     	.pipe($.jscs())
@@ -40,8 +37,6 @@ gulp.task('js', function () {
         .pipe($.jshint.reporter(require('jshint-stylish')))
         .pipe(reload({stream:true}));
 });
-
-//gulp.task('scripts-watch', ['js'], reload);
 
 gulp.task('html', ['dust', 'styles', 'js'], function () {
     return gulp.src(paths.html.source)
@@ -69,14 +64,10 @@ gulp.task('fonts', function () {
 });
 
 gulp.task('clean', function () {
-    return del(['app/css/main.css', './' + settings.dirs.dist], {force: true});
+    return del(paths.clean, {force: true});
 });
 
-gulp.task('build', ['clean'], function() {
-	gulp.start('html');
-	gulp.start('images');
-	gulp.start('fonts');
-});
+gulp.task('build', ['html', 'images', 'fonts']);
 
 gulp.task('default', ['watch']);
 
@@ -87,11 +78,12 @@ gulp.task('serve', ['clean', 'build'], function () {
 // inject bower components
 gulp.task('wiredep', function () {
     var wiredep = require('wiredep').stream;
-    gulp.src(paths.styles.source.all)
+    gulp.src(paths.styles.source.main)
         .pipe(wiredep({
             directory: paths.bower.source
         }))
-        .pipe(gulp.dest(paths.styles.dist));
+        .pipe(gulp.dest(paths.styles.wiredep));
+
     gulp.src(paths.html.source)
         .pipe(wiredep({
             directory: paths.bower.source,
