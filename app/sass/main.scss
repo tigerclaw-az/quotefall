@@ -16,8 +16,8 @@ $icon-font-path: '../fonts/';
 
 /* Space out content a bit */
 body {
-  padding-top: rem-calc(20);
-  padding-bottom: rem-calc(20);
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -36,8 +36,8 @@ body {
   h3 {
 	margin-top: 0;
 	margin-bottom: 0;
-	line-height: rem-calc(40);
-	padding-bottom: rem-calc(19);
+	line-height: 40px;
+	padding-bottom: 19px;
   }
 }
 
