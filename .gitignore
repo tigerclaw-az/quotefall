@@ -5,3 +5,4 @@ dist
 bower_components
 app/css/main.scss
 app/css/main.css
+app/js/lib/
