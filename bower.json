@@ -3,11 +3,11 @@
   "dependencies": {
     "basil.js": "~0.4.3",
     "fastclick": "~1.0.6",
-    "jquery": "~2.1.4",
-    "moment": "~2.10.6",
+    "jquery": "~3.1.0",
+    "moment": "~2.14.1",
     "dustjs-linkedin": "~2.7.2",
     "jquery.sticky": "~1.0.0",
     "bootstrap-sass": "~3.3.6",
-    "modernizr": "~2.8.2"
+    "modernizr": "~3.3.1"
   }
 }
