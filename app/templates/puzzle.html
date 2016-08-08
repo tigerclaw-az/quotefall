@@ -1,6 +1,14 @@
 <div class="letters">
-	<span class="column"></span>
+	{#letters}
+	<span class="column">
+		{#columns}
+		<p class="drag-letter letter">{letter}</p>
+		{/columns}
+	</span>
+	{/letters}
 </div>
 <div class="board">
-	<span class="column"></span>
+	{#letters}
+	<span class="drop-letter{?space} blank{/space}"></span>
+	{/letters}
 </div>
