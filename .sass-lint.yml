@@ -65,7 +65,6 @@ rules:
   nesting-depth:
     - 1
     - max-depth: 6
-  no-color-keyword: 1
   no-color-literals: 1
   no-css-comments: 0
   no-debug: 1
