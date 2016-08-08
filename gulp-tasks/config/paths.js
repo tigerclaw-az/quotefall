@@ -40,12 +40,12 @@ var safe = {
 		dist: appDir + '/js/lib'
 	},
 	html: {
-		source: appDir + '/*.html',
+		source: appDir + '/index.html',
 		dist: distDir
 	},
 	templates: {
-		source: appDir + '/templates/*.tpl',
-		dist: distDir + '/templates'
+		source: appDir + '/templates/*.html',
+		dist: distDir + '/js'
 	}
 };
 

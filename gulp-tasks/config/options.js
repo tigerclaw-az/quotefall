@@ -20,7 +20,7 @@ var safe = {
 		},
 		debugInfo: false,
 		xip: false,
-		port: 9000
+		port: 8000
 	},
 	imagemin: {
 		optimizationLevel: 3,
