@@ -1,4 +1,6 @@
 .board {
+	@include clearfix;
+
 	.drop-letter {
 		border: 1px solid $black;
 		float: left;
