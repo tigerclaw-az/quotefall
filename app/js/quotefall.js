@@ -1,8 +1,13 @@
 window.Quotefall = function(quote) {
 	var remainder = 0;
 
-	this.quote = quote;
-	this.totalColumns = Math.ceil(this.quote.length / this.rows);
+	this.quote = quote.toUpperCase();
+	this.puzzleData = {
+		columns: [],
+		squares: []
+	};
+
+	this.columns = Math.ceil(this.quote.length / this.rows);
 	remainder = this.quote.length % this.rows;
 
 	if (remainder > 0) {
@@ -11,9 +16,26 @@ window.Quotefall = function(quote) {
 	}
 
 	this.letters = this.quote.split('');
-	this.puzzleData = {
-		letters: []
-	};
+
+	for (var i = 0; i < this.columns; ++i) {
+		var column;
+
+		if (!this.puzzleData.columns[i]) {
+			this.puzzleData.columns[i] = {};
+		}
+
+		column = this.puzzleData.columns[i];
+
+		if (!column.letters) {
+			column.letters = [];
+		}
+
+		for (var j = 0; j < this.rows; ++j) {
+			var pos = this.columns * j;
+
+			column.letters.push(this.letters[i + pos]);
+		}
+	}
 };
 
 window.Quotefall.prototype = {
@@ -27,10 +49,10 @@ window.Quotefall.prototype = {
 		this.letters.forEach(function(val) {
 			var isSpace = val === ' ';
 
-			self.puzzleData.letters.push({ space: isSpace });
+			self.puzzleData.squares.push({ space: isSpace });
 		});
 
-		$('.puzzle').width(this.totalColumns * this.width);
+		$('.puzzle').width(this.columns * this.width);
 
 		dust.render('puzzle', this.puzzleData, function(err, out) {
 			$('.puzzle').html(out);
