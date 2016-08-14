@@ -1,5 +1,41 @@
+$letter-height: 50;
+$letter-width: 50;
+
 .puzzle {
 	@include clearfix;
 
 	margin: 0 auto;
+
+	.letters {
+		@include clearfix;
+
+		.column {
+			border-left: 1px solid $black;
+			border-right: 1px solid $black;
+			float: left;
+			text-align: center;
+
+			.drag-letter {
+				font-size: 18px;
+				font-weight: 600;
+				height: #{$letter-height / 2}px;
+				width: #{$letter-width - 2}px;
+			}
+		}
+	}
+
+	.board {
+		@include clearfix;
+
+		.drop-letter {
+			border: 1px solid $black;
+			float: left;
+			height: #{$letter-height}px;
+			width: #{$letter-width}px;
+
+			&.blank {
+				background-color: $black;
+			}
+		}
+	}
 }
