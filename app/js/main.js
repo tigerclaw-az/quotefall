@@ -1,6 +1,15 @@
 (function($) {
-	var quote = 'if those space scientists are so smart why do they all count backward',
-		puzzle = new window.Quotefall(quote);
+	var quote = '',
+		puzzle = new window.Quotefall(),
+		$input = $('.input-scrambled');
 
-	puzzle.generateBoard();
+	$input.on('keyup', function(e) {
+		// TODO: Only allow letters and spaces
+	});
+
+	$('.btn-submit').on('click', function() {
+		quote = $input.val();
+
+		puzzle.generateBoard(quote);
+	});
 })(jQuery);
