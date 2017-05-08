@@ -31,18 +31,17 @@ gulp.task('es6', ['eslint'], function() {
 		.transform(babelify, options.babelify)
 		.bundle()
 		.pipe(source('app.js'))
-		.pipe(gulp.dest(settings.dirs.tmp + '/scripts'));
+		.pipe(gulp.dest(paths.js.serve));
 });
 
-// gulp.task('dust', function() {
-// 	gulp.src(paths.templates.source)
-// 		.pipe($.rename({ extname: '' }))
-// 		.pipe($.dust())
-// 		.pipe($.concat('tpl.js'))
-// 		.pipe(gulp.dest(paths.js.dist))
-// 		.pipe(gulp.dest(paths.templates.dist))
-// 		.pipe(reload({ stream: true }));
-// });
+gulp.task('dust', function() {
+	gulp.src(paths.templates.source)
+		.pipe($.rename({ extname: '' }))
+		.pipe($.dust())
+		.pipe($.concat('tpl.js'))
+		.pipe(gulp.dest(paths.templates.serve))
+		.pipe(reload({ stream: true }));
+});
 
 gulp.task('sass-lint', function() {
 	return gulp.src(paths.styles.source.all)
@@ -59,15 +58,15 @@ gulp.task('scss', ['sass-lint'], function() {
 		.pipe($.sass({ errLogToConsole: true }))
 		.pipe($.autoprefixer(options.autoprefixer))
 		.pipe($.sourcemaps.write())
-		.pipe(gulp.dest(settings.dirs.tmp + '/styles'))
+		.pipe(gulp.dest(paths.styles.serve))
 		.pipe(reload({ stream: true }))
 		.pipe($.size());
 });
 
-gulp.task('html', ['es6', 'scss'], function() {
-	return gulp.src(paths.html.source)
+gulp.task('html', ['wiredep', 'es6', 'dust', 'scss'], function() {
+	return gulp.src(settings.dirs.tmp + '/*.html')
 		.pipe($.useref({ searchPath: [settings.dirs.tmp] }))
-		.pipe($.if('*.js', $.uglify()))
+		// .pipe($.if('*.js', $.uglify()))
 		.pipe($.if('*.css', $.csso()))
 		.pipe($.if('*.html', $.minifyHtml(options.minifyHtml)))
 		.pipe(gulp.dest(settings.dirs.dist))
@@ -77,8 +76,8 @@ gulp.task('html', ['es6', 'scss'], function() {
 gulp.task('images', function() {
 	return gulp.src(paths.images.source)
 		.pipe($.cache($.imagemin(options.imagemin)))
-		.pipe(gulp.dest(settings.dirs.tmp + '/images'))
-		.pipe(gulp.dest(settings.dirs.dist + '/images'))
+		.pipe(gulp.dest(paths.images.serve))
+		.pipe(gulp.dest(paths.images.dist))
 		.pipe(reload({ stream: true, once: true }))
 		.pipe($.size());
 });
@@ -86,8 +85,8 @@ gulp.task('images', function() {
 gulp.task('fonts', function() {
 	return gulp.src(require('main-bower-files')().concat(paths.fonts.source))
 		.pipe($.if('*.{eot,svg,ttf,woff}', $.flatten()))
-		.pipe(gulp.dest('.tmp/fonts'))
-		.pipe(gulp.dest('dist/fonts'));
+		.pipe(gulp.dest(paths.fonts.serve))
+		.pipe(gulp.dest(paths.fonts.dist));
 });
 
 gulp.task('extras', function() {
@@ -121,22 +120,21 @@ gulp.task('wiredep', function() {
 
 	gulp.src(paths.html.source)
 		.pipe(wiredep(options.wiredep))
-		.pipe(gulp.dest(settings.dirs.tmp));
+		.pipe(gulp.dest(paths.html.serve));
 });
 
 gulp.task('watch', ['serve'], function() {
-	// watch for changes
+	// Watch for changes
 	gulp.watch([
-		'app/*.html',
-		'app/images/**/*',
-		'.tmp/scripts/app.js'
+		paths.html.serve + '/*.html',
+		paths.images.source.join(','),
+		paths.js.serve + '/app.js'
 	]).on('change', reload);
 
-	// gulp.watch([paths.html.source], reload);
 	gulp.watch(paths.styles.source.all, ['scss']);
 	gulp.watch(paths.fonts.source, ['fonts'], reload);
 	gulp.watch(paths.js.source, ['es6']);
-	// gulp.watch(paths.templates.source, ['dust']);
+	gulp.watch(paths.templates.source, ['dust']);
 	gulp.watch(paths.images.source, ['images']);
 	gulp.watch('bower.json', ['wiredep', 'fonts']);
 });

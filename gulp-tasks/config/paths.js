@@ -24,29 +24,33 @@ var safe = {
 			all: [appDir + '/scss/**/*.scss'],
 			main: [appDir + '/scss/main.scss']
 		},
-		wiredep: tmpDir + '/styles',
+		serve: tmpDir + '/styles',
 		dist: distDir + '/styles'
 	},
 	images: {
 		source: [appDir + '/images/**/*'],
+		serve: tmpDir + '/images',
 		dist: distDir + '/images'
 	},
 	fonts: {
 		source: appDir + '/fonts/**/*',
+		serve: tmpDir + '/fonts',
 		dist: distDir + '/fonts'
 	},
 	js: {
 		source: appDir + '/js/**/*.js',
+		serve: tmpDir + '/scripts',
 		dist: distDir + '/scripts'
 	},
 	html: {
 		source: appDir + '/*.html',
-		dist: distDir,
-		wiredep: tmpDir
+		serve: tmpDir,
+		dist: distDir
 	},
 	templates: {
 		source: appDir + '/templates/*.html',
-		dist: distDir + '/js'
+		serve: tmpDir + '/scripts',
+		dist: distDir + '/scripts'
 	}
 };
 
