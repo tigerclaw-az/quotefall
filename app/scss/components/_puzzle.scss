@@ -10,8 +10,8 @@ $letter-width: 50;
 		@include clearfix;
 
 		.column {
-			border-left: 1px solid $black;
-			border-right: 1px solid $black;
+			border-left: 1px solid map-get($colors, 'black');
+			border-right: 1px solid map-get($colors, 'black');
 			float: left;
 			text-align: center;
 
@@ -28,13 +28,13 @@ $letter-width: 50;
 		@include clearfix;
 
 		.drop-letter {
-			border: 1px solid $black;
+			border: 1px solid map-get($colors, 'black');
 			float: left;
 			height: #{$letter-height}px;
 			width: #{$letter-width}px;
 
 			&.blank {
-				background-color: $black;
+				background-color: map-get($colors, 'black');
 			}
 		}
 	}

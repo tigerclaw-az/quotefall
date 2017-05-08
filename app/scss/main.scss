@@ -1,0 +1,11 @@
+$icon-font-path: '../fonts/';
+
+// bower:scss
+@import 'bootstrap-settings';
+@import 'bower_components/bootstrap-sass/assets/stylesheets/bootstrap';
+// endbower
+
+@import 'variables';
+@import 'global';
+
+@import 'components/puzzle';

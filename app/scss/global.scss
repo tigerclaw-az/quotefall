@@ -1,17 +1,7 @@
-$icon-font-path: '../fonts/';
-
-// bower:scss
-@import '../bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss';
-// endbower
-
-@import 'lib/variables';
-@import 'lib/mixins';
-@import 'components/puzzle';
-
 /* Space out content a bit */
 body {
-	padding-top: 20px;
 	padding-bottom: 20px;
+	padding-top: 20px;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -24,22 +14,22 @@ body {
 
 /* Custom page header */
 .header {
-	border-bottom: 1px solid $gallery-grey;
+	border-bottom: 1px solid map-get($colors, 'gallery-grey');
 
   /* Make the masthead heading the same height as the navigation */
 	h3 {
-		margin-top: 0;
-		margin-bottom: 0;
 		line-height: 40px;
+		margin-bottom: 0;
+		margin-top: 0;
 		padding-bottom: 19px;
 	}
 }
 
 /* Custom page footer */
 .footer {
+	border-top: 1px solid map-get($colors, 'gallery-grey');
+	color: map-get($colors, 'boulder');
 	padding-top: 19px;
-	color: #777;
-	border-top: 1px solid $gallery-grey;
 }
 
 .container-narrow > hr {
@@ -48,8 +38,8 @@ body {
 
 /* Main marketing message and sign up button */
 .jumbotron {
+	border-bottom: 1px solid map-get($colors, 'gallery-grey');
 	text-align: center;
-	border-bottom: 1px solid $gallery-grey;
 
 	.btn {
 		font-size: 21px;
@@ -58,7 +48,7 @@ body {
 }
 
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
+@media(min-width: #{$screen-tablet}) {
 	/* Remove the padding we set earlier */
 	.header,
 	.marketing,
