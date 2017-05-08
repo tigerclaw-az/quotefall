@@ -9,17 +9,16 @@
 	<link rel="apple-touch-icon" href="apple-touch-icon.png">
 	<!-- <link rel="favicon" href="favicon.ico"> -->
 
-	<!-- build:css css/vendor.css -->
+	<!-- build:css styles/vendor.css -->
 	<!-- bower:css -->
 	<!-- endbower -->
 	<!-- endbuild -->
 
-	<!-- build:css css/main.css -->
-	<link rel="stylesheet" href="css/main.css">
+	<!-- build:css styles/main.css -->
+	<link rel="stylesheet" href="styles/main.css">
 	<!-- endbuild -->
 
-	<!-- build:js js/lib/modernizr.js -->
-	<!-- <script src="bower_components/modernizr/bin/modernizr"></script> -->
+	<!-- build:js scripts/lib/modernizr.js -->
 	<!-- endbuild -->
   </head>
 	<body>
@@ -39,33 +38,24 @@
 				<h3 class="text-muted">quotefall</h3>
 			</header>
 
-			Scrambled: <input type="text" length="255" max="255" class="input-scrambled"><button type="submit" class="btn-lg btn-submit">Set</button>
+			<label class="sr-only">Scrambled</label><input placeholder="Scrambled Letters" type="text" length="255" max="255" class="form-control input-lg input-scrambled">
+			<button type="submit" class="btn btn-lg btn-default">Set</button>
+
 			<section class="puzzle"></section>
 
-			<footer>
-			</footer>
+			<footer></footer>
 		</div>
 
-		<!-- build:js js/lib/vendor.js -->
+		<!-- build:js scripts/lib/vendor.js -->
 		<!-- bower:js -->
-		<script src="bower_components/basil.js/src/basil.js"></script>
-		<script src="bower_components/fastclick/lib/fastclick.js"></script>
-		<script src="bower_components/jquery/dist/jquery.js"></script>
-		<script src="bower_components/moment/moment.js"></script>
-		<script src="bower_components/dustjs-linkedin/dist/dust-full.min.js"></script>
-		<script src="bower_components/jquery.sticky/jquery.sticky.js"></script>
-		<script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
 		<!-- endbower -->
 		<!-- endbuild -->
 
-		<!-- build:js js/lib/plugins.js -->
-
+		<!-- build:js scripts/lib/plugins.js -->
 		<!-- endbuild -->
 
-		<!-- build:js js/main.js -->
-		<script src="js/lib/tpl.js"></script>
-		<script src="js/quotefall.js"></script>
-		<script src="js/main.js"></script>
+		<!-- build:js scripts/app.js -->
+		<script src="scripts/app.js"></script>
 		<!-- endbuild -->
 	</body>
 </html>
