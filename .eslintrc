@@ -1,13 +1,18 @@
 {
-  "parser": "babel-eslint",
-  "env": {
+  env: {
     "browser": true,
+    "es6": true,
+    "jquery": true,
     "node": true
   },
-  "rules": {
-    "quotes": [2, "single"],
-    "eol-last": [0],
+  rules: {
+  	"capitalized-comments": [2, "always", { "ignoreInlineComments": true }],
+    quotes: [2, "single"],
+    "eol-last": [2, "always"],
     "no-mixed-requires": [0],
     "no-underscore-dangle": [0]
+  },
+  parserOptions: {
+  	sourceType: "module"
   }
 }
