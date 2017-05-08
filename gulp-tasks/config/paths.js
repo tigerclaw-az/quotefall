@@ -7,25 +7,25 @@ var _ = require('lodash'),
 	settings = require('./settings'),
 	appDir = settings.dirs.app,
 	distDir = settings.dirs.dist,
+	tmpDir = settings.dirs.tmp,
 	output;
 
 // Safe Default incase settings.json not found
 var safe = {
 	bower: {
-		source: appDir + '/bower_components'
+		source: './bower_components'
 	},
 	clean: [
-		settings.dirs.app + '/css/main.css',
-		settings.dirs.app + 'js/lib',
-		'./' + settings.dirs.dist
+		settings.dirs.tmp,
+		settings.dirs.dist
 	],
 	styles: {
 		source: {
-			all: [appDir + '/sass/**/*.scss'],
-			main: [appDir + '/sass/main.scss']
+			all: [appDir + '/scss/**/*.scss'],
+			main: [appDir + '/scss/main.scss']
 		},
-		wiredep: appDir + '/css',
-		dist: distDir + '/css'
+		wiredep: tmpDir + '/styles',
+		dist: distDir + '/styles'
 	},
 	images: {
 		source: [appDir + '/images/**/*'],
@@ -36,12 +36,13 @@ var safe = {
 		dist: distDir + '/fonts'
 	},
 	js: {
-		source: [appDir + '/js/*.js'],
-		dist: appDir + '/js/lib'
+		source: appDir + '/js/**/*.js',
+		dist: distDir + '/scripts'
 	},
 	html: {
-		source: appDir + '/index.html',
-		dist: distDir
+		source: appDir + '/*.html',
+		dist: distDir,
+		wiredep: tmpDir
 	},
 	templates: {
 		source: appDir + '/templates/*.html',

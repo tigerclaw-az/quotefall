@@ -8,8 +8,9 @@ var _ = require('lodash'),
 // Safe Default incase settings.json not found
 var safe = {
 	dirs: {
-		app: 'app',
-		dist: 'dist'
+		app: './app',
+		dist: './dist',
+		tmp: './.tmp'
 	},
 	defaults: {
 
