@@ -1,21 +1,25 @@
 $letter-height: 50;
 $letter-width: 50;
 
-.puzzle {
+.qf-puzzle {
 	@include clearfix;
 
+	display: inline-block;
 	margin: 0 auto;
 
-	.letters {
+	.qf-column {
+		float: left;
+		text-align: center;
+	}
+
+	.qf-letters {
 		@include clearfix;
 
-		.column {
+		.qf-column {
 			border-left: 1px solid map-get($colors, 'black');
 			border-right: 1px solid map-get($colors, 'black');
-			float: left;
-			text-align: center;
 
-			.drag-letter {
+			.qf-letter-drag {
 				font-size: 18px;
 				font-weight: 600;
 				height: #{$letter-height / 2}px;
@@ -24,16 +28,15 @@ $letter-width: 50;
 		}
 	}
 
-	.board {
+	.qf-board {
 		@include clearfix;
 
-		.drop-letter {
+		.qf-letter-drop {
 			border: 1px solid map-get($colors, 'black');
-			float: left;
 			height: #{$letter-height}px;
 			width: #{$letter-width}px;
 
-			&.blank {
+			&.qf-letter-blank {
 				background-color: map-get($colors, 'black');
 			}
 		}

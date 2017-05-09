@@ -1,14 +1,12 @@
-<div class="letters">
+<div class="qf-letters">
 	{#columns}
-	<span class="column">
+	<span class="qf-column">
 		{#letters}
-		<p class="drag-letter letter">{.}</p>
+		<p class="qf-letter-drag qf-letter">{.}</p>
 		{/letters}
 	</span>
 	{/columns}
 </div>
-<div class="board">
-	{#squares}
-	<span class="drop-letter{?space} blank{/space}"></span>
-	{/squares}
+<div class="qf-board">
+
 </div>
