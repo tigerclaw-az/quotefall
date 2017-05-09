@@ -3,8 +3,11 @@ import Quotefall from './quotefall.js';
 
 (($) => {
 	var quote = '',
-		puzzle = new Quotefall(),
-		$input = $('.input-scrambled');
+		qf = new Quotefall(),
+		$input = $('.qf-input-letters'),
+		$puzzle = $('.qf-puzzle');
+
+	$puzzle.width(qf.columns * qf.width);
 
 	$input.on('keydown', function(e) {
 		var key = e.which;
@@ -16,9 +19,16 @@ import Quotefall from './quotefall.js';
 		return true;
 	});
 
-	$('.btn-submit').on('click', function() {
+	$('.qf-set-board').on('click', function() {
+		var board;
+
 		quote = $input.val();
 
-		puzzle.generateBoard(quote);
+		qf.resetBoard();
+		board = qf.getBoard(quote);
+
+		dust.render('puzzle', board, function(err, out) {
+			$puzzle.html(out);
+		});
 	});
 })(jQuery);
