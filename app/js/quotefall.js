@@ -3,17 +3,14 @@
 export
 default class Quotefall {
 	constructor() {
-		this.puzzleData = {
-			columns: [],
-			squares: []
-		};
-
 		this.height = 50;
 		this.width = 50;
 		this.rows = 4;
+
+		this.resetBoard();
 	}
 
-	generateBoard(quote) {
+	getBoard(quote) {
 		var self = this,
 			remainder;
 
@@ -29,8 +26,8 @@ default class Quotefall {
 
 		this.letters = this.quote.split('');
 
-		for (var i = 0; i < this.columns; ++i) {
-			var column;
+		for (let i = 0; i < this.columns; ++i) {
+			let column;
 
 			if (!this.puzzleData.columns[i]) {
 				this.puzzleData.columns[i] = {};
@@ -42,23 +39,20 @@ default class Quotefall {
 				column.letters = [];
 			}
 
-			for (var j = 0; j < this.rows; ++j) {
-				var pos = this.columns * j;
+			for (let j = 0; j < this.rows; ++j) {
+				let pos = this.columns * j,
+					letter = this.letters[i + pos];
 
-				column.letters.push(this.letters[i + pos]);
+				column.letters.push(letter);
 			}
 		}
 
-		this.letters.forEach(function(val) {
-			var isSpace = val === ' ';
+		return this.puzzleData;
+	}
 
-			self.puzzleData.squares.push({ space: isSpace });
-		});
-
-		$('.puzzle').width(this.columns * this.width);
-
-		dust.render('puzzle', this.puzzleData, function(err, out) {
-			$('.puzzle').html(out);
-		});
+	resetBoard() {
+		this.puzzleData = {
+			columns: []
+		};
 	}
 }
