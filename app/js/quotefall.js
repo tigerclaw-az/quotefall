@@ -1,16 +1,21 @@
-window.Quotefall = function() {
-	var remainder = 0;
+/* jshint esversion: 6 */
 
-	this.puzzleData = {
-		columns: [],
-		squares: []
-	};
-	this.height = 50;
-	this.width = 50;
-	this.rows = 4;
+export
+default class Quotefall {
+	constructor() {
+		this.puzzleData = {
+			columns: [],
+			squares: []
+		};
 
-	this.generateBoard = function(quote) {
-		var self = this;
+		this.height = 50;
+		this.width = 50;
+		this.rows = 4;
+	}
+
+	generateBoard(quote) {
+		var self = this,
+			remainder;
 
 		this.quote = quote.toUpperCase();
 
@@ -55,5 +60,5 @@ window.Quotefall = function() {
 		dust.render('puzzle', this.puzzleData, function(err, out) {
 			$('.puzzle').html(out);
 		});
-	};
-};
+	}
+}
