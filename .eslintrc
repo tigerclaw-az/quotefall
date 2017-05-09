@@ -6,7 +6,7 @@
     "node": true
   },
   rules: {
-  	"capitalized-comments": [2, "always", { "ignoreInlineComments": true }],
+  	"capitalized-comments": [2, "always", { "ignoreConsecutiveComments": true, "ignoreInlineComments": true }],
     quotes: [2, "single"],
     "eol-last": [2, "always"],
     "no-mixed-requires": [0],
