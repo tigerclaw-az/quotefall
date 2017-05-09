@@ -35,7 +35,7 @@ gulp.task('es6', ['eslint'], function() {
 });
 
 gulp.task('dust', function() {
-	gulp.src(paths.templates.source)
+	return gulp.src(paths.templates.source)
 		.pipe($.rename({ extname: '' }))
 		.pipe($.dust())
 		.pipe($.concat('tpl.js'))
@@ -52,12 +52,13 @@ gulp.task('sass-lint', function() {
 });
 
 gulp.task('scss', ['sass-lint'], function() {
-	return gulp.src(paths.styles.source.main)
+	return gulp.src(settings.dirs.app + '/scss/main.injected.scss')
 		.pipe($.plumber())
 		.pipe($.sourcemaps.init())
 		.pipe($.sass({ errLogToConsole: true }))
 		.pipe($.autoprefixer(options.autoprefixer))
 		.pipe($.sourcemaps.write())
+		.pipe($.rename('main.css'))
 		.pipe(gulp.dest(paths.styles.serve))
 		.pipe(reload({ stream: true }))
 		.pipe($.size());
@@ -96,6 +97,7 @@ gulp.task('extras', function() {
 		], {
 			dot: true
 		})
+		.pipe(gulp.dest(settings.dirs.tmp))
 		.pipe(gulp.dest(settings.dirs.dist));
 });
 
@@ -105,6 +107,8 @@ gulp.task('clean', function() {
 
 gulp.task('serve', ['build'], function() {
 	browserSync(options.browserSync);
+
+	return true;
 });
 
 // Inject bower components
@@ -112,13 +116,12 @@ gulp.task('wiredep', function() {
 	var wiredep = require('wiredep').stream;
 
 	// Only needed if we use bower:scss inside main.scss
-	// gulp.src(paths.styles.source.main)
-	// 	.pipe(wiredep({
-	// 		directory: paths.bower.source
-	// 	}))
-	// 	.pipe(gulp.dest(settings.dirs.app));
+	gulp.src(paths.styles.source.main)
+		.pipe($.rename('main.injected.scss'))
+		.pipe(wiredep())
+		.pipe(gulp.dest(settings.dirs.app + '/scss'));
 
-	gulp.src(paths.html.source)
+	return gulp.src(paths.html.source)
 		.pipe(wiredep(options.wiredep))
 		.pipe(gulp.dest(paths.html.serve));
 });
@@ -128,7 +131,7 @@ gulp.task('watch', ['serve'], function() {
 	gulp.watch([
 		paths.html.serve + '/*.html',
 		paths.images.source.join(','),
-		paths.js.serve + '/app.js'
+		paths.js.serve + '/**/*.js'
 	]).on('change', reload);
 
 	gulp.watch(paths.styles.source.all, ['scss']);
@@ -136,7 +139,10 @@ gulp.task('watch', ['serve'], function() {
 	gulp.watch(paths.js.source, ['es6']);
 	gulp.watch(paths.templates.source, ['dust']);
 	gulp.watch(paths.images.source, ['images']);
+	gulp.watch(paths.html.source, ['wiredep']);
 	gulp.watch('bower.json', ['wiredep', 'fonts']);
+
+	return true;
 });
 
 gulp.task('preflight', ['eslint']);

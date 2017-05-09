@@ -25,12 +25,12 @@ var safe = {
 	browserSync: {
 		debugInfo: false,
 		port: 9000,
-		// routes: {
-		// 	'/bower_components': 'bower_components'
-		// },
 		server: {
-			baseDir: [settings.dirs.dist],
-			directory: false
+			baseDir: [settings.dirs.tmp],
+			directory: false,
+			routes: {
+				'/bower_components': 'bower_components'
+			}
 		},
 		xip: false
 	},
@@ -38,8 +38,8 @@ var safe = {
 		optimizationLevel: 3,
 		progressive: true,
 		interlaced: true,
-		// Don't remove IDs from SVGs, they are often used
-		// as hooks for embedding and styling
+		/* Don't remove IDs from SVGs, they are often used
+		 as hooks for embedding and styling */
 		svgoPlugins: [{ cleanupIDs: false }]
 	},
 	minifyHtml: {
@@ -55,11 +55,10 @@ var safe = {
 		config: '/.sass-lint.yml'
 	},
 	wiredep: {
-		directory: paths.bower.source,
-		exclude: ['bootstrap-sass-official'],
+		// exclude: ['bootstrap-sass'],
 		overrides: {
 			'jquery-ui': {
-				main: ['themes/dark-hive/jquery-ui.css', 'jquery-ui.js']
+				main: ['themes/dark-hive/jquery-ui.css']
 			}
 		}
 	}

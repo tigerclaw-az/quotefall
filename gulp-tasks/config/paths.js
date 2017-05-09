@@ -13,7 +13,7 @@ var _ = require('lodash'),
 // Safe Default incase settings.json not found
 var safe = {
 	bower: {
-		source: './bower_components'
+		source: appDir + 'dev-serve/bower_components'
 	},
 	clean: [
 		settings.dirs.tmp,
@@ -21,8 +21,8 @@ var safe = {
 	],
 	styles: {
 		source: {
-			all: [appDir + '/scss/**/*.scss'],
-			main: [appDir + '/scss/main.scss']
+			all: [appDir + '/scss/**/*.scss', '!main.injected.scss'],
+			main: appDir + '/scss/main.scss'
 		},
 		serve: tmpDir + '/styles',
 		dist: distDir + '/styles'
