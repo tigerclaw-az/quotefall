@@ -4,7 +4,5 @@ dist
 .sass-cache
 *.sublime*
 bower_components
-app/css/main.scss
-app/css/main.css
 app/js/lib
-app/scss/main.injected.scss
+app/scss/main.scss
