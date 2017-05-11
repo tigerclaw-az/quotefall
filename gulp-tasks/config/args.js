@@ -2,8 +2,7 @@
 'use strict';
 
 // Dependencies
-var args = require('yargs').argv,
-	settings = require('./settings');
+var args = require('yargs').argv;
 
 // Export
 module.exports = {
