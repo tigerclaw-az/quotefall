@@ -9,6 +9,11 @@ import Quotefall from './quotefall.js';
 
 	$puzzle.width(qf.columns * qf.width);
 
+	/**
+	 * Watch for keydown event and only allow alphabetic characters
+	 * @param  {Object} e
+	 * @return {Boolean}
+	 */
 	$input.on('keydown', function(e) {
 		var key = e.which;
 
@@ -19,6 +24,9 @@ import Quotefall from './quotefall.js';
 		return true;
 	});
 
+	/**
+	 * Generate the board when button is clicked
+	 */
 	$('.qf-set-board').on('click', function() {
 		var board;
 
