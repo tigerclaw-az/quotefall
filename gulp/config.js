@@ -8,59 +8,72 @@
 
 var gutil = require('gulp-util');
 
+exports.settings = {
+	projectName: 'quotefall'
+};
+
 /**
  *  The main paths of your project handle these with care
  */
 var paths = {
-	app: 'app',
 	src: 'src',
 	dist: 'dist',
 	tmp: '.tmp',
 	e2e: 'e2e'
 };
 
-exports.paths = Object.assign(paths, {
-	bower: {
-		source: paths.app + 'dev-serve/bower_components'
-	},
+paths.app = paths.src + '/app';
+paths.assets = {
+	source: paths.app + '/assets',
+	dist: paths.dist + '/assets'
+};
+
+paths = Object.assign(paths, {
 	clean: [
 		paths.tmp,
 		paths.dist
 	],
-	styles: {
-		source: {
-			all: [paths.app + '/scss/**/*.scss', '!main.scss'],
-			index: paths.app + '/scss/index.scss'
-		},
-		serve: paths.tmp + '/styles',
-		dist: paths.dist + '/styles'
-	},
 	images: {
-		source: [paths.app + '/images/**/*'],
-		serve: paths.tmp + '/images',
-		dist: paths.dist + '/images'
+		source: [paths.assets.source + '/images/**/*'],
+		dist: paths.assets.dist + '/images'
 	},
 	fonts: {
-		source: paths.app + '/fonts/**/*',
-		serve: paths.tmp + '/fonts',
-		dist: paths.dist + '/fonts'
+		source: paths.assets.source + '/fonts/**/*',
+		dist: paths.assets.dist + '/fonts'
 	},
-	js: {
-		source: paths.app + '/js/**/*.js',
-		serve: paths.tmp + '/scripts',
+	scripts: {
+		index: paths.app + '/index.module.js',
+		source: paths.app + '/**/*.js',
 		dist: paths.dist + '/scripts'
 	},
 	html: {
-		source: paths.app + '/*.html',
-		serve: paths.tmp,
+		index: paths.app + '/index.html',
+		source: paths.app + '/**/*.html',
 		dist: paths.dist
 	},
-	templates: {
-		source: paths.app + '/templates/*.html',
-		serve: paths.tmp + '/scripts',
-		dist: paths.dist + '/scripts'
+	serve: {
+		tmp: paths.tmp + '/serve'
+	},
+	styles: {
+		inject: [],
+		source: {
+			all: [
+				paths.app + '/**/*.scss',
+				'!' + paths.app + '/index.scss'
+			],
+			index: paths.app + '/index.scss'
+		},
+		dist: paths.dist + '/styles'
 	}
 });
+
+paths.scripts.serve = paths.serve.tmp + '/scripts';
+paths.styles.serve = paths.serve.tmp + '/styles';
+paths.styles.source.inject = paths.styles.source.all.concat(
+	['!' + paths.app + '/config/*']
+);
+
+exports.paths = paths;
 
 exports.options = {
 	autoprefixer: {
@@ -68,6 +81,7 @@ exports.options = {
 		remove: false
 	},
 	babelify: {
+		plugins: [[ 'angularjs-annotate', { explicitOnly: true } ]],
 		// Use all of the ES2015 spec
 		presets: ['es2015'],
 		sourceMaps: true
@@ -78,13 +92,6 @@ exports.options = {
 	browserSync: {
 		debugInfo: false,
 		port: 9000,
-		server: {
-			baseDir: [paths.tmp],
-			directory: false,
-			routes: {
-				'/bower_components': 'bower_components'
-			}
-		},
 		xip: false
 	},
 	imagemin: {
@@ -95,14 +102,32 @@ exports.options = {
 		 as hooks for embedding and styling */
 		svgoPlugins: [{ cleanupIDs: false }]
 	},
-	minifyHtml: {
-		conditionals: true,
-		loose: true
+	inject: {
+		transform: function(filePath) {
+			filePath = filePath.replace(paths.app + '/', '');
+
+			return '@import "' + filePath + '";';
+		},
+		starttag: '// injector',
+		endtag: '// endinjector',
+		addRootSlash: false
+	},
+	htmlmin: {
+		collapseBooleanAttributes: true,
+		collapseWhitespace: true,
+		removeEmptyAttributes: true,
+		removeAttributeQuotes: true,
+		useShortDoctype: true
+	},
+	ngAnnotate: {
+		add: true,
+		single_quotes: true
 	},
 	sass: {
-		outputStyle: 'expanded',
+		errLogToConsole: true,
 		includePaths: [],
-		errLogToConsole: true
+		outputStyle: 'expanded',
+		precision: 10
 	},
 	sasslint: {
 		config: '/.sass-lint.yml'

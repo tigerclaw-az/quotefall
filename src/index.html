@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html lang="en">
   <head>
 	<meta charset="utf-8">
 	<meta name="description" content="">
@@ -21,34 +21,12 @@
 	<!-- build:js scripts/lib/modernizr.js -->
 	<!-- endbuild -->
   </head>
-	<body>
+	<body ng-app="quotefall" ng-strict-di>
 		<!--[if lt IE 10]>
 		  <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 		<![endif]-->
 
-		<nav class="sidebar"></nav>
-
-		<div class="container">
-			<header class="header">
-				<ul class="nav nav-pills pull-right">
-					<li class="active"><a href="#">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Contact</a></li>
-				</ul>
-				<h3 class="text-muted">quotefall</h3>
-			</header>
-
-			<label class="sr-only">Scrambled</label><input placeholder="Scrambled Letters" type="text" length="255" max="255" class="form-control input-lg qf-input-letters">
-			<button type="submit" class="btn btn-lg btn-default qf-set-board">Set</button>
-
-			<div class="qf-puzzle-container well-lg text-center">
-				<section class="qf-puzzle"></section>
-			</div>
-
-			<footer>
-				Yay! I'm the footer!
-			</footer>
-		</div>
+		<div ng-view></div>
 
 		<!-- build:js scripts/vendor.js -->
 		<!-- bower:js -->
