@@ -1,3 +1,14 @@
+$icon-font-path: "../../bootstrap-sass/assets/fonts/bootstrap/";
+
+@import 'config/bootstrap-settings';
+
+/**
+ *  Do not remove the comments below. It's the markers used by wiredep to inject
+ *  sass dependencies when defined in the bower.json of your dependencies
+ */
+// bower:scss
+// endbower
+
 /* Space out content a bit */
 body {
 	padding-bottom: 20px;
@@ -67,3 +78,10 @@ body {
 		border-bottom: 0;
 	}
 }
+
+/**
+ *  Do not remove the comments below. It's the markers used by gulp-inject to inject
+ *  all your sass files automatically
+ */
+// injector
+// endinjector

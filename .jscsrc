@@ -3,7 +3,9 @@
 	"disallowCapitalizedComments": null,
 	"disallowCommaBeforeLineBreak": null,
 	"disallowCurlyBraces": [],
-	"disallowDanglingUnderscores": { "allExcept": ["_gm", "_defaults", "_name"] },
+	"disallowDanglingUnderscores": {
+		"allExcept": ["_defaults", "_name", "_super"]
+	},
 	"disallowEmptyBlocks": true,
 	"disallowFunctionDeclarations": true,
 	"disallowIdentifierNames": [],
@@ -65,12 +67,16 @@
 	"disallowTrailingComma": true,
 	"disallowTrailingWhitespace": true,
 	"disallowYodaConditions": true,
+	"maxErrors": -1,
 	"maximumLineLength": {
 		"value": 90,
 		"tabSize": 1,
-		"allowComments": true,
-		"allowUrlComments": true,
-		"allowRegex": true
+		"allExcept": [
+			"regex",
+			"comments",
+			"urlComments",
+			"functionSignature"
+		]
 	},
 	"requireAnonymousFunctions": true,
 	"requireBlocksOnNewline": true,
