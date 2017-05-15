@@ -9,6 +9,7 @@ var _ = require('lodash'),
 	gulp = require('gulp'),
 	babelify = require('babelify'),
 	browserify = require('browserify'),
+	browserSync = require('browser-sync'),
 	glob = require('glob'),
 	path = require('path'),
 	source = require('vinyl-source-stream'),
@@ -24,7 +25,7 @@ gulp.task('scripts:lint', function() {
 		.pipe($.jscsStylish())
 		.pipe($.eslint())
 		.pipe($.eslint.format())
-		// .pipe($.if(!browserSync.active, $.eslint.failOnError()));
+		.pipe($.if(!browserSync.active, $.eslint.failOnError()));
 });
 
 gulp.task('scripts', ['scripts:lint'], function() {
@@ -65,6 +66,7 @@ gulp.task('styles', ['styles:lint'], function() {
 		.pipe($.sourcemaps.write())
 		.pipe($.rename('main.css'))
 		.pipe(gulp.dest(paths.styles.serve))
+		.pipe(browserSync.reload({ stream: true }))
 		.pipe($.size());
 });
 
