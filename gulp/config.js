@@ -6,7 +6,8 @@
  *  of the tasks
  */
 
-var gutil = require('gulp-util');
+var gutil = require('gulp-util'),
+	path = require('path');
 
 exports.settings = {
 	projectName: 'quotefall'
@@ -22,10 +23,10 @@ var paths = {
 	e2e: 'e2e'
 };
 
-paths.app = paths.src + '/app';
+paths.app = path.join(paths.src, 'app');
 paths.assets = {
-	source: paths.app + '/assets',
-	dist: paths.dist + '/assets'
+	source: path.join(paths.app, 'assets'),
+	dist: path.join(paths.dist, 'assets')
 };
 
 paths = Object.assign(paths, {
@@ -34,42 +35,44 @@ paths = Object.assign(paths, {
 		paths.dist
 	],
 	images: {
-		source: [paths.assets.source + '/images/**/*'],
-		dist: paths.assets.dist + '/images'
+		source: [path.join(paths.assets.source, 'images/**/*')],
+		dist: path.join(paths.assets.dist, 'images')
 	},
 	fonts: {
-		source: paths.assets.source + '/fonts/**/*',
-		dist: paths.assets.dist + '/fonts'
+		source: path.join(paths.assets.source, 'fonts/**/*'),
+		dist: path.join(paths.assets.dist, 'fonts')
 	},
 	scripts: {
-		index: paths.app + '/index.module.js',
-		source: paths.app + '/**/*.js',
-		dist: paths.dist + '/scripts'
+		index: path.join(paths.app, 'index.module.js'),
+		source: path.join(paths.app, '**/*.js'),
+		dist: path.join(paths.dist, 'scripts')
 	},
 	html: {
-		index: paths.app + '/index.html',
-		source: paths.app + '/**/*.html',
+		index: path.join(paths.app, 'index.html'),
+		source: path.join(paths.app, '**/*.html'),
 		dist: paths.dist
 	},
 	serve: {
-		tmp: paths.tmp + '/serve'
+		tmp: path.join(paths.tmp, 'serve')
 	},
 	styles: {
 		inject: [],
 		source: {
 			all: [
-				paths.app + '/**/*.scss',
-				'!' + paths.app + '/index.scss'
+				path.join(paths.app, '**/*.scss')
 			],
-			index: paths.app + '/index.scss'
+			index: path.join(paths.app, 'index.scss')
 		},
-		dist: paths.dist + '/styles'
+		dist: path.join(paths.dist, 'styles')
 	}
 });
 
-paths.scripts.serve = paths.serve.tmp + '/scripts';
-paths.styles.serve = paths.serve.tmp + '/styles';
-paths.styles.source.inject = paths.styles.source.all.concat(
+paths.scripts.serve = path.join(paths.serve.tmp, 'scripts');
+paths.styles.serve = path.join(paths.serve.tmp, 'styles');
+paths.styles.source.noindex = paths.styles.source.all.concat(
+	['!' + paths.styles.source.index]
+);
+paths.styles.source.inject = paths.styles.source.noindex.concat(
 	['!' + paths.app + '/config/*']
 );
 

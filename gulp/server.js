@@ -1,6 +1,7 @@
 'use strict';
 
-var path = require('path'),
+var $ = require('gulp-load-plugins')(),
+	path = require('path'),
 	gulp = require('gulp'),
 	conf = require('./config'),
 	paths = conf.paths;
@@ -73,11 +74,15 @@ function browserSyncInit(baseDir, browser) {
 gulp.task('watch', ['clean', 'wiredep', 'scripts', 'styles'], function() {
 	// Watch for changes
 	gulp.watch([
-		paths.html.serve + '/*.html',
+		path.join(paths.serve.tmp, '*.html'),
 		paths.fonts.source,
 		paths.images.source.join(','),
-		paths.scripts.serve + '/**/*.js'
-	]).on('change', browserSync.reload);
+		path.join(paths.scripts.serve, '**/*.js'),
+		path.join(paths.styles.serve, '**/*.css')
+	]).on('change', function() {
+		$.notify('Files changed and browser reloaded');
+		browserSync.reload();
+	});
 
 	gulp.watch(paths.styles.source.all, ['styles']);
 	gulp.watch(paths.scripts.source, ['scripts']);
@@ -97,7 +102,7 @@ browserSync.use(browserSyncSpa({
 }));
 
 gulp.task('serve', ['watch'], function() {
-	browserSyncInit([path.join(conf.paths.tmp, '/serve'), conf.paths.src]);
+	browserSyncInit([conf.paths.serve.tmp, conf.paths.src]);
 });
 
 gulp.task('serve:dist', ['build'], function() {
@@ -105,7 +110,7 @@ gulp.task('serve:dist', ['build'], function() {
 });
 
 gulp.task('serve:e2e', ['inject'], function() {
-	browserSyncInit([conf.paths.tmp + '/serve', conf.paths.src], []);
+	browserSyncInit([conf.paths.serve.tmp, conf.paths.src], []);
 });
 
 gulp.task('serve:e2e-dist', ['build'], function() {
