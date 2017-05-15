@@ -144,7 +144,7 @@ exports.options = {
 	 *  to inject css preprocessor deps and js files in karma
 	 */
 	wiredep: {
-		exclude: [/\/bootstrap\.js$/, /\/bootstrap-sass\/.*\.js/, /\/bootstrap\.css/],
+		exclude: [/\/jquery\.js$/, /\/bootstrap\.js$/, /\/bootstrap-sass\/.*\.js/, /\/bootstrap\.css/],
 		directory: 'bower_components',
 		overrides: {
 			'jquery-ui': {

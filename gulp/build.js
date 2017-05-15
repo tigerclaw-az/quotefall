@@ -5,8 +5,7 @@ var $ = require('gulp-load-plugins')({
 		pattern: ['gulp-*', 'autoprefixer', 'main-bower-files', 'uglify-save-license', 'del']
 	});
 
-var _ = require('lodash'),
-	gulp = require('gulp'),
+var gulp = require('gulp'),
 	babelify = require('babelify'),
 	browserify = require('browserify'),
 	browserSync = require('browser-sync'),
