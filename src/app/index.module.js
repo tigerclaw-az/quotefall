@@ -6,15 +6,16 @@ import { PuzzleDirective } from '../app/components/puzzle/puzzle.directive';
 
 let deps = [
 	'ngAnimate',
-	'ngCookies',
-	'ngTouch',
-	'ngSanitize',
-	'ngMessages',
 	'ngAria',
+	'ngCookies',
+	'ngDraggable',
+	'ngMessages',
 	'ngResource',
 	'ngRoute',
-	'ui.bootstrap',
-	'toastr'
+	'ngSanitize',
+	'ngTouch',
+	'toastr',
+	'ui.bootstrap'
 ];
 
 export
