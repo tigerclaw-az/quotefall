@@ -1,4 +1,4 @@
-$icon-font-path: "../../bootstrap-sass/assets/fonts/bootstrap/";
+$icon-font-path: '../../bootstrap-sass/assets/fonts/bootstrap/';
 
 @import 'config/bootstrap-settings';
 
@@ -19,6 +19,7 @@ body {
 .header,
 .marketing,
 .footer {
+	background-color: map-get($colors, 'fountain');
 	padding-left: 15px;
 	padding-right: 15px;
 }
@@ -56,6 +57,13 @@ body {
 		font-size: 21px;
 		padding: 14px 24px;
 	}
+}
+
+.nav,
+.pagination,
+.carousel,
+.panel-title a { // sass-lint:disable-line force-element-nesting
+	cursor: pointer;
 }
 
 /* Responsive: Portrait tablets and up */
