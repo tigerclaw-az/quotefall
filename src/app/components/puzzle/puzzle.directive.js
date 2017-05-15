@@ -30,8 +30,6 @@ class PuzzleController {
 			numRows = scope.numRows || 4,
 			numColumns;
 
-
-		// FIXME: Remove after testing
 		// letters = 'araoefaaleareofenunreseesyptozleq ot thlv  ut lus t   oly   z o '
 		ctrl.quote = letters.toUpperCase();
 
@@ -49,12 +47,7 @@ class PuzzleController {
 			columns,
 			remainder;
 
-		console.debug('columns', this.columns);
-		console.debug('rows', this.rows);
-
 		this.resetBoard();
-
-		// this.columns = [].fill.call({ length: Math.ceil(this.quote.length / rows) }, 'x');
 
 		columns = this.columns.length;
 		rows = this.rows.length;
