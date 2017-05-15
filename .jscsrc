@@ -1,13 +1,9 @@
 {
-	"disallowAnonymousFunctions": null,
-	"disallowCapitalizedComments": null,
-	"disallowCommaBeforeLineBreak": null,
 	"disallowCurlyBraces": [],
 	"disallowDanglingUnderscores": {
 		"allExcept": ["_defaults", "_name", "_super"]
 	},
 	"disallowEmptyBlocks": true,
-	"disallowFunctionDeclarations": true,
 	"disallowIdentifierNames": [],
 	"disallowImplicitTypeConversion": [],
 	"disallowKeywordsInComments": [ "TODO", "FIXME" ],
@@ -26,14 +22,12 @@
 	"disallowPaddingNewLinesAfterUseStrict": null,
 	"disallowPaddingNewLinesBeforeExport": null,
 	"disallowPaddingNewlinesBeforeKeywords": [],
-	"disallowPaddingNewLinesBeforeLineComments": null,
 	"disallowPaddingNewlinesInBlocks": true,
 	"disallowPaddingNewLinesInObjects": null,
 	"disallowQuotedKeysInObjects": true,
 	"disallowSemicolons": null,
 	"disallowSpaceAfterBinaryOperators": [],
 	"disallowSpaceAfterKeywords": [],
-	"disallowSpaceAfterLineComment": null,
 	"disallowSpaceAfterObjectKeys": true,
 	"disallowSpaceAfterPrefixUnaryOperators": true,
 	"disallowSpaceBeforeBinaryOperators": [],
@@ -78,10 +72,8 @@
 			"functionSignature"
 		]
 	},
-	"requireAnonymousFunctions": true,
 	"requireBlocksOnNewline": true,
 	"requireCamelCaseOrUpperCaseIdentifiers": "ignoreProperties",
-	"requireCapitalizedComments": { "allExcept": ["jshint", "document", "window", "jQuery"] },
 	"requireCapitalizedConstructors": true,
 	"requireCommaBeforeLineBreak": true,
 	"requireCommaBeforeLineBreak": true,
