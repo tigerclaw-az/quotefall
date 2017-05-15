@@ -20,10 +20,17 @@ $letter-width: 50;
 			border-bottom: 0;
 
 			.qf-letter {
+				cursor: move;
+				cursor: grab;
+				display: block;
 				font-size: 1.5rem;
 				font-weight: 600;
 				height: #{$letter-height / 2}px;
 				width: #{$letter-width - 2}px;
+
+				&:active {
+					cursor: grabbing;
+				}
 			}
 		}
 	}
@@ -43,6 +50,10 @@ $letter-width: 50;
 			display: inline-block;
 			height: #{$letter-height}px;
 			width: #{$letter-width}px;
+
+			&.drag-enter {
+				background-color: map-get($colors, hopbush);
+			}
 
 			&.qf-reserved {
 				background-color: map-get($colors, 'black');
