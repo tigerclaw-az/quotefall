@@ -2,14 +2,13 @@
 'use strict';
 
 var $ = require('gulp-load-plugins')({
-		pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
+		pattern: ['gulp-*', 'autoprefixer', 'main-bower-files', 'uglify-save-license', 'del']
 	});
 
 var _ = require('lodash'),
 	gulp = require('gulp'),
 	babelify = require('babelify'),
 	browserify = require('browserify'),
-	browserSync = require('browser-sync'),
 	glob = require('glob'),
 	path = require('path'),
 	source = require('vinyl-source-stream'),
@@ -25,7 +24,7 @@ gulp.task('scripts:lint', function() {
 		.pipe($.jscsStylish())
 		.pipe($.eslint())
 		.pipe($.eslint.format())
-		.pipe($.if(!browserSync.active, $.eslint.failOnError()));
+		// .pipe($.if(!browserSync.active, $.eslint.failOnError()));
 });
 
 gulp.task('scripts', ['scripts:lint'], function() {
@@ -51,19 +50,21 @@ gulp.task('styles:lint', function() {
 });
 
 gulp.task('styles', ['styles:lint'], function() {
-	var injectFiles = gulp.src(paths.styles.source.inject, { read: false });
+	var injectFiles = gulp.src(paths.styles.source.inject, { read: false }),
+		postcssPlugins = [
+			$.autoprefixer(options.autoprefixer)
+		];
 
 	return gulp.src(paths.styles.source.index)
 		.pipe($.plumber(options.errorHandler))
 		.pipe($.inject(injectFiles, options.inject)).on('error', conf.errorHandler('inject'))
 		.pipe(wiredep(options.wiredep))
 		.pipe($.sourcemaps.init())
-		.pipe($.sass(options.sass)).on('error', conf.errorHandler('Sass'))
-		.pipe($.autoprefixer(options.autoprefixer)).on('error', conf.errorHandler('Autoprefixer'))
+		.pipe($.sass(options.sass)).on('error', conf.errorHandler('sass'))
+		.pipe($.postcss(postcssPlugins)).on('error', conf.errorHandler('postcss'))
 		.pipe($.sourcemaps.write())
 		.pipe($.rename('main.css'))
 		.pipe(gulp.dest(paths.styles.serve))
-		.pipe(browserSync.reload({ stream: true }))
 		.pipe($.size());
 });
 
@@ -77,11 +78,11 @@ gulp.task('partials', function() {
 		module: conf.settings.projectName,
 		root: 'app'
 	}))
-	.pipe(gulp.dest(paths.serve.tmp + '/partials/'));
+	.pipe(gulp.dest(path.join(paths.serve.tmp, '/partials/')));
 });
 
 gulp.task('html', ['wiredep', 'partials', 'scripts', 'styles'], function() {
-	return gulp.src(paths.tmp + '/*.html')
+	return gulp.src([path.join(paths.tmp, '/*.html')])
 		.pipe($.useref({ searchPath: [paths.tmp] }))
 		// .pipe($.if('*.js', $.uglify()))
 		.pipe($.replace('../../bower_components/bootstrap-sass/assets/fonts/bootstrap/', '../fonts/'))
@@ -124,7 +125,7 @@ gulp.task('clean', function() {
 
 // Inject bower components
 gulp.task('wiredep', function() {
-	return gulp.src(paths.src + '/*.html')
+	return gulp.src([path.join(paths.src, '/*.html')])
 		.pipe(wiredep(options.wiredep))
 		.pipe(gulp.dest(paths.serve.tmp));
 });
@@ -136,7 +137,7 @@ gulp.task('produce', ['preflight', 'wiredep', 'scripts', 'styles', 'images', 'fo
 gulp.task('package', ['produce', 'html', 'extras']);
 
 gulp.task('build', ['clean', 'package'], function() {
-	return gulp.src(paths.dist + '/**/*')
+	return gulp.src([path.join(paths.dist, '/**/*')])
 		.pipe($.plumber())
 		.pipe($.size({ title: 'build', gzip: true }));
 });
