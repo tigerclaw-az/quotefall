@@ -29,10 +29,13 @@ $letter-width: 50;
 	}
 
 	.qf-answer-grid {
-		@include clearfix;
+		display: block;
 
 		.qf-row {
 			@include clearfix;
+
+			display: block;
+			line-height: 0;
 		}
 
 		.qf-answer-square {
@@ -41,7 +44,7 @@ $letter-width: 50;
 			height: #{$letter-height}px;
 			width: #{$letter-width}px;
 
-			&.qf-letter-blank {
+			&.qf-reserved {
 				background-color: map-get($colors, 'black');
 			}
 		}
