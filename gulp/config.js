@@ -94,8 +94,11 @@ exports.options = {
 	},
 	browserSync: {
 		debugInfo: false,
-		port: 9000,
-		xip: false
+		minify: false,
+		// notify: true,
+		port: 8181,
+		reloadOnRestart: true,
+		watchEvents: ['add', 'change']
 	},
 	imagemin: {
 		optimizationLevel: 3,
