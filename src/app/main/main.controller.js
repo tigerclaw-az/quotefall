@@ -1,11 +1,8 @@
 export class MainController {
-	constructor ($timeout, toastr) {
+	constructor ($scope, $timeout, toastr) {
 		'ngInject';
 
-		this.height = 50;
-		this.width = 50;
-		this.rows = 4;
-
+		this.$scope = $scope;
 		this.toastr = toastr;
 
 		this.activate($timeout);
