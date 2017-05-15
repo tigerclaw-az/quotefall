@@ -6,7 +6,7 @@
 	</div>
 	<div class="qf-answer-grid">
 		<span class="qf-row" ng-repeat="r in vm.rows track by $index">
-			<span class="qf-answer-square" ng-repeat="c in vm.columns track by $index"></span>
+			<span class="qf-answer-square" ng-class="{'qf-reserved': reserved}" ng-repeat="c in vm.columns track by $index" ng-click="reserved = !reserved"></span>
 		</span>
 	</div>
 </section>
