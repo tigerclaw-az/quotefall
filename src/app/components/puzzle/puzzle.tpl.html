@@ -1,11 +1,12 @@
 <section class="qf-puzzle">
-	<div class="qf-letters">
-		{#columns}
-		<span class="qf-column">
-			{#letters}
-			<p class="qf-letter-drag qf-letter">{.}</p>
-			{/letters}
+	<div class="qf-letter-columns">
+		<span class="qf-column" ng-repeat="column in vm.puzzleData.columns track by $index">
+			<p class="qf-letter" ng-repeat="letter in column.letters track by $index">{{letter}}</p>
 		</span>
-		{/columns}
+	</div>
+	<div class="qf-answer-grid">
+		<span class="qf-row" ng-repeat="r in vm.rows track by $index">
+			<span class="qf-answer-square" ng-repeat="c in vm.columns track by $index"></span>
+		</span>
 	</div>
 </section>
