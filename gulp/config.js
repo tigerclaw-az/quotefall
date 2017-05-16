@@ -26,7 +26,7 @@ var paths = {
 
 paths.app = path.join(paths.src, 'app');
 paths.assets = {
-	source: path.join(paths.app, 'assets'),
+	source: path.join(paths.src, 'assets'),
 	dist: path.join(paths.dist, 'assets')
 };
 
@@ -46,6 +46,7 @@ paths = Object.assign(paths, {
 	scripts: {
 		index: path.join(paths.app, 'index.module.js'),
 		source: path.join(paths.app, '**/*.js'),
+		test: path.join(paths.app, '**/*.spec.js'),
 		dist: path.join(paths.dist, 'scripts')
 	},
 	html: {
