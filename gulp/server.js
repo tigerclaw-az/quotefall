@@ -78,18 +78,18 @@ gulp.task('watch', ['clean', 'wiredep', 'scripts', 'styles'], function() {
 		paths.fonts.source,
 		paths.images.source.join(','),
 		path.join(paths.scripts.serve, '**/*.js')
-	]).on('change', function() {
+	], { cwd: './' }).on('change', function() {
 		$.notify('Files changed and browser reloaded');
 		browserSync.reload();
-	});
+	}).on('error', conf.errorHandler);
 
-	gulp.watch(paths.styles.source.all, ['styles'], function() {
+	gulp.watch(paths.styles.source.all, { cwd: './' }, ['styles'], function() {
 		browserSync.reload({ stream: true });
 	});
-	gulp.watch(paths.scripts.source, ['scripts']);
+	gulp.watch(paths.scripts.source, { cwd: './' }, ['scripts']);
 	gulp.watch('bower.json', ['wiredep', 'fonts']);
 
-	gulp.watch(path.join(paths.html.source), function(event) {
+	gulp.watch(path.join(paths.html.source), { cwd: './' }, function(event) {
 		browserSync.reload(event.path);
 	});
 
