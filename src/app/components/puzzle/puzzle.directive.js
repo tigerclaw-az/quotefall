@@ -6,7 +6,7 @@ export function PuzzleDirective() {
 		controller: PuzzleController,
 		controllerAs: 'vm',
 		replace: true,
-		restrict: 'E',
+		restrict: 'A',
 		scope: false,
 		templateUrl: 'app/components/puzzle/puzzle.tpl.html',
 		link: function(scope, el, attr, ctrl) {
@@ -26,8 +26,8 @@ class PuzzleController {
 	}
 
 	setupPuzzle(scope, ctrl) {
-		var letters = scope.scrambledLetters,
-			numRows = scope.numRows || 4,
+		var letters = scope.main.scrambledLetters,
+			numRows = scope.main.numRows || 4,
 			numColumns;
 
 		// letters = 'araoefaaleareofenunreseesyptozleq ot thlv  ut lus t   oly   z o '

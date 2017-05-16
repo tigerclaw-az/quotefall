@@ -8,44 +8,11 @@
 		<h3 class="text-muted">quotefall</h3>
 	</header>
 
-	<form name="puzzleForm">
-		<div class="form-group">
-			<label class="sr-only col-form-label" for="scrambled">Scrambled</label>
-			<input
-				ng-model="scrambledLetters"
-				ng-minlength="16"
-				panther-parser
-				panther-type="alpha"
-				class="form-control input-lg qf-input-letters"
-				name="scrambled"
-				placeholder="Scrambled Letters"
-				type="text"
-				required
-			>
-		</div>
-		<div class="form-group row">
-			<div class="col-xs-6">
-				<label class="sr-only col-form-label" for="rows">Rows</label>
-				<input
-					ng-model="numRows"
-					ng-maxlength="2"
-					panther-parser
-					class="form-control input-md qf-input-rows"
-					name="rows"
-					placeholder="Rows (4)"
-					type="text"
-					maxlength="2"
-				>
-			</div>
-		</div>
-
-		<!-- TODO: Enable button when quote length has met requirement -->
-		<button type="submit" class="btn btn-lg btn-default qf-set-puzzle" ng-click="setupPuzzle()" ng-disabled="puzzleForm.$invalid">Set</button>
-	</form>
+	<ng-include src="'app/components/puzzle/puzzleForm.tpl.html'" ng-if="main.isRoute('/create')"></ng-include>
 
 	<div class="qf-puzzle-container well-lg text-center">
-		<!-- This is used as a reference for the 'quotefallPuzzle' directive -->
-		<puzzle></puzzle>
+		<!-- This is used as a reference for the 'puzzle' directive -->
+		<div data-puzzle></div>
 	</div>
 
 	<footer>
