@@ -6,6 +6,12 @@ export class MainController {
 		this.$location = $location;
 		this.toastr = toastr;
 
+		this.$scope.routes = {
+			home: '/',
+			create: '/create',
+			help: '/help'
+		};
+
 		this.activate($timeout);
 	}
 

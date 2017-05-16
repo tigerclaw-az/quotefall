@@ -1,14 +1,14 @@
 <div class="container">
 	<header class="header">
 		<ul class="nav nav-pills pull-right">
-			<li class="active"><a href="#">Home</a></li>
-			<li><a href="#">About</a></li>
-			<li><a href="#">Contact</a></li>
+			<li ng-class="{active: main.isRoute(routes.home)}"><a href="#!{{routes.home}}">Home</a></li>
+			<li ng-class="{active: main.isRoute(routes.create)}"><a href="#!{{routes.create}}">Create Puzzle</a></li>
+			<li ng-class="{active: main.isRoute(routes.help)}"><a href="#!{{routes.help}}">Help</a></li>
 		</ul>
-		<h3 class="text-muted">quotefall</h3>
+		<h3 class="text-muted">Quotefall Puzzles</h3>
 	</header>
 
-	<ng-include src="'app/components/puzzle/puzzleForm.tpl.html'" ng-if="main.isRoute('/create')"></ng-include>
+	<ng-include src="'app/components/puzzle/puzzleForm.tpl.html'" ng-if="main.isRoute(routes.create)"></ng-include>
 
 	<div class="qf-puzzle-container well-lg text-center">
 		<!-- This is used as a reference for the 'puzzle' directive -->
