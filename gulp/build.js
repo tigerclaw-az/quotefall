@@ -1,45 +1,20 @@
 /* jshint node: true */
 'use strict';
 
+// jscs:disable requireMultipleVarDecl
 var $ = require('gulp-load-plugins')({
 		pattern: ['gulp-*', 'autoprefixer', 'main-bower-files', 'uglify-save-license', 'del']
-	});
+	}),
+	gulp = require('gulp');
 
-var gulp = require('gulp'),
-	babelify = require('babelify'),
-	browserify = require('browserify'),
-	browserSync = require('browser-sync'),
+var browserSync = require('browser-sync'),
 	glob = require('glob'),
 	path = require('path'),
-	source = require('vinyl-source-stream'),
 	wiredep = require('wiredep').stream;
 
 var conf = require('./config'),
 	options = conf.options,
 	paths = conf.paths;
-
-gulp.task('scripts:lint', function() {
-	return gulp.src(paths.scripts.source)
-		.pipe($.jscs())
-		.pipe($.jscsStylish())
-		.pipe($.eslint())
-		.pipe($.eslint.format())
-		.pipe($.if(!browserSync.active, $.eslint.failOnError()));
-});
-
-gulp.task('scripts', ['scripts:lint'], function() {
-	var files = glob.sync(paths.scripts.index);
-
-	options.browserify.entries = files;
-
-	return browserify(options.browserify)
-		.transform(babelify, options.babelify)
-		.bundle().on('error', conf.errorHandler('bundle'))
-		.pipe(source('app.js'))
-		// .pipe($.sourcemaps.init({ loadMaps: true }))
-		// .pipe($.sourcemaps.write('./', { includeContent: true }))
-		.pipe(gulp.dest(paths.scripts.serve));
-});
 
 gulp.task('styles:lint', function() {
 	return gulp.src(paths.styles.source.all)
