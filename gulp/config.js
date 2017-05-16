@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  *  This file contains the variables used in other gulp files
  *  which defines tasks
@@ -6,8 +8,7 @@
  *  of the tasks
  */
 
-var gutil = require('gulp-util'),
-	path = require('path');
+var path = require('path');
 
 exports.settings = {
 	projectName: 'quotefall'
@@ -158,10 +159,14 @@ exports.options = {
  *  Common implementation for an error handler of a Gulp plugin
  */
 exports.errorHandler = function(title) {
-	'use strict';
+	var gutil = require('gulp-util'),
+		notify = require('gulp-notify');
 
 	return function(err) {
-		gutil.log(gutil.colors.red('[' + title + ']'), err.toString());
+		var errMsg = err.toString();
+
+		notify(errMsg);
+		gutil.log(gutil.colors.red('[' + title + ']'), errMsg);
 		this.emit('end');
 	};
 };
