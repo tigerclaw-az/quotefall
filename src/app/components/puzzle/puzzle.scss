@@ -1,5 +1,5 @@
-$letter-height: 50;
-$letter-width: 50;
+$column-width: 3.5;
+$letter-height: 3.5;
 
 .qf-puzzle {
 	@include clearfix;
@@ -18,19 +18,13 @@ $letter-width: 50;
 		.qf-column {
 			border: 1px solid map-get($colors, 'black');
 			border-bottom: 0;
+			width: #{$column-width}em;
 
 			.qf-letter {
-				cursor: move;
-				cursor: grab;
 				display: block;
-				font-size: 1.5rem;
+				font-size: 1.8rem;
 				font-weight: 600;
-				height: #{$letter-height / 2}px;
-				width: #{$letter-width - 2}px;
-
-				&:active {
-					cursor: grabbing;
-				}
+				height: #{$letter-height / 2}em;
 			}
 		}
 	}
@@ -48,12 +42,8 @@ $letter-width: 50;
 		.qf-answer-square {
 			border: 1px solid map-get($colors, 'black');
 			display: inline-block;
-			height: #{$letter-height}px;
-			width: #{$letter-width}px;
-
-			&.drag-enter {
-				background-color: map-get($colors, hopbush);
-			}
+			height: #{$letter-height}em;
+			width: #{$column-width}em;
 
 			&.qf-reserved {
 				background-color: map-get($colors, 'black');
