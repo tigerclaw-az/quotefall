@@ -8,7 +8,6 @@ let deps = [
 	'ngAnimate',
 	'ngAria',
 	'ngCookies',
-	'ngDraggable',
 	'ngMessages',
 	'ngResource',
 	'ngRoute',
