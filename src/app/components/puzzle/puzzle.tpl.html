@@ -3,9 +3,6 @@
 		<div class="qf-column" ng-repeat="column in vm.puzzleData.columns track by $index">
 			<span
 				class="qf-letter"
-				ng-drag="true"
-				ng-drag-data="{letter: letter}"
-				ng-drag-success="onDragComplete($data, $event)"
 				ng-repeat="letter in column.letters track by $index"
 			>{{letter}}</span>
 		</div>
@@ -14,8 +11,6 @@
 		<span class="qf-row" ng-repeat="r in vm.rows track by $index">
 			<span
 				class="qf-answer-square"
-				ng-drop="true"
-				ng-drop-success="onDropComplete($data, $event)"
 				ng-class="{'qf-reserved': reserved}"
 				ng-repeat="c in vm.columns track by $index"
 				ng-click="reserved = !reserved"
