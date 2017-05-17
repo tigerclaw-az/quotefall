@@ -10,7 +10,7 @@ export function PuzzleDirective() {
 		scope: false,
 		templateUrl: 'app/components/puzzle/puzzle.tpl.html',
 		link: function(scope, el, attr, ctrl) {
-			scope.setupPuzzle = ctrl.setupPuzzle;
+			// scope.setupPuzzle = ctrl.setupPuzzle;
 		}
 	};
 
@@ -26,20 +26,20 @@ class PuzzleController {
 	}
 
 	setupPuzzle() {
-		var letters = this.main.scrambledLetters,
-			numRows = this.main.numRows || 4,
-			vm = this.vm,
+		console.debug('this', this);
+		var letters = this.scrambledLetters,
+			numRows = this.numRows || 4,
 			numColumns;
 
 		// letters = 'araoefaaleareofenunreseesyptozleq ot thlv  ut lus t   oly   z o '
-		vm.quote = letters.toUpperCase();
+		this.quote = letters.toUpperCase();
 
-		vm.rows = [].fill.call({ length: numRows }, 'x');
+		this.rows = [].fill.call({ length: numRows }, 'x');
 
-		numColumns = Math.ceil(vm.quote.length / numRows);
-		vm.columns = [].fill.call({ length: numColumns }, 'x');
+		numColumns = Math.ceil(this.quote.length / numRows);
+		this.columns = [].fill.call({ length: numColumns }, 'x');
 
-		vm.createBoard();
+		this.createBoard();
 	}
 
 	createBoard() {

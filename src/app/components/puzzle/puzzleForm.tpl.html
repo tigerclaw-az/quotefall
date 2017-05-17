@@ -2,7 +2,7 @@
 	<div class="form-group">
 		<label class="sr-only col-form-label" for="scrambled">Scrambled</label>
 		<input
-			ng-model="main.scrambledLetters"
+			ng-model="vm.scrambledLetters"
 			ng-minlength="16"
 			panther-parser
 			panther-type="alpha"
@@ -17,7 +17,7 @@
 		<div class="col-xs-6">
 			<label class="sr-only col-form-label" for="rows">Rows</label>
 			<input
-				ng-model="main.numRows"
+				ng-model="vm.numRows"
 				ng-maxlength="2"
 				panther-parser
 				class="form-control input-lg qf-input-rows"
@@ -28,7 +28,7 @@
 			>
 		</div>
 		<div class="col-xs-6">
-			<button type="submit" class="btn btn-lg btn-default qf-setup-puzzle" ng-click="setupPuzzle()" ng-disabled="puzzleForm.$invalid">Setup</button>
+			<button type="submit" class="btn btn-lg btn-default qf-setup-puzzle" ng-click="vm.setupPuzzle()" ng-disabled="puzzleForm.$invalid">Setup</button>
 		</div>
 	</div>
 </form>
