@@ -4,6 +4,7 @@ $letter-height: 3.5;
 .qf-puzzle {
 	@include clearfix;
 
+	background-color: map-get($colors, 'white');
 	display: inline-block;
 	margin: 0 auto;
 
