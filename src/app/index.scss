@@ -11,6 +11,7 @@ $icon-font-path: '../../bootstrap-sass/assets/fonts/bootstrap/';
 
 /* Space out content a bit */
 body {
+	background-color: map-get($colors, 'gallery-grey');
 	padding-bottom: 20px;
 	padding-top: 20px;
 }
