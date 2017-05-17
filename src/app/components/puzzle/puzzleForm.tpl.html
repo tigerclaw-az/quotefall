@@ -1,4 +1,4 @@
-<form name="puzzleForm">
+<form name="puzzleForm" ng-show="!puzzleForm.$submitted">
 	<div class="form-group">
 		<label class="sr-only col-form-label" for="scrambled">Scrambled</label>
 		<input
@@ -20,15 +20,15 @@
 				ng-model="main.numRows"
 				ng-maxlength="2"
 				panther-parser
-				class="form-control input-md qf-input-rows"
+				class="form-control input-lg qf-input-rows"
 				name="rows"
 				placeholder="Rows (4)"
 				type="text"
 				maxlength="2"
 			>
 		</div>
+		<div class="col-xs-6">
+			<button type="submit" class="btn btn-lg btn-default qf-setup-puzzle" ng-click="setupPuzzle()" ng-disabled="puzzleForm.$invalid">Setup</button>
+		</div>
 	</div>
-
-	<!-- TODO: Enable button when quote length has met requirement -->
-	<button type="submit" class="btn btn-lg btn-default qf-set-puzzle" ng-click="setupPuzzle()" ng-disabled="puzzleForm.$invalid">Set</button>
 </form>

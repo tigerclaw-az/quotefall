@@ -1,13 +1,23 @@
-export function routerConfig($routeProvider) {
+export function routerConfig($stateProvider, $urlRouterProvider) {
 	'ngInject';
 
-	$routeProvider
-		.when('/:type?', {
+	$urlRouterProvider.otherwise('/');
+
+	$stateProvider
+		.state('app', {
+			url: '/',
 			templateUrl: 'app/main/main.html',
 			controller: 'MainController',
 			controllerAs: 'main'
 		})
-		.otherwise({
-			redirectTo: '/'
-		});
+		.state('app.create', {
+			url: 'create',
+			views: {
+				'puzzle-form': {
+					templateUrl: 'app/components/puzzle/puzzleForm.tpl.html'
+					// TODO: Add specific controller for the form
+				}
+			}
+		})
+		;
 }

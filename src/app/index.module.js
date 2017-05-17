@@ -10,11 +10,11 @@ let deps = [
 	'ngCookies',
 	'ngMessages',
 	'ngResource',
-	'ngRoute',
 	'ngSanitize',
 	'ngTouch',
 	'toastr',
-	'ui.bootstrap'
+	'ui.bootstrap',
+	'ui.router'
 ];
 
 export

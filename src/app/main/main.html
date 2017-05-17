@@ -1,21 +1,26 @@
 <div class="container">
+	<div data-ui-view="header"></div>
+	<!-- TODO: Move this into "header" template -->
 	<header class="header">
 		<ul class="nav nav-pills pull-right">
-			<li ng-class="{active: main.isRoute(routes.home)}"><a href="#!{{routes.home}}">Home</a></li>
-			<li ng-class="{active: main.isRoute(routes.create)}"><a href="#!{{routes.create}}">Create Puzzle</a></li>
-			<li ng-class="{active: main.isRoute(routes.help)}"><a href="#!{{routes.help}}">Help</a></li>
+			<li ng-class="{active: main.isRoute(routes.home)}"><a ui-sref="app">Home</a></li>
+			<li ng-class="{active: main.isRoute(routes.create)}"><a ui-sref="app.create">Create Puzzle</a></li>
+			<li ng-class="{active: main.isRoute(routes.help)}"><a ui-srref="help">Help</a></li>
 		</ul>
 		<h3 class="text-muted">Quotefall Puzzles</h3>
 	</header>
 
-	<ng-include src="'app/components/puzzle/puzzleForm.tpl.html'" ng-if="main.isRoute(routes.create)"></ng-include>
+	<div data-ui-view="puzzle-form"></div>
 
+	<div data-ui-view="puzzle"></div>
+	<!-- TODO: Move this into "puzzle" template -->
 	<div class="qf-puzzle-container well-lg text-center">
 		<!-- This is used as a reference for the 'puzzle' directive -->
 		<div data-puzzle></div>
 	</div>
 
-	<footer>
+	<!-- TODO: Move this into separate template -->
+	<footer class="footer">
 		Yay! I'm the footer!
 	</footer>
 </div>
