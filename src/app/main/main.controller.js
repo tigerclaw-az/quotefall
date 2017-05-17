@@ -1,16 +1,10 @@
 export class MainController {
-	constructor ($scope, $location, $timeout, toastr) {
+	constructor ($scope, $state, $timeout, toastr) {
 		'ngInject';
 
 		this.$scope = $scope;
-		this.$location = $location;
+		this.$state = $state;
 		this.toastr = toastr;
-
-		this.$scope.routes = {
-			home: '/',
-			create: '/create',
-			help: '/help'
-		};
 
 		this.activate($timeout);
 	}
@@ -22,6 +16,6 @@ export class MainController {
 	}
 
 	isRoute(name) {
-		return this.$location.path() === name;
+		return this.$state.current.name === name;
 	}
 }
