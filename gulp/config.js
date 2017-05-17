@@ -2,10 +2,7 @@
 
 /**
  *  This file contains the variables used in other gulp files
- *  which defines tasks
- *  By design, we only put there very generic config values
- *  which are used in several places to keep good readability
- *  of the tasks
+ *  which defines tasks.
  */
 
 var path = require('path');
@@ -50,7 +47,7 @@ paths = Object.assign(paths, {
 		dist: path.join(paths.dist, 'scripts')
 	},
 	html: {
-		index: path.join(paths.app, 'index.html'),
+		index: path.join(paths.src, 'index.html'),
 		source: path.join(paths.app, '**/*.html'),
 		dist: paths.dist
 	},
@@ -126,10 +123,6 @@ exports.options = {
 		removeEmptyAttributes: true,
 		removeAttributeQuotes: true,
 		useShortDoctype: true
-	},
-	ngAnnotate: {
-		add: true,
-		single_quotes: true
 	},
 	sass: {
 		errLogToConsole: true,
