@@ -41,9 +41,12 @@ paths = Object.assign(paths, {
 		dist: path.join(paths.assets.dist, 'fonts')
 	},
 	scripts: {
-		index: path.join(paths.app, 'index.module.js'),
-		source: path.join(paths.app, '**/*.js'),
-		test: path.join(paths.app, '**/*.spec.js'),
+		source: {
+			all: path.join(paths.app, '**/*.js'),
+			index: path.join(paths.app, 'index.module.js'),
+			test: path.join(paths.app, '**/*.spec.js')
+		},
+		out: path.join(paths.app, 'index.js'),
 		dist: path.join(paths.dist, 'scripts')
 	},
 	html: {
@@ -66,6 +69,12 @@ paths = Object.assign(paths, {
 	}
 });
 
+paths.scripts.source.inject = [paths.scripts.source.all].concat(
+	[
+		'!' + paths.scripts.source.test,
+		'!' + path.join(paths.app, 'index*')
+	]
+);
 paths.scripts.serve = path.join(paths.serve.tmp, 'scripts');
 paths.styles.serve = path.join(paths.serve.tmp, 'styles');
 paths.styles.source.noindex = paths.styles.source.all.concat(
@@ -159,7 +168,7 @@ exports.errorHandler = function(title) {
 	return function(err) {
 		var errMsg = err.toString();
 
-		notify(errMsg);
+		notify(errMsg).write(errMsg);
 		gutil.log(gutil.colors.red('[' + title + ']'), errMsg);
 		this.emit('end');
 	};
