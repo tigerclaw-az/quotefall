@@ -5,25 +5,30 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 
 	$stateProvider
 		.state('app', {
-			// abstract: true,
 			url: '/',
 			views: {
 				'': {
-					controller: 'MainController as main',
+					controller: 'MainController as main'
 				},
-				'header': {
+				header: {
 					templateUrl: 'app/components/header/header.tpl.html'
-				},
-				'content': {
-					templateUrl: 'app/main/blank.tpl.html'
 				}
 			}
 		})
-		.state('app.create', {
-			url: 'create',
+		.state('puzzle', {
+			abstract: true,
+			url: '/puzzle',
 			views: {
-				'content@': {
-					templateUrl: 'app/components/puzzle/puzzleForm.tpl.html'
+				content: {
+					templateUrl: 'app/components/puzzle/puzzle.tpl.html'
+				}
+			}
+		})
+		.state('puzzle.create', {
+			url: '/create',
+			views: {
+				puzzleForm: {
+					templateUrl: 'app/components/puzzle/form/puzzleForm.tpl.html'
 					// TODO: Add specific controller for the form
 				}
 			}

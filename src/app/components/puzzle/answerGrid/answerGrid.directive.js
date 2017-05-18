@@ -1,23 +1,20 @@
-export function PuzzleDirective() {
+export function AnswerGridDirective() {
 	'ngInject';
 
 	let directive = {
 		bindToController: true,
-		controller: PuzzleController,
+		controller: AnswerGridController,
 		controllerAs: 'vm',
 		replace: true,
 		restrict: 'A',
 		scope: false,
-		templateUrl: 'app/components/puzzle/puzzle.tpl.html',
-		link: function(scope, el, attr, ctrl) {
-			// scope.setupPuzzle = ctrl.setupPuzzle;
-		}
+		templateUrl: 'app/components/puzzle/answerGrid/answerGrid.tpl.html'
 	};
 
 	return directive;
 }
 
-class PuzzleController {
+class AnswerGridController {
 	constructor (moment) {
 		'ngInject';
 
@@ -26,7 +23,6 @@ class PuzzleController {
 	}
 
 	setupPuzzle() {
-		console.debug('this', this);
 		var letters = this.scrambledLetters,
 			numRows = this.numRows || 4,
 			numColumns;
