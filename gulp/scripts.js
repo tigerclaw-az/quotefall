@@ -51,7 +51,9 @@ function injectScripts() {
 				moduleName = changeCase.pascalCase(fileName),
 				modulePath = filepath.replace('.js', ''),
 				moduleType = fileNameParse.ext,
-				moduleRef = fileNameParse.name;
+				moduleRef = moduleType === '.directive' ?
+									fileNameParse.name :
+									changeCase.camelCase(fileName);
 
 			if (injectName === 'import-inject') {
 				return `import { ${moduleName} } from './${modulePath}';`;
