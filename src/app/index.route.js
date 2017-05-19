@@ -5,18 +5,19 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 
 	$stateProvider
 		.state('app', {
-			url: '/',
-			views: {
-				'': {
-					controller: 'MainController as main'
-				},
-				header: {
-					templateUrl: 'app/components/header/header.tpl.html'
-				}
-			}
+			abstract: true,
+			url: '',
+			controller: 'mainController',
+			controllerAs: 'main',
+			templateUrl: 'app/main/main.tpl.html'
+		})
+		.state('app.home', {
+			// parent: 'app',
+			url: '/'
 		})
 		.state('puzzle', {
 			abstract: true,
+			parent: 'app',
 			url: '/puzzle',
 			views: {
 				content: {
@@ -29,7 +30,6 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 			views: {
 				puzzleForm: {
 					templateUrl: 'app/components/puzzle/form/puzzleForm.tpl.html'
-					// TODO: Add specific controller for the form
 				}
 			}
 		})
