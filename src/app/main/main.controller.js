@@ -14,8 +14,4 @@ export class MainController {
 			this.classAnimation = 'rubberBand';
 		}, 4000);
 	}
-
-	isRoute(name) {
-		return this.$state.current.name === name;
-	}
 }
