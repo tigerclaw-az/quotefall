@@ -42,7 +42,10 @@ paths = Object.assign(paths, {
 	},
 	scripts: {
 		source: {
-			all: path.join(paths.app, '**/*.js'),
+			all: [
+				path.join(paths.app, '**/*.js'),
+				'!' + path.join(paths.app, 'index.js')
+			],
 			index: path.join(paths.app, 'index.module.js'),
 			test: path.join(paths.app, '**/*.spec.js')
 		},
@@ -69,7 +72,7 @@ paths = Object.assign(paths, {
 	}
 });
 
-paths.scripts.source.inject = [paths.scripts.source.all].concat(
+paths.scripts.source.inject = paths.scripts.source.all.concat(
 	[
 		'!' + paths.scripts.source.test,
 		'!' + path.join(paths.app, 'index*')
