@@ -72,9 +72,9 @@ paths = Object.assign(paths, {
 	}
 });
 
+paths.scripts.source.all.push('!' + paths.scripts.source.test);
 paths.scripts.source.inject = paths.scripts.source.all.concat(
 	[
-		'!' + paths.scripts.source.test,
 		'!' + path.join(paths.app, 'index*')
 	]
 );
