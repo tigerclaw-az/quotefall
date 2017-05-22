@@ -50,9 +50,9 @@ function runTests(singleRun, done) {
 }
 
 gulp.task('test', ['scripts:test'], function(done) {
-	runTests(true, done);
+	return runTests(true, done);
 });
 
 gulp.task('test:auto', ['scripts:test-watch'], function(done) {
-	runTests(false, done);
+	return runTests(false, done);
 });

@@ -19,28 +19,28 @@ var conf = require('./config'),
 	options = conf.options,
 	paths = conf.paths;
 
-function compileScripts(test) {
+function getScripts(isTest) {
 	var files = [glob.sync(paths.scripts.out)];
 
-	if (test) {
+	if (isTest) {
 		files.push(glob.sync(paths.scripts.source.test));
 	}
 
-	options.browserify.entries = files;
-
-	return injectScripts().on('end', function() {
-		return browserify(options.browserify)
-			.transform(babelify, options.babelify)
-			.bundle().on('error', conf.errorHandler('bundle'))
-			.pipe(source('app.js'))
-			.pipe(buffer())
-			.pipe($.sourcemaps.init({ loadMaps: true }))
-			.pipe($.sourcemaps.write('./', { includeContent: true }))
-			.pipe(gulp.dest(paths.scripts.serve));
-	});
+	return files;
 }
 
-function injectScripts() {
+function compileScripts(isTest) {
+	return browserify(options.browserify)
+		.transform(babelify, options.babelify)
+		.bundle().on('error', conf.errorHandler('bundle'))
+		.pipe(source('app.js'))
+		.pipe(buffer())
+		.pipe($.sourcemaps.init({ loadMaps: true }))
+		.pipe($.sourcemaps.write('./', { includeContent: true }))
+		.pipe(gulp.dest(paths.scripts.serve));
+}
+
+gulp.task('inject', function() {
 	$.del.sync(paths.scripts.out, { force: true });
 
 	var jsFiles = gulp.src(paths.scripts.source.inject, { read: false, cwd: './' }),
@@ -81,7 +81,7 @@ function injectScripts() {
 		.pipe($.inject(jsFiles, moduleInjectOpts))
 		.pipe($.rename('index.js'))
 		.pipe(gulp.dest(paths.app));
-}
+});
 
 gulp.task('scripts:lint', function() {
 	return gulp.src(paths.scripts.source.all)
@@ -92,12 +92,16 @@ gulp.task('scripts:lint', function() {
 		.pipe($.if(!browserSync.active, $.eslint.failOnError()));
 });
 
-gulp.task('scripts', ['scripts:lint'], function() {
+gulp.task('scripts', ['inject', 'scripts:lint'], function() {
+	options.browserify.entries = getScripts(false);
+
 	return compileScripts();
 });
 
-gulp.task('scripts:test', function() {
-	compileScripts(true);
+gulp.task('scripts:test', ['inject'], function() {
+	options.browserify.entries = getScripts(true);
+
+	return compileScripts();
 });
 
 gulp.task('scripts:test-watch', function(callback) {
