@@ -1,12 +1,13 @@
 export class MainController {
-	constructor ($scope, $state, $timeout, toastr) {
+	constructor ($scope, $state, $log, $timeout, puzzleService) {
 		'ngInject';
 
 		this.$scope = $scope;
 		this.$state = $state;
-		this.toastr = toastr;
 
 		this.activate($timeout);
+
+		this.puzzles = [];
 	}
 
 	activate($timeout) {
