@@ -24,7 +24,7 @@ export class PuzzleService {
 
 	}
 
-	newPuzzle(quote, rows) {
+	newPuzzle(quote, rows = 4) {
 		var self = this,
 			totalChars = quote.length,
 			remainder = totalChars % rows;
@@ -52,6 +52,6 @@ export class PuzzleService {
 	resetPuzzle() {
 		// this.answerSquares.reset();
 
-		// this.letterColumns.clear();
+		this.letterColumns.clear();
 	}
 }
