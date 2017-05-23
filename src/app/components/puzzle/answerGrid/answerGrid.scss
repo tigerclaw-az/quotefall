@@ -1,0 +1,16 @@
+.qf-answer-grid {
+		@include clearfix;
+		display: block;
+		line-height: 0;
+
+		.qf-answer-square {
+			border: 1px solid map-get($colors, 'black');
+			float: left;
+			height: #{$letter-height}em;
+			width: #{$column-width}em;
+
+			&.qf-reserved {
+				background-color: map-get($colors, 'black');
+			}
+		}
+	}
