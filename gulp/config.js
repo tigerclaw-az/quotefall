@@ -106,7 +106,7 @@ exports.options = {
 	browserSync: {
 		debugInfo: false,
 		minify: false,
-		// notify: true,
+		open: false,
 		port: 8181,
 		reloadOnRestart: true,
 		watchEvents: ['add', 'change']
