@@ -1,3 +1,5 @@
+import $log from '../../../shared/logger/es6-logger';
+
 export function AnswerGridDirective() {
 	'ngInject';
 
@@ -15,23 +17,24 @@ export function AnswerGridDirective() {
 }
 
 class AnswerGridController {
-	constructor($scope, $log, moment) {
+	constructor($scope, answerGridService) {
 		'ngInject';
 
 		this.$scope = $scope;
-		this.$log = $log;
-		$log.info('$scope', $scope);
 		this.$scope.$on('$destroy', this.destroy());
+
+		this.agService = answerGridService;
 	}
 
 	destroy() {
 		return () => {
-			this.$log.info('destory', this);
+			$log.info('destory', this);
 		};
 	}
 
-	onClickAnswerSquare(row, col) {
-		this.$log.info('onClickAnswerSquare', this.puzzle);
-		this.puzzle.answerData[row][col] = true;
+	onClickAnswerSquare(pos) {
+		$log.info('onClickAnswerSquare()', pos);
+		// this.puzzle.answerData[row][col] = true;
+		this.agService.setReserved(pos);
 	}
 }
