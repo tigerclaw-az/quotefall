@@ -1,5 +1,5 @@
 export class MainController {
-	constructor ($scope, $state, $log, $timeout, puzzleService, letterColumnsService) {
+	constructor ($scope, $state, $log, $timeout, puzzleService) {
 		'ngInject';
 
 		this.$scope = $scope;
@@ -8,7 +8,7 @@ export class MainController {
 		this.activate($timeout);
 
 		this.puzzles = [];
-		this.lcService = letterColumnsService;
+
 		this.puzzleService = puzzleService;
 	}
 
