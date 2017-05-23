@@ -17,13 +17,11 @@ export function LetterColumnsDirective() {
 }
 
 class LetterColumnsController {
-	constructor($scope, letterColumnsService) {
+	constructor($scope) {
 		'ngInject';
 
 		this.$scope = $scope;
 		this.$scope.$on('$destroy', this.destroy());
-
-		this.$scope.columns = letterColumnsService.data.columns;
 	}
 
 	destroy() {

@@ -6,37 +6,41 @@ export class LetterColumnsService {
 
 		this._ = _;
 
-		this.data = {
-			columns: [],
-			letters: ''
-		};
+		// this.data = {
+		// 	columns: [],
+		// 	letters: ''
+		// };
 
-		// this.columns = [];
-		// this.letters = '';
+		this.columns = [];
+		this.letters = '';
 
 		this.size = 0;
 	}
 
 	init(letters, totalColumns, totalRows) {
-		this.data.letters = letters;
-		this.size = this.data.letters.length;
+		// letters = 'araoefaaleareofenunreseesyptozleq ot thlv  ut lus t   oly   z o '
+
+		// this.data.letters = letters;
+		// this.size = this.data.letters.length;
+		this.letters = letters;
+		this.size = this.letters.length;
 
 		let i = -1;
-		let grouped = this._.groupBy(this.data.letters, function() {
+		let grouped = this._.groupBy(this.letters, function() {
 			++i;
 
 			return i % totalColumns;
 		});
 
-		angular.copy(this._.values(grouped), this.data.columns);
+		// angular.copy(this._.values(grouped), this.data.columns);
+		angular.copy(this._.values(grouped), this.columns);
 	}
 
 	clear() {
+		// this.data.columns = [];
 		// Clear array properly in order to update any references
-		// this.columns = this.columns.splice(0, this.columns.length);
-		this.data.columns = [];
-		// this.letters = this.letters.slice(this.letters.length);
-		this.data.letters = '';
+		this.columns.splice(0, this.columns.length);
+		this.letters = '';
 		this.size = 0;
 	}
 }
