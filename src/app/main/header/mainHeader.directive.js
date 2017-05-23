@@ -4,10 +4,10 @@ export function MainHeaderDirective() {
 	let directive = {
 		bindToController: true,
 		controller: MainHeaderController,
-		controllerAs: 'mh',
+		controllerAs: 'header',
 		replace: true,
 		restrict: 'E',
-		scope: false,
+		scope: true,
 		templateUrl: 'app/main/header/mainHeader.tpl.html'
 	};
 
