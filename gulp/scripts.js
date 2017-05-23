@@ -55,6 +55,14 @@ gulp.task('inject', function() {
 									fileNameParse.name :
 									changeCase.camelCase(fileName);
 
+			if (!moduleType) {
+				return;
+			}
+
+			if (moduleType.includes('model')) {
+				moduleType = '.service';
+			}
+
 			if (injectName === 'import-inject') {
 				return `import { ${moduleName} } from './${modulePath}';`;
 			}
