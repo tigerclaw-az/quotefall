@@ -29,26 +29,4 @@ $letter-height: 3.5;
 			}
 		}
 	}
-
-	.qf-answer-grid {
-		display: block;
-
-		.qf-row {
-			@include clearfix;
-
-			display: block;
-			line-height: 0;
-		}
-
-		.qf-answer-square {
-			border: 1px solid map-get($colors, 'black');
-			display: inline-block;
-			height: #{$letter-height}em;
-			width: #{$column-width}em;
-
-			&.qf-reserved {
-				background-color: map-get($colors, 'black');
-			}
-		}
-	}
 }
