@@ -1,11 +1,14 @@
 import $log from '../../shared/logger/es6-logger';
 
 export class PuzzleService {
-	constructor(letterColumnsService) {
+	constructor(letterColumnsService, answerGridService) {
 		'ngInject';
 
-		this.letterColumns = letterColumnsService;
-		// this.answerSquares;
+		this.lcService = letterColumnsService;
+		this.agService = answerGridService;
+
+		this.letterColumns = this.lcService.columns;
+		this.answerGrid = this.agService.grid;
 
 		this.totalColumns = 0;
 		this.totalRows = 4;
@@ -32,9 +35,7 @@ export class PuzzleService {
 		this.totalRows = rows;
 		this.totalColumns = Math.ceil(totalChars / this.totalRows);
 
-		// this.size = columns * rows;
-
-		// this.columns = [].fill.call({ length: numColumns }, 'x');
+		this.size = this.totalColumns * this.totalRows;
 
 		this.resetPuzzle();
 
@@ -46,12 +47,12 @@ export class PuzzleService {
 
 		let letters = quote.toUpperCase().split('');
 
-		this.letterColumns.init(letters, this.totalColumns, this.totalRows);
+		this.lcService.init(letters, this.totalColumns, this.totalRows);
+		this.agService.init(this.size);
 	}
 
 	resetPuzzle() {
-		// this.answerSquares.reset();
-
-		this.letterColumns.clear();
+		this.lcService.clear();
+		this.agService.clear();
 	}
 }
