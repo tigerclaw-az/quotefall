@@ -4,9 +4,9 @@ export function AnswerGridDirective() {
 	let directive = {
 		bindToController: true,
 		controller: AnswerGridController,
-		controllerAs: 'vm',
+		controllerAs: 'answerGrid',
 		replace: true,
-		restrict: 'A',
+		restrict: 'E',
 		scope: false,
 		templateUrl: 'app/components/puzzle/answerGrid/answerGrid.tpl.html'
 	};
@@ -15,74 +15,23 @@ export function AnswerGridDirective() {
 }
 
 class AnswerGridController {
-	constructor (moment) {
+	constructor($scope, $log, moment) {
 		'ngInject';
 
-		this.height = 50;
-		this.width = 50;
+		this.$scope = $scope;
+		this.$log = $log;
+		$log.info('$scope', $scope);
+		this.$scope.$on('$destroy', this.destroy());
 	}
 
-	setupPuzzle() {
-		var letters = this.scrambledLetters,
-			numRows = this.numRows || 4,
-			numColumns;
-
-		// letters = 'araoefaaleareofenunreseesyptozleq ot thlv  ut lus t   oly   z o '
-		this.quote = letters.toUpperCase();
-
-		this.rows = [].fill.call({ length: numRows }, 'x');
-
-		numColumns = Math.ceil(this.quote.length / numRows);
-		this.columns = [].fill.call({ length: numColumns }, 'x');
-
-		this.createBoard();
-	}
-
-	createBoard() {
-		var self = this,
-			rows,
-			columns,
-			remainder;
-
-		this.resetBoard();
-
-		columns = this.columns.length;
-		rows = this.rows.length;
-
-		remainder = this.quote.length % rows;
-
-		if (remainder > 0) {
-			remainder = rows - remainder;
-			this.quote += Array(remainder + 1).join(' ');
-		}
-
-		this.letters = this.quote.split('');
-
-		for (let i = 0; i < columns; ++i) {
-			let column;
-
-			if (!this.puzzleData.columns[i]) {
-				this.puzzleData.columns[i] = {};
-			}
-
-			column = this.puzzleData.columns[i];
-
-			if (!column.letters) {
-				column.letters = [];
-			}
-
-			for (let j = 0; j < rows; ++j) {
-				let pos = columns * j,
-					letter = this.letters[i + pos];
-
-				column.letters.push(letter);
-			}
-		}
-	}
-
-	resetBoard() {
-		this.puzzleData = {
-			columns: []
+	destroy() {
+		return () => {
+			this.$log.info('destory', this);
 		};
+	}
+
+	onClickAnswerSquare(row, col) {
+		this.$log.info('onClickAnswerSquare', this.puzzle);
+		this.puzzle.answerData[row][col] = true;
 	}
 }

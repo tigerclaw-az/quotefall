@@ -1,20 +1,13 @@
-<section class="qf-puzzle">
-	<div class="qf-letter-columns">
-		<div class="qf-column" ng-repeat="column in vm.puzzleData.columns track by $index">
-			<span
-				class="qf-letter"
-				ng-repeat="letter in column.letters track by $index"
-			>{{letter}}</span>
-		</div>
-	</div>
-	<div class="qf-answer-grid">
-		<span class="qf-row" ng-repeat="r in vm.rows track by $index">
-			<span
-				class="qf-answer-square"
-				ng-class="{'qf-reserved': reserved}"
-				ng-repeat="c in vm.columns track by $index"
-				ng-click="reserved = !reserved"
-			></span>
-		</span>
-	</div>
-</section>
+<div class="qf-answer-grid">
+	<span class="qf-row" ng-repeat="r in puzzle.rows track by $index" ng-init="row = $index">
+		<span
+			class="qf-answer-square"
+			ng-repeat="c in puzzle.columns track by $index"
+			ng-init="col = $index"
+			ng-click="puzzle.onClickAnswerSquare(row, col)"
+			ng-class="{'qf-reserved': puzzle.answerData[row][col]}"
+		></span>
+	</span>
+
+	<button type="submit" class="btn btn-lg btn-primary qf-save-puzzle" ng-show="puzzle.quote" ng-click="puzzle.save()">Save</button>
+</div>
