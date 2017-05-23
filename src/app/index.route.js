@@ -12,7 +12,6 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 			templateUrl: 'app/main/main.tpl.html'
 		})
 		.state('app.home', {
-			// parent: 'app',
 			url: '/'
 		})
 		.state('puzzle', {
@@ -21,6 +20,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 			url: '/puzzle',
 			views: {
 				content: {
+					controller: 'puzzleController as puzzle',
 					templateUrl: 'app/components/puzzle/puzzle.tpl.html'
 				}
 			}
