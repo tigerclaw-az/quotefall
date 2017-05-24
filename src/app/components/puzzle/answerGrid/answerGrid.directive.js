@@ -1,5 +1,3 @@
-import $log from '../../../shared/logger/es6-logger';
-
 export function AnswerGridDirective() {
 	'ngInject';
 
@@ -17,10 +15,12 @@ export function AnswerGridDirective() {
 }
 
 class AnswerGridController {
-	constructor($scope, answerGridService) {
+	constructor($scope, $log, answerGridService) {
 		'ngInject';
 
 		this.$scope = $scope;
+		this.$log = $log;
+
 		this.$scope.$on('$destroy', this.destroy());
 
 		this.agService = answerGridService;
@@ -28,12 +28,12 @@ class AnswerGridController {
 
 	destroy() {
 		return () => {
-			$log.info('destory', this);
+			this.$log.info('destory', this);
 		};
 	}
 
 	onClickAnswerSquare(pos) {
-		$log.info('onClickAnswerSquare()', pos);
+		this.$log.info('onClickAnswerSquare()', pos);
 		// this.puzzle.answerData[row][col] = true;
 		this.agService.setReserved(pos);
 	}

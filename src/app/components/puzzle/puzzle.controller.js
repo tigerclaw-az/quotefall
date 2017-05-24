@@ -1,10 +1,10 @@
-import $log from '../../shared/logger/es6-logger';
-
 export class PuzzleController {
-	constructor($scope, puzzleService, utils, moment) {
+	constructor($scope, $log, puzzleService, utils, moment) {
 		'ngInject';
 
 		this.$scope = $scope;
+		this.$log = $log;
+
 		this.$scope.$on('$destroy', this.destroy());
 
 		this.puzzleService = puzzleService;
@@ -12,7 +12,7 @@ export class PuzzleController {
 
 	destroy() {
 		return () => {
-			$log.info('destroy', this);
+			this.$log.info('destroy', this);
 			this.puzzleService.resetPuzzle();
 		};
 	}
