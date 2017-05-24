@@ -15,7 +15,13 @@ export function MainSidebarDirective() {
 }
 
 class MainSidebarController {
-	constructor () {
+	constructor ($log) {
 		'ngInject';
+
+		this.$log = $log;
+	}
+
+	$onInit() {
+		this.$log.info('$onInit', this);
 	}
 }
