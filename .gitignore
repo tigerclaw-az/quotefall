@@ -7,3 +7,4 @@ bower_components
 app/js/lib
 app/scss/main.scss
 src/app/index.js
+coverage/
