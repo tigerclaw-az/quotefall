@@ -16,7 +16,7 @@ var conf = require('./config'),
 	];
 
 function runTests(singleRun, done) {
-	var reporters = ['progress'],
+	var reporters = ['verbose', 'progress'],
 		preprocessors = {},
 		localConfig = {
 			configFile: path.join(__dirname, '/../karma.conf.js'),

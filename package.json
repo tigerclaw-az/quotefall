@@ -59,6 +59,7 @@
     "karma-ng-html2js-preprocessor": "~0.2.0",
     "karma-phantomjs-launcher": "~0.2.1",
     "karma-phantomjs-shim": "~1.2.0",
+    "karma-verbose-reporter": "0.0.6",
     "lodash": "~4.17.4",
     "main-bower-files": "^2.13.1",
     "opn": "^5.0.0",
