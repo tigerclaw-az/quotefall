@@ -1,9 +1,8 @@
-import $log from '../../../shared/logger/es6-logger';
-
 export class LetterColumnsService {
-	constructor(_) {
+	constructor($log, _) {
 		'ngInject';
 
+		this.$log = $log;
 		this._ = _;
 
 		// this.data = {

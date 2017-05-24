@@ -1,5 +1,3 @@
-import $log from '../../../shared/logger/es6-logger';
-
 export function LetterColumnsDirective() {
 	'ngInject';
 
@@ -17,16 +15,18 @@ export function LetterColumnsDirective() {
 }
 
 class LetterColumnsController {
-	constructor($scope) {
+	constructor($scope, $log) {
 		'ngInject';
 
 		this.$scope = $scope;
+		this.$log = $log;
+
 		this.$scope.$on('$destroy', this.destroy());
 	}
 
 	destroy() {
 		return () => {
-			$log.info('destroy', this);
+			this.$log.info('destroy', this);
 		};
 	}
 }
