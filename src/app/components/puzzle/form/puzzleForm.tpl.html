@@ -28,7 +28,7 @@
 			>
 		</div>
 		<div class="col-xs-6">
-			<button type="submit" class="btn btn-lg btn-default qf-setup-puzzle" ng-click="main.puzzleService.newPuzzle(scrambledLetters, numRows)" ng-disabled="puzzleForm.$invalid">Setup</button>
+			<button type="submit" class="btn btn-lg btn-default qf-setup-puzzle" ng-click="main.puzzleStore.create(scrambledLetters, numRows)" ng-disabled="puzzleForm.$invalid">Setup</button>
 		</div>
 	</div>
 </form>

@@ -1,12 +1,12 @@
-export class PuzzleService {
-	constructor($log, letterColumnsService, answerGridService, utils) {
+export class PuzzleStoreService {
+	constructor($log, utils, letterColumnsModel, answerGridModel) {
 		'ngInject';
 
 		this.$log = $log;
 
 		this.$log.info('constructor()', this);
-		this.lcService = letterColumnsService;
-		this.agService = answerGridService;
+		this.lcService = letterColumnsModel;
+		this.agService = answerGridModel;
 		this.utils = utils;
 
 		this.letterColumns = this.lcService.columns;
@@ -19,23 +19,28 @@ export class PuzzleService {
 		this.size = 0;
 	}
 
-	getPuzzle(id) {
+	get(id) {
 
 	}
 
-	savePuzzle(id) {
+	insert(id) {
+		this.puzzles.push({
+			id: id,
+			letterColumns: this.letterColumns,
+			answerGrid: this.answerGrid
+		});
+
+		this.$log.info('insert()', angular.toJson(this.puzzles));
+	}
+
+	delete(id) {
 
 	}
 
-	deletePuzzle(id) {
-
-	}
-
-	newPuzzle(quote, rows = 4) {
+	create(quote, rows = 4) {
 		var self = this,
 			totalChars = quote.length,
-			remainder = totalChars % rows,
-			id = this.utils.getUuid();
+			remainder = totalChars % rows;
 
 		this.totalRows = rows;
 		this.totalColumns = Math.ceil(totalChars / this.totalRows);
@@ -55,22 +60,11 @@ export class PuzzleService {
 		this.lcService.init(letters, this.totalColumns, this.totalRows);
 		this.agService.init(this.size);
 
-		this.puzzles.push({
-			id: id,
-			letterColumns: this.letterColumns,
-			answerGrid: this.answerGrid
-		});
-
 		this.$log.info('newPuzzle()', this.puzzles);
 	}
 
 	resetPuzzle() {
 		this.lcService.clear();
 		this.agService.clear();
-	}
-
-	savePuzzle() {
-		// this.$log.info('savePuzzle()', JSON.stringify(this.puzzles));
-
 	}
 }

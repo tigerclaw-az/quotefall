@@ -15,12 +15,15 @@ export function LetterColumnsDirective() {
 }
 
 class LetterColumnsController {
-	constructor($scope, $log) {
+	constructor($scope, $log, letterColumnsModel) {
 		'ngInject';
 
 		this.$scope = $scope;
 		this.$log = $log;
+	}
 
+	$onInit() {
+		this.$log.info('$onInit', this);
 		this.$scope.$on('$destroy', this.destroy());
 	}
 
