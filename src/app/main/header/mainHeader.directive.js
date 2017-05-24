@@ -18,4 +18,8 @@ class MainHeaderController {
 	constructor () {
 		'ngInject';
 	}
+
+	$onInit() {
+
+	}
 }
