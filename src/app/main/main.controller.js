@@ -1,5 +1,5 @@
 export class MainController {
-	constructor ($scope, $state, $log, $timeout, utils, puzzleStore, answerGridModel, letterColumnsModel) {
+	constructor ($scope, $state, $log, $timeout, utils, puzzleStore) {
 		'ngInject';
 
 		this.$scope = $scope;
@@ -9,8 +9,6 @@ export class MainController {
 
 		this.utils = utils;
 		this.puzzleStore = puzzleStore;
-		this.agService = answerGridModel;
-		this.lcService = letterColumnsModel;
 
 		this.puzzleId = this.utils.getUuid();
 	}
