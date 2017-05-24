@@ -4,5 +4,7 @@
 	<section class="qf-puzzle">
 		<letter-columns></letter-columns>
 		<answer-grid></answer-grid>
+
+		<button type="submit" class="btn btn-lg btn-primary qf-save-puzzle" ng-show="main.puzzleService.size" ng-click="main.puzzleService.savePuzzle()">Save</button>
 	</section>
 </div>
