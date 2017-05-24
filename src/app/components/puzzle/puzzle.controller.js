@@ -16,7 +16,6 @@ export class PuzzleController {
 	destroy() {
 		return () => {
 			this.$log.info('destroy', this);
-			this.puzzleStore.resetPuzzle();
 		};
 	}
 }

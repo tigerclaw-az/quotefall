@@ -20,6 +20,8 @@ class LetterColumnsController {
 
 		this.$scope = $scope;
 		this.$log = $log;
+
+		this.lcModel = letterColumnsModel;
 	}
 
 	$onInit() {
@@ -30,6 +32,7 @@ class LetterColumnsController {
 	destroy() {
 		return () => {
 			this.$log.info('destroy', this);
+			this.lcModel.clear();
 		};
 	}
 }

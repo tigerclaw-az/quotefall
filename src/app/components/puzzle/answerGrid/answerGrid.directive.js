@@ -21,7 +21,7 @@ class AnswerGridController {
 		this.$scope = $scope;
 		this.$log = $log;
 
-		this.agService = answerGridModel;
+		this.agModel = answerGridModel;
 	}
 
 	$onInit() {
@@ -30,13 +30,14 @@ class AnswerGridController {
 
 	destroy() {
 		return () => {
-			this.$log.info('destory', this);
+			this.$log.info('destroy', this);
+			this.agModel.clear();
 		};
 	}
 
 	onClickAnswerSquare(pos) {
 		this.$log.info('onClickAnswerSquare()', pos);
 		// this.puzzle.answerData[row][col] = true;
-		this.agService.setReserved(pos);
+		this.agModel.setReserved(pos);
 	}
 }

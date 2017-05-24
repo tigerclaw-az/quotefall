@@ -47,8 +47,6 @@ export class PuzzleStoreService {
 
 		this.size = this.totalColumns * this.totalRows;
 
-		this.resetPuzzle();
-
 		/* Pad the end of quote if size doesn't match columns */
 		if (remainder > 0) {
 			remainder = rows - remainder;
@@ -61,10 +59,5 @@ export class PuzzleStoreService {
 		this.agService.init(this.size);
 
 		this.$log.info('newPuzzle()', this.puzzles);
-	}
-
-	resetPuzzle() {
-		this.lcService.clear();
-		this.agService.clear();
 	}
 }
