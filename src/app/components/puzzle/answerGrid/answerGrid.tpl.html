@@ -1,12 +1,8 @@
 <div class="qf-answer-grid" style="width: {{main.puzzleService.totalColumns * 3.5}}em">
-	<!-- <span class="qf-row" ng-repeat="r in puzzle.rows track by $index" ng-init="row = $index"> -->
-		<span
-			class="qf-answer-square"
-			ng-repeat="square in main.puzzleService.answerGrid track by $index"
-			ng-click="answerGrid.onClickAnswerSquare($index)"
-			ng-class="{'qf-reserved': main.puzzleService.answerGrid[$index]}"
-		></span>
-	<!-- </span> -->
-
-	<button type="submit" class="btn btn-lg btn-primary qf-save-puzzle" ng-show="puzzle.quote" ng-click="puzzle.save()">Save</button>
+	<span
+		class="qf-answer-square"
+		ng-repeat="square in main.puzzleService.answerGrid track by $index"
+		ng-click="answerGrid.onClickAnswerSquare($index)"
+		ng-class="{'qf-reserved': main.puzzleService.answerGrid[$index]}"
+	></span>
 </div>
