@@ -51,7 +51,7 @@ gulp.task('inject', function() {
 				moduleName = changeCase.pascalCase(fileName),
 				modulePath = filepath.replace('.js', ''),
 				moduleType = fileNameParse.ext,
-				moduleRef = moduleType === '.directive' ?
+				moduleRef = !moduleType.includes('controller') ?
 									fileNameParse.name :
 									changeCase.camelCase(fileName);
 

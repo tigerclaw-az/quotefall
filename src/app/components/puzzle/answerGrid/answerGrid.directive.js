@@ -15,15 +15,17 @@ export function AnswerGridDirective() {
 }
 
 class AnswerGridController {
-	constructor($scope, $log, answerGridService) {
+	constructor($scope, $log, answerGridModel) {
 		'ngInject';
 
 		this.$scope = $scope;
 		this.$log = $log;
 
-		this.$scope.$on('$destroy', this.destroy());
+		this.agService = answerGridModel;
+	}
 
-		this.agService = answerGridService;
+	$onInit() {
+		this.$scope.$on('$destroy', this.destroy());
 	}
 
 	destroy() {

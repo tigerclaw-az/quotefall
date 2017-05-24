@@ -1,10 +1,10 @@
 <div class="qf-puzzle-container text-center">
 	<div data-ui-view="puzzleForm"></div>
 
-	<section class="qf-puzzle">
+	<section class="qf-puzzle" data-id="{{ puzzle.id }}">
 		<letter-columns></letter-columns>
 		<answer-grid></answer-grid>
 
-		<button type="submit" class="btn btn-lg btn-primary qf-save-puzzle" ng-show="main.puzzleService.size" ng-click="main.puzzleService.savePuzzle()">Save</button>
+		<button type="submit" class="btn btn-lg btn-primary qf-save-puzzle" ng-show="main.puzzleStore.size" ng-click="main.puzzleStore.insert(puzzle.id)">Save</button>
 	</section>
 </div>

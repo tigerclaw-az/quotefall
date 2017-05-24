@@ -1,5 +1,5 @@
 export class PuzzleController {
-	constructor($scope, $log, puzzleService, utils, moment) {
+	constructor($scope, $log, utils, puzzleStore) {
 		'ngInject';
 
 		this.$scope = $scope;
@@ -7,13 +7,16 @@ export class PuzzleController {
 
 		this.$scope.$on('$destroy', this.destroy());
 
-		this.puzzleService = puzzleService;
+		this.puzzleStore = puzzleStore;
+		this.utils = utils;
+
+		this.id = this.utils.getUuid();
 	}
 
 	destroy() {
 		return () => {
 			this.$log.info('destroy', this);
-			this.puzzleService.resetPuzzle();
+			this.puzzleStore.resetPuzzle();
 		};
 	}
 }

@@ -3,7 +3,7 @@ describe('puzzle controller', () => {
 
 	let puzzle;
 
-	beforeEach(inject(($rootScope, $controller, puzzleService) => {
+	beforeEach(inject(($rootScope, $controller, puzzleStore) => {
 		let scope = $rootScope.$new();
 
 		puzzle = $controller('puzzleController', { $scope: scope });

@@ -1,4 +1,4 @@
-export class AnswerGridService {
+export class AnswerGridModelService {
 	constructor($log, _) {
 		'ngInject';
 

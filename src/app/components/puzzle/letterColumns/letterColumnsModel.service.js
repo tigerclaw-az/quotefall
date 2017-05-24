@@ -1,4 +1,4 @@
-export class LetterColumnsService {
+export class LetterColumnsModelService {
 	constructor($log, _) {
 		'ngInject';
 
