@@ -43,7 +43,7 @@ module.exports = function(config) {
 			moduleName: 'gulpAngular'
 		},
 
-		logLevel: 'WARN',
+		logLevel: 'INFO',
 
 		frameworks: ['phantomjs-shim', 'jasmine'],
 
@@ -54,7 +54,8 @@ module.exports = function(config) {
 			'karma-phantomjs-shim',
 			'karma-coverage',
 			'karma-jasmine',
-			'karma-ng-html2js-preprocessor'
+			'karma-ng-html2js-preprocessor',
+			'karma-verbose-reporter'
 		],
 
 		coverageReporter: {
@@ -62,7 +63,7 @@ module.exports = function(config) {
 			dir: 'coverage/'
 		},
 
-		reporters: ['progress'],
+		reporters: ['verbose', 'progress'],
 
 		proxies: {
 			'/assets/': path.join('/base/', conf.paths.assets.source)
