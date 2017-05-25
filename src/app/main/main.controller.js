@@ -8,9 +8,6 @@ export class MainController {
 		this.activate($timeout);
 
 		this.utils = utils;
-		this.puzzleStore = puzzleStore;
-
-		this.puzzleId = this.utils.getUuid();
 	}
 
 	activate($timeout) {
