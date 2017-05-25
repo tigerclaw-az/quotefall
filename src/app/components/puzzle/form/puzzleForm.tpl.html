@@ -1,4 +1,4 @@
-<form name="puzzleForm" ng-show="!puzzleForm.$submitted">
+<form ng-show="!puzzleForm.$submitted">
 	<div class="form-group">
 		<label class="sr-only col-form-label" for="scrambled">Scrambled</label>
 		<input
@@ -28,7 +28,7 @@
 			>
 		</div>
 		<div class="col-xs-6">
-			<button type="submit" class="btn btn-lg btn-default qf-setup-puzzle" ng-click="main.puzzleStore.create(scrambledLetters, numRows)" ng-disabled="puzzleForm.$invalid">Setup</button>
+			<button type="submit" class="btn btn-lg btn-default qf-setup-puzzle" ng-click="puzzleForm.setup(scrambledLetters, numRows)" ng-disabled="puzzleForm.$invalid">Setup</button>
 		</div>
 	</div>
 </form>

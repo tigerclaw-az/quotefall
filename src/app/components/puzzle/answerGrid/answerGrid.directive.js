@@ -37,7 +37,6 @@ class AnswerGridController {
 
 	onClickAnswerSquare(pos) {
 		this.$log.info('onClickAnswerSquare()', pos);
-		// this.puzzle.answerData[row][col] = true;
 		this.agModel.setReserved(pos);
 	}
 }

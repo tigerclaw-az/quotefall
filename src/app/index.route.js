@@ -15,20 +15,26 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 			url: '/'
 		})
 		.state('puzzle', {
-			abstract: true,
 			parent: 'app',
-			url: '/puzzle',
+			url: '/puzzle/:id',
+			stateParams: {
+				id: ''
+			},
 			views: {
 				content: {
-					controller: 'puzzleController as puzzle',
 					templateUrl: 'app/components/puzzle/puzzle.tpl.html'
 				}
 			}
 		})
-		.state('puzzle.create', {
-			url: '/create',
+		.state('puzzle.edit', {
+			url: '/edit'
+		})
+		.state('app.new', {
+			url: '/new',
 			views: {
-				puzzleForm: {
+				content: {
+					controller: 'puzzleFormController',
+					controllerAs: 'puzzleForm',
 					templateUrl: 'app/components/puzzle/form/puzzleForm.tpl.html'
 				}
 			}
