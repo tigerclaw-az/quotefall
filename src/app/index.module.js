@@ -1,6 +1,6 @@
 import { config } from './index.config';
-import { Utils } from './index.service';
 import { routerConfig } from './index.route';
+import { Utils } from './shared/utils.service';
 
 /* import-inject:js */
 /* endinject */
