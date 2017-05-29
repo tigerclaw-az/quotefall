@@ -1,6 +1,5 @@
 import { config } from './index.config';
 import { routerConfig } from './index.route';
-import { Utils } from './shared/utils.service';
 
 /* import-inject:js */
 /* endinject */
@@ -28,7 +27,6 @@ var mod;
 		.constant('_', _)
 		.config(config)
 		.config(routerConfig)
-		.service('utils', Utils)
 		/* module-inject:js */
 		/* endinject */
 	;

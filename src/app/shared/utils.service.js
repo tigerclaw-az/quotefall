@@ -1,6 +1,6 @@
 'use strict';
 
-export class Utils {
+export class UtilsService {
 	constructor() {
 		'nginject';
 	}
