@@ -32,7 +32,6 @@ class LetterColumnsController {
 	destroy() {
 		return () => {
 			this.$log.info('destroy', this);
-			this.lcModel.clear();
 		};
 	}
 }
