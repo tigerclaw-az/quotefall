@@ -39,4 +39,13 @@ export class PuzzleGridModelService {
 
 		// this.$log.info('newPuzzle()', this.puzzles);
 	}
+
+	clear() {
+		this.totalColumns = 0;
+		this.totalRows = 4;
+		this.size = 0;
+
+		this.lcModel.clear();
+		this.agModel.clear();
+	}
 }

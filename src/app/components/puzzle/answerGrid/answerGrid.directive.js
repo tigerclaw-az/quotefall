@@ -31,7 +31,6 @@ class AnswerGridController {
 	destroy() {
 		return () => {
 			this.$log.info('destroy', this);
-			this.agModel.clear();
 		};
 	}
 
