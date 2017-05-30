@@ -1,9 +1,19 @@
+/* jscs:disable */
+
 describe('main controller', () => {
-	let vm;
+	let ctrl,
+		scope;
 
 	beforeEach(angular.mock.module('quotefall'));
 
-	// beforeEach(inject(($controller) => {
-	// 	vm = $controller('MainController');
-	// }));
+	beforeEach(inject(($rootScope, $controller) => {
+		scope = $rootScope.$new();
+		ctrl = $controller('mainController', {
+			'$scope': scope
+		});
+	}));
+
+	it('should have puzzleStore', () => {
+		expect(scope.puzzleStore).not.toBeNull();
+	});
 });
