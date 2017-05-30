@@ -14,6 +14,24 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 		.state('app.home', {
 			url: '/'
 		})
+		.state('app.new', {
+			url: '/new',
+			views: {
+				content: {
+					controller: 'puzzleFormController as puzzleForm',
+					templateUrl: 'app/components/puzzle/form/puzzleForm.tpl.html'
+				}
+			}
+		})
+		.state('app.list', {
+			url: '/list',
+			views: {
+				content: {
+					controller: 'puzzleListController as puzzleList',
+					templateUrl: 'app/components/puzzle/list/puzzleList.tpl.html'
+				}
+			}
+		})
 		.state('puzzle', {
 			parent: 'app',
 			url: '/puzzle/:id',
@@ -29,16 +47,6 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 		})
 		.state('puzzle.edit', {
 			url: '/edit'
-		})
-		.state('app.new', {
-			url: '/new',
-			views: {
-				content: {
-					controller: 'puzzleFormController',
-					controllerAs: 'puzzleForm',
-					templateUrl: 'app/components/puzzle/form/puzzleForm.tpl.html'
-				}
-			}
 		})
 		;
 }
