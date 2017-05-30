@@ -25,9 +25,7 @@ function runTests(singleRun, done) {
 		},
 		server;
 
-	[paths.html.source].forEach(function(path) {
-		preprocessors[path] = ['ng-html2js'];
-	});
+	preprocessors[paths.html.source] = ['ng-html2js'];
 
 	if (singleRun) {
 		pathSrcJs.forEach(function(path) {
