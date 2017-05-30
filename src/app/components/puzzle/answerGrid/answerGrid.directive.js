@@ -25,6 +25,8 @@ class AnswerGridController {
 	}
 
 	$onInit() {
+		this.$log.info('$onInit()', this);
+
 		this.$scope.$on('$destroy', this.destroy());
 	}
 

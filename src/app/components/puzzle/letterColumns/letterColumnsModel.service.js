@@ -18,18 +18,15 @@ export class LetterColumnsModelService {
 
 	init(letters, totalColumns, totalRows) {
 		// letters = 'araoefaaleareofenunreseesyptozleq ot thlv  ut lus t   oly   z o '
+		let i = -1,
+			grouped = this._.groupBy(letters, function() {
+				++i;
 
-		// this.data.letters = letters;
-		// this.size = this.data.letters.length;
+				return i % totalColumns;
+			});
+
 		this.letters = letters;
 		this.size = this.letters.length;
-
-		let i = -1;
-		let grouped = this._.groupBy(this.letters, function() {
-			++i;
-
-			return i % totalColumns;
-		});
 
 		// angular.copy(this._.values(grouped), this.data.columns);
 		angular.copy(this._.values(grouped), this.columns);

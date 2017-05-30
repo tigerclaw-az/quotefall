@@ -1,4 +1,9 @@
 <div class="qf-puzzle-container text-center">
 	<h4>{{title}}</h4>
+
 	<puzzle-grid></puzzle-grid>
+
+	<div class="row">
+		<button type="submit" class="btn btn-lg btn-primary qf-save-puzzle" ng-click="main.puzzleStore.insert(puzzleModel.model.id)">Save</button>
+	</div>
 </div>
