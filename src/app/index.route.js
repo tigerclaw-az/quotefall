@@ -22,6 +22,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 			},
 			views: {
 				content: {
+					controller: 'puzzleController as puzzle',
 					templateUrl: 'app/components/puzzle/puzzle.tpl.html'
 				}
 			}

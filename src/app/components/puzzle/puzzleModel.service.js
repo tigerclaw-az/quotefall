@@ -1,22 +1,21 @@
-export class PuzzleGridModelService {
+export class PuzzleModelService {
 	constructor($log, answerGridModel, letterColumnsModel) {
 		'ngInject';
 
 		this.$log = $log;
 
-		// this.puzzleStore = puzzleStore;
 		this.agModel = answerGridModel;
 		this.lcModel = letterColumnsModel;
 
 		this.answerGrid = this.agModel.grid;
 		this.letterColumns = this.lcModel.columns;
 
-		this.totalColumns = 0;
-		this.totalRows = 4;
-		this.size = 0;
+		this.$log.info('constructor()', this);
+
+		this.clear();
 	}
 
-	newPuzzle(quote, rows) {
+	newPuzzle(quote, rows, title) {
 		var self = this,
 			totalChars = quote.length,
 			remainder = totalChars % rows;
@@ -25,6 +24,8 @@ export class PuzzleGridModelService {
 		this.totalColumns = Math.ceil(totalChars / this.totalRows);
 
 		this.size = this.totalColumns * this.totalRows;
+
+		this.title = title;
 
 		/* Pad the end of quote if size doesn't match columns */
 		if (remainder > 0) {
@@ -41,6 +42,7 @@ export class PuzzleGridModelService {
 	}
 
 	clear() {
+		this.title = '';
 		this.totalColumns = 0;
 		this.totalRows = 4;
 		this.size = 0;
