@@ -8,7 +8,7 @@ export function PuzzleGridDirective() {
 		replace: true,
 		restrict: 'E',
 		scope: false,
-		templateUrl: 'app/components/puzzle/puzzleGrid.tpl.html'
+		templateUrl: 'app/components/puzzle/grid/puzzleGrid.tpl.html'
 	};
 
 	return directive;
