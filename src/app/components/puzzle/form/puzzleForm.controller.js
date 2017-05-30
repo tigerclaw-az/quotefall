@@ -8,7 +8,6 @@ export class PuzzleFormController {
 		this.puzzleGridModel = puzzleGridModel;
 
 		this.$log.info('contructor()', this);
-		this.$log.info('puzzleGrid()', this.puzzleGridModel);
 	}
 
 	setup(letters, numRows = 4) {

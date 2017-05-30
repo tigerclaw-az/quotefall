@@ -1,7 +1,8 @@
 export class PuzzleStoreService {
-	constructor($log, utils, letterColumnsModel, answerGridModel) {
+	constructor($log, $http, utils, letterColumnsModel, answerGridModel) {
 		'ngInject';
 
+		this.$http = $http;
 		this.$log = $log;
 
 		this.$log.info('constructor()', this);
@@ -31,5 +32,20 @@ export class PuzzleStoreService {
 
 	delete(id) {
 
+	}
+
+	loadPuzzles(url) {
+		var successCb = (response) => {
+				var data = response.data,
+					status = response.status;
+
+				this.$log.info(response);
+
+				this.puzzles = data;
+			},
+			errorCb = (response) => {
+				this.$log.info(response);
+			};
+		this.$http.get(url).then(successCb, errorCb);
 	}
 }
