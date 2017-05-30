@@ -5,6 +5,7 @@ $letter-height: 3.5;
 	@include clearfix;
 
 	background-color: map-get($colors, 'white');
+	color: map-get($colors, 'black');
 	display: inline-block;
 	margin: 0 auto;
 

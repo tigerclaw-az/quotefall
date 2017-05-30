@@ -19,3 +19,12 @@ $colors: (
 	'yellow': #ffff00,
 	'white': #ffffff
 );
+
+// Global
+$brand-primary: map-get($colors, 'white');
+$body-bg: lighten(map-get($colors, 'black'), 7);
+$headings-color: invert($body-bg);
+
+// Buttons
+$btn-primary-bg: map-get($colors, fountain);
+$btn-primary-color: $body-bg;
