@@ -15,7 +15,7 @@ export function PuzzleGridDirective() {
 }
 
 class PuzzleGridController {
-	constructor($scope, $log, $stateParams, puzzleGridModel) {
+	constructor($scope, $log, $stateParams, puzzleModel) {
 		'ngInject';
 
 		this.$scope = $scope;
@@ -26,7 +26,7 @@ class PuzzleGridController {
 
 		this.$log.info('constructor()', this, $scope);
 
-		this.model = puzzleGridModel;
+		this.model = puzzleModel;
 		this.agModel = this.main.answerGridModel;
 		this.lcModel = this.main.letterColumnsModel;
 
