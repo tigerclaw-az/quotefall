@@ -40,10 +40,10 @@ module.exports = function(config) {
 
 		ngHtml2JsPreprocessor: {
 			stripPrefix: conf.paths.src + '/',
-			moduleName: 'gulpAngular'
+			moduleName: 'quotefall'
 		},
 
-		logLevel: 'INFO',
+		logLevel: 'WARN',
 
 		frameworks: ['phantomjs-shim', 'jasmine'],
 
@@ -75,9 +75,7 @@ module.exports = function(config) {
 	// It was not possible to do it there because karma doesn't let us now if we are
 	// running a single test or not
 	configuration.preprocessors = {};
-	[conf.paths.html.source].forEach(function(path) {
-		configuration.preprocessors[path] = ['ng-html2js'];
-	});
+	configuration.preprocessors[conf.paths.html.source] = ['ng-html2js'];
 
 	// This block is needed to execute Chrome on Travis
 	// If you ever plan to use Chrome and Travis, you can keep it
