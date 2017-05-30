@@ -15,7 +15,7 @@ export function PuzzleGridDirective() {
 }
 
 class PuzzleGridController {
-	constructor($scope, $log, $stateParams, puzzleModel) {
+	constructor($scope, $log, $stateParams) {
 		'ngInject';
 
 		this.$scope = $scope;
@@ -25,13 +25,6 @@ class PuzzleGridController {
 		this.main = $scope.main;
 
 		this.$log.info('constructor()', this, $scope);
-
-		this.model = puzzleModel;
-		this.agModel = this.main.answerGridModel;
-		this.lcModel = this.main.letterColumnsModel;
-
-		this.answerGrid = this.agModel.grid;
-		this.letterColumns = this.lcModel.columns;
 	}
 
 	$onInit() {
@@ -42,8 +35,6 @@ class PuzzleGridController {
 	destroy() {
 		return () => {
 			this.$log.info('destroy', this);
-
-			this.model.clear();
 		};
 	}
 }

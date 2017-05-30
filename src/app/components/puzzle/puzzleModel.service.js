@@ -37,8 +37,6 @@ export class PuzzleModelService {
 
 		this.lcModel.init(letters, this.totalColumns, this.totalRows);
 		this.agModel.init(this.size);
-
-		// this.$log.info('newPuzzle()', this.puzzles);
 	}
 
 	clear() {
