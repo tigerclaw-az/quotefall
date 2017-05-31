@@ -1,8 +1,20 @@
 'use strict';
 
 export class UtilsService {
-	constructor() {
-		'nginject';
+	constructor($log) {
+		'ngInject';
+
+		this.$log = $log;
+
+		this.$log.info('constructor()', this);
+	}
+
+	decode(str) {
+		return window.atob(str);
+	}
+
+	encode(str) {
+		return window.btoa(str);
 	}
 
 	getRandom(from, to) {
