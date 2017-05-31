@@ -1,0 +1,24 @@
+[{
+	"date": 1496192122797,
+	"id": "NmZkOTA5M2UtNDM5Zi00NTlj",
+	"title": "sample",
+	"columnSize": 16,
+	"rowSize": 4,
+	"letterColumns": [
+        ["A", "N", "Q", "S"],
+        ["R", "U", " ", " "],
+        ["A", "N", "O", "T"],
+        ["O", "R", "T", " "],
+        ["E", "E", " ", " "],
+        ["F", "S", "T", " "],
+        ["A", "E", "H", "O"],
+        ["A", "E", "L", "L"],
+        ["L", "S", "V", "Y"],
+        ["E", "Y", " ", " "],
+        ["A", "P", " ", " "],
+        ["R", "T", "U", " "],
+        ["E", "O", "T", "Z"],
+        ["O", "Z", " ", " "],
+        ["F", "L", "L", "O"],
+        ["E", "E", "U", " "]
+    ], "answerGrid": [false, false, false, false, false, false, false, false, false, true, false, false, false, false, false, false, false, true, false, false, false, true, false, false, false, false, true, false, false, true, false, false, false, false, false, true, true, false, false, false, false, true, false, false, false, true, false, false, false, true, false, false, true, false, false, false, false, false, true, true, false, false, false, true] }]
