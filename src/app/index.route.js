@@ -9,7 +9,12 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 			url: '',
 			controller: 'mainController',
 			controllerAs: 'main',
-			templateUrl: 'app/main/main.tpl.html'
+			templateUrl: 'app/main/main.tpl.html',
+			resolve: {
+				puzzles: (puzzleStore) => {
+					return puzzleStore.loadPuzzles('puzzles.json');
+				}
+			}
 		})
 		.state('app.home', {
 			url: '/'
