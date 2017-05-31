@@ -10,7 +10,6 @@ export class AnswerGridModelService {
 
 	init(size) {
 		angular.copy(this._.fill(Array(size), false), this.grid);
-		this.$log.info('init()', size, this.grid);
 	}
 
 	setReserved(pos) {
