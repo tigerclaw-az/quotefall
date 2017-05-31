@@ -1,9 +1,9 @@
-<div class="qf-puzzle-container text-center">
-	<h4>{{title}}</h4>
+<div class="qf-puzzle-container text-center" style="width: {{puzzleModel.columnSize * 3.5}}em">
+	<h4>{{puzzleModel.title}}</h4>
 
 	<puzzle-grid></puzzle-grid>
 
-	<div class="row">
+	<div class="row" ng-show="{{puzzleModel.id ? false : true}}">
 		<button type="submit" class="btn btn-lg btn-primary qf-save-puzzle" ng-click="puzzle.save()">Save</button>
 	</div>
 </div>

@@ -12,24 +12,25 @@ export class LetterColumnsModelService {
 
 		this.columns = [];
 		this.letters = '';
-
-		this.size = 0;
 	}
 
-	init(letters, totalColumns, totalRows) {
+	init(letters, columnSize) {
 		// letters = 'araoefaaleareofenunreseesyptozleq ot thlv  ut lus t   oly   z o '
 		let i = -1,
 			grouped = this._.groupBy(letters, function() {
 				++i;
 
-				return i % totalColumns;
+				return i % columnSize;
 			});
 
 		this.letters = letters;
-		this.size = this.letters.length;
 
-		// angular.copy(this._.values(grouped), this.data.columns);
-		angular.copy(this._.values(grouped), this.columns);
+		this.setColumns(grouped);
+	}
+
+	setColumns(group) {
+		// angular.copy(this._.values(group), this.data.columns);
+		angular.copy(this._.values(group), this.columns);
 	}
 
 	clear() {
@@ -37,6 +38,5 @@ export class LetterColumnsModelService {
 		// Clear array properly in order to update any references
 		this.columns.splice(0, this.columns.length);
 		this.letters = '';
-		this.size = 0;
 	}
 }

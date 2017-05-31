@@ -1,11 +1,12 @@
 export class PuzzleModelService {
-	constructor($log, answerGridModel, letterColumnsModel) {
+	constructor($log, answerGridModel, letterColumnsModel, puzzleStore) {
 		'ngInject';
 
 		this.$log = $log;
 
 		this.agModel = answerGridModel;
 		this.lcModel = letterColumnsModel;
+		this.puzzleStore = puzzleStore;
 
 		this.answerGrid = this.agModel.grid;
 		this.letterColumns = this.lcModel.columns;
@@ -20,10 +21,10 @@ export class PuzzleModelService {
 			totalChars = quote.length,
 			remainder = totalChars % rows;
 
-		this.totalRows = rows;
-		this.totalColumns = Math.ceil(totalChars / this.totalRows);
+		this.rowSize = rows;
+		this.columnSize = Math.ceil(totalChars / this.rowSize);
 
-		this.size = this.totalColumns * this.totalRows;
+		this.size = this.columnSize * this.rowSize;
 
 		this.title = title;
 
@@ -35,14 +36,30 @@ export class PuzzleModelService {
 
 		let letters = quote.toUpperCase().split('');
 
-		this.lcModel.init(letters, this.totalColumns, this.totalRows);
+		this.lcModel.init(letters, this.columnSize);
 		this.agModel.init(this.size);
 	}
 
+	setupPuzzle(id) {
+		this.id = id;
+
+		let data = this.puzzleStore.get(id);
+
+		this.columnSize = data.columnSize;
+		this.rowSize = data.rowSize;
+		this.title = data.title;
+
+		this.agModel.setGrid(data.answerGrid);
+		this.lcModel.setColumns(data.letterColumns);
+
+		this.$log.info('setupPuzzle()', this, id, data);
+	}
+
 	clear() {
+		this.id = null;
 		this.title = '';
-		this.totalColumns = 0;
-		this.totalRows = 4;
+		this.columnSize = 0;
+		this.rowSize = 4;
 		this.size = 0;
 
 		this.lcModel.clear();
