@@ -1,20 +1,21 @@
 export class PuzzleController {
-	constructor($scope, $log) {
+	constructor($scope, $state, $log) {
 		'ngInject';
 
 		this.$log = $log;
 		this.$scope = $scope;
+		this.$state = $state;
+		this.$parent = $scope.$parent;
 
-		this.main = $scope.main;
-		this.model = this.main.puzzleModel;
+		this.mainCtrl = $scope.main;
+		this.model = $scope.main.puzzleModel;
 
-		this.agModel = this.main.answerGridModel;
-		this.lcModel = this.main.letterColumnsModel;
+		this.$log.info('contructor()', this, $scope);
+		this.agModel = this.mainCtrl.answerGridModel;
+		this.lcModel = this.mainCtrl.letterColumnsModel;
 
 		this.answerGrid = this.agModel.grid;
 		this.letterColumns = this.lcModel.columns;
-
-		this.$log.info('contructor()', this, $scope);
 	}
 
 	$onInit() {
@@ -30,5 +31,10 @@ export class PuzzleController {
 
 			this.model.clear();
 		};
+	}
+
+	save() {
+		this.$parent.puzzleStore.insert();
+		this.$state.go('app.list');
 	}
 }

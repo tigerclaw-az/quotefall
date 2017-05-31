@@ -2,6 +2,7 @@ export class MainController {
 	constructor ($scope, $state, $log, $timeout, utils, answerGridModel, letterColumnsModel, puzzleModel, puzzleStore) {
 		'ngInject';
 
+		this.$log = $log;
 		this.$scope = $scope;
 		this.$state = $state;
 
@@ -10,12 +11,14 @@ export class MainController {
 		this.answerGridModel = answerGridModel;
 		this.letterColumnsModel = letterColumnsModel;
 		this.puzzleModel = puzzleModel;
-		this.puzzleStore = puzzleStore;
 		this.utils = utils;
 
-		this.puzzles = this.puzzleStore.puzzles;
+		$scope.puzzleStore = puzzleStore;
+		$scope.puzzles = $scope.puzzleStore.puzzles;
 
-		this.puzzleStore.loadPuzzles('puzzles.json');
+		this.$log.info('constructor()', this, $scope);
+
+		$scope.puzzleStore.loadPuzzles('puzzles.json');
 	}
 
 	activate($timeout) {

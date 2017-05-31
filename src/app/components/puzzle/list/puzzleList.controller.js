@@ -4,8 +4,8 @@ export class PuzzleListController {
 
 		this.$scope = $scope;
 		this.$log = $log;
-		this.puzzleStore = $scope.$parent.main.puzzleStore;
+		this.puzzleStore = $scope.$parent.puzzleStore;
 
-		this.$log.info('constructor()', this);
+		this.$log.info('constructor()', this, $scope);
 	}
 }
