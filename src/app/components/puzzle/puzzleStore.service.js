@@ -1,17 +1,16 @@
 export class PuzzleStoreService {
-	constructor($log, $http, utils, letterColumnsModel, answerGridModel) {
+	constructor($log, $http, utils, answerGridModel, letterColumnsModel, puzzleModel) {
 		'ngInject';
 
 		this.$http = $http;
 		this.$log = $log;
 
-		this.$log.info('constructor()', this);
-		this.lcService = letterColumnsModel;
-		this.agService = answerGridModel;
+		this.agModel = answerGridModel;
+		this.lcModel = letterColumnsModel;
+		this.pModel = puzzleModel;
 		this.utils = utils;
 
-		this.letterColumns = this.lcService.columns;
-		this.answerGrid = this.agService.grid;
+		this.$log.info('constructor()', this);
 
 		this.puzzles = [];
 	}
@@ -20,11 +19,12 @@ export class PuzzleStoreService {
 
 	}
 
-	insert(id) {
+	insert() {
 		this.puzzles.push({
-			id: id,
-			letterColumns: this.letterColumns,
-			answerGrid: this.answerGrid
+			id: this.utils.getUuid(true),
+			title: this.pModel.title,
+			letterColumns: this.lcModel.columns,
+			answerGrid: this.agModel.grid
 		});
 
 		this.$log.info('insert()', angular.toJson(this.puzzles));
