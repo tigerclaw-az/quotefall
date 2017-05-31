@@ -11,14 +11,16 @@ export class MainController {
 		this.answerGridModel = answerGridModel;
 		this.letterColumnsModel = letterColumnsModel;
 		this.puzzleModel = puzzleModel;
+		this.puzzleStore = puzzleStore;
 		this.utils = utils;
 
-		$scope.puzzleStore = puzzleStore;
-		$scope.puzzles = $scope.puzzleStore.puzzles;
+		$scope.puzzleStore = this.puzzleStore;
 
 		this.$log.info('constructor()', this, $scope);
+	}
 
-		$scope.puzzleStore.loadPuzzles('puzzles.json');
+	$onInit() {
+		this.$log.info('$onInit()', this);
 	}
 
 	activate($timeout) {

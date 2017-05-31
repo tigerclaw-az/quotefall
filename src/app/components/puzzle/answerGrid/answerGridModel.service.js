@@ -9,7 +9,11 @@ export class AnswerGridModelService {
 	}
 
 	init(size) {
-		angular.copy(this._.fill(Array(size), false), this.grid);
+		this.setGrid(this._.fill(Array(size), false));
+	}
+
+	setGrid(grid) {
+		angular.copy(grid, this.grid);
 	}
 
 	setReserved(pos) {

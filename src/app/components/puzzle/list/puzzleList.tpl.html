@@ -1,5 +1,5 @@
 <ul>
-	<li ng-repeat="puzzle in puzzleList.puzzleStore.puzzles track by $index">
-		{{puzzle.title}}
+	<li ng-repeat="puzzle in $parent.main.puzzleStore.data.puzzles track by $index">
+		<a ui-sref="puzzle({ id: puzzle.id })">{{puzzle.title}}</a>
 	</li>
 </ul>

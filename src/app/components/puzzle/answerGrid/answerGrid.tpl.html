@@ -1,8 +1,8 @@
-<div class="qf-answer-grid" style="width: {{puzzle.model.totalColumns * 3.5}}em">
+<div class="qf-answer-grid">
 	<span
 		class="qf-answer-square"
 		ng-repeat="square in puzzle.answerGrid track by $index"
-		ng-click="answerGrid.onClickAnswerSquare($index)"
+		ng-click="puzzleModel.id || answerGrid.onClickAnswerSquare($index)"
 		ng-class="{'qf-reserved': puzzle.answerGrid[$index]}"
 	></span>
 </div>
