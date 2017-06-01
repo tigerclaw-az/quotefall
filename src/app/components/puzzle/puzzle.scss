@@ -2,12 +2,8 @@ $column-width: 3.5;
 $letter-height: 3.5;
 
 .qf-puzzle {
-	@include clearfix;
-
 	background-color: map-get($colors, 'white');
 	color: map-get($colors, 'black');
-	display: inline-block;
-	margin: 0 auto;
 
 	.qf-column {
 		float: left;
@@ -15,8 +11,6 @@ $letter-height: 3.5;
 	}
 
 	.qf-letter-columns {
-		@include clearfix;
-
 		.qf-column {
 			border: 1px solid map-get($colors, 'black');
 			border-bottom: 0;

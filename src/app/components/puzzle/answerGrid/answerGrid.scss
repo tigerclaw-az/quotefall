@@ -4,6 +4,7 @@
 		line-height: 0;
 
 		.qf-answer-square {
+			background-color: map-get($colors, 'white');
 			border: 1px solid map-get($colors, 'black');
 			float: left;
 			height: #{$letter-height}em;
