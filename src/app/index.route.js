@@ -28,6 +28,15 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 				}
 			}
 		})
+		.state('app.edit', {
+			url: '/edit',
+			views: {
+				content: {
+					controller: 'puzzleController as puzzle',
+					templateUrl: 'app/components/puzzle/puzzle.tpl.html'
+				}
+			}
+		})
 		.state('app.list', {
 			url: '/list',
 			views: {
@@ -49,9 +58,6 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 					templateUrl: 'app/components/puzzle/puzzle.tpl.html'
 				}
 			}
-		})
-		.state('puzzle.edit', {
-			url: '/edit'
 		})
 		;
 }

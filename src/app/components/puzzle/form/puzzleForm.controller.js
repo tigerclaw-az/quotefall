@@ -14,6 +14,6 @@ export class PuzzleFormController {
 		this.$log.info('setup()', this);
 
 		this.puzzleModel.newPuzzle(letters, numRows, title);
-		this.$state.go('puzzle.edit', { id: 1 });
+		this.$state.go('app.edit');
 	}
 }

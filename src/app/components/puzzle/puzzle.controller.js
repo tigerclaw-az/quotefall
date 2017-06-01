@@ -24,7 +24,7 @@ export class PuzzleController {
 		this.$scope.title = this.model.title;
 		this.$scope.$on('$destroy', this.destroy());
 
-		if (this.$state.is('puzzle') && this.$state.params.id) {
+		if (this.$state.params.id) {
 			this.model.setupPuzzle(this.$state.params.id);
 		}
 
