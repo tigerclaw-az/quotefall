@@ -3,8 +3,13 @@
 		<div class="navbar-collapse collapse">
 			<ul class="nav">
 				<li ui-sref-active="active"><a ui-sref="app.home">Home</a></li>
-				<li ui-sref-active="active"><a ui-sref="app.new">Submit Puzzle</a></li>
-				<li ui-sref-active="active"><a ui-sref="app.list">View Puzzles</a></li>
+				<li>
+					<a href="#" class="has-submenu">Puzzles</a>
+					<ul class="submenu">
+						<li ui-sref-active="active"><a ui-sref="app.new">New</a></li>
+						<li ui-sref-active="active"><a ui-sref="app.list">View All</a></li>
+					</ul>
+				</li>
 				<li ui-sref-active="active"><a ui-srref="app.help">Help</a></li>
 			</ul>
 		</div>
