@@ -9,19 +9,4 @@ $letter-height: 3.5;
 		float: left;
 		text-align: center;
 	}
-
-	.qf-letter-columns {
-		.qf-column {
-			border: 1px solid map-get($colors, 'black');
-			border-bottom: 0;
-			width: #{$column-width}em;
-
-			.qf-letter {
-				display: block;
-				font-size: 1.8rem;
-				font-weight: 600;
-				height: #{$letter-height / 2}em;
-			}
-		}
-	}
 }
