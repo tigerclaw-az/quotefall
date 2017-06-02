@@ -1,8 +1,14 @@
 <div class="qf-letter-columns">
-	<div class="qf-column" ng-repeat="column in puzzle.letterColumns track by $index">
+	<div class="qf-column" ng-repeat="column in puzzle.letterColumns track by $index" ng-init="col = $index">
 		<span
 			class="qf-letter"
-			ng-repeat="letter in column track by $index"
+			ng-repeat="letter in column track by $index" ng-init="pos = col + puzzleModel.columnSize * $index"
+			ng-class="{
+				inactive: selected.position >= 0 && selected.position != pos,
+				selected: selected.position == pos,
+				used: used[pos]
+			}"
+			ng-click="letterColumnsCtrl.isClickable(pos) && letterColumnsCtrl.onLetterClick(letter, col, $index, pos)"
 		>{{letter}}</span>
 	</div>
 </div>
