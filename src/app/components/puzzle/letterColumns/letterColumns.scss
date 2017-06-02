@@ -1,0 +1,34 @@
+$letter-column-color: $body-bg;
+$letter-column-selected-color: map-get($colors, palma);
+
+.qf-letter-columns {
+	user-select: none;
+
+	.qf-column {
+		border: 1px solid map-get($colors, 'black');
+		border-bottom: 0;
+		width: #{$column-width}em;
+
+		.qf-letter {
+			color: $letter-column-color;
+			display: block;
+			font-size: 1.8rem;
+			font-weight: 600;
+			height: #{$letter-height / 2}em;
+			transition: color .3s ease;
+
+			&.inactive,
+			&.used {
+				color: lighten($letter-column-color, 75);
+			}
+
+			&.used {
+				text-decoration: line-through;
+			}
+
+			&.selected {
+				background-color: $letter-column-selected-color;
+			}
+		}
+	}
+}
