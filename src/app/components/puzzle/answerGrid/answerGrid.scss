@@ -1,17 +1,22 @@
 .qf-answer-grid {
-		@include clearfix;
-		display: block;
-		line-height: 0;
+	@include clearfix;
+	display: block;
+	line-height: 0;
+	user-select: none;
 
-		.qf-answer-square {
-			background-color: map-get($colors, 'white');
-			border: 1px solid map-get($colors, 'black');
-			float: left;
-			height: #{$letter-height}em;
-			width: #{$column-width}em;
+	.qf-answer-square {
+		background-color: map-get($colors, 'white');
+		border: 1px solid map-get($colors, 'black');
+		float: left;
+		height: #{$letter-height}em;
+		width: #{$column-width}em;
 
-			&.qf-reserved {
-				background-color: map-get($colors, 'black');
-			}
+		&.qf-reserved {
+			background-color: map-get($colors, 'black');
+		}
+
+		&.highlight:not(.qf-reserved) {
+			background-color: map-get($colors, palma);
 		}
 	}
+}
