@@ -1,8 +1,9 @@
 export class PuzzleModelService {
-	constructor($log, answerGridModel, letterColumnsModel, puzzleStore) {
+	constructor($log, $state, answerGridModel, letterColumnsModel, puzzleStore) {
 		'ngInject';
 
 		this.$log = $log;
+		this.$state = $state;
 
 		this.agModel = answerGridModel;
 		this.lcModel = letterColumnsModel;
@@ -42,6 +43,19 @@ export class PuzzleModelService {
 
 		this.lcModel.init(letters, this.columnSize);
 		this.agModel.init(this.size);
+	}
+
+	save() {
+		let data = {
+			title: this.title,
+			answerGrid: this.answerGrid,
+			letterColumns: this.letterColumns,
+			columnSize: this.columnSize,
+			rowSize: this.rowSize
+		};
+
+		this.puzzleStore.insert(data);
+		this.$state.go('app.list');
 	}
 
 	setupPuzzle(id) {

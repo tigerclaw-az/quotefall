@@ -38,17 +38,4 @@ export class PuzzleController {
 			this.model.clear();
 		};
 	}
-
-	save() {
-		let data = {
-			title: this.model.title,
-			answerGrid: this.answerGrid,
-			letterColumns: this.letterColumns,
-			columnSize: this.model.columnSize,
-			rowSize: this.model.rowSize
-		};
-
-		this.mainCtrl.puzzleStore.insert(data);
-		this.$state.go('app.list');
-	}
 }
