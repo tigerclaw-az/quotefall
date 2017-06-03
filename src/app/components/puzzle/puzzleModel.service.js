@@ -16,6 +16,10 @@ export class PuzzleModelService {
 		this.clear();
 	}
 
+	getColumnFromPosition(pos) {
+		return pos < this.columnSize ? pos : pos % this.columnSize;
+	}
+
 	newPuzzle(quote, rows, title) {
 		var self = this,
 			totalChars = quote.length,
