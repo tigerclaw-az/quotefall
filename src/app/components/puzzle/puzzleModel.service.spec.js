@@ -19,11 +19,11 @@ describe('puzzleModel service', () => {
 		});
 
 		it('should have 4 rows', () => {
-			expect(pModel.totalRows).toEqual(4);
+			expect(pModel.rowSize).toEqual(4);
 		});
 
 		it('should have 16 rows', () => {
-			expect(pModel.totalColumns).toEqual(16);
+			expect(pModel.columnSize).toEqual(16);
 		});
 
 		it('should have grid size of 64', () => {
