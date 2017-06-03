@@ -8,11 +8,11 @@ export class PuzzleController {
 		this.$parent = $scope.$parent;
 
 		this.mainCtrl = $scope.main;
-		this.model = $scope.main.puzzleModel;
+		this.model = this.mainCtrl.puzzleModel;
 
 		this.agModel = this.mainCtrl.answerGridModel;
 		this.lcModel = this.mainCtrl.letterColumnsModel;
-		$scope.puzzleModel = this.mainCtrl.puzzleModel;
+		$scope.puzzleModel = this.model;
 
 		this.answerGrid = this.agModel.grid;
 		this.letterColumns = this.lcModel.columns;
