@@ -19,35 +19,30 @@ class LetterColumnsController {
 		'ngInject';
 
 		this.$scope = $scope;
+		this.$parent = this.$scope.$parent;
 		this.$log = $log;
+
+		this.puzzle = this.$scope.puzzle;
 
 		this.$log.info('constructor()', this, $scope);
 
-		this.lcModel = this.$scope.$parent.main.letterColumnsModel;
+		this.lcModel = this.puzzle.lcModel;
 	}
 
 	$onInit() {
 		this.$log.info('$onInit', this);
 		this.$scope.$on('$destroy', this.destroy());
 
+		this.$scope.selected = this.lcModel.selected;
 		this.$scope.used = this.lcModel.used;
-		this.clearSelected();
+		this.lcModel.clearSelected();
 	}
 
 	destroy() {
 		return () => {
-			this.clearSelected();
+			this.lcModel.clearSelected();
 
 			this.$log.info('destroy', this);
-		};
-	}
-
-	clearSelected() {
-		this.$scope.selected = {
-			column: -1,
-			index: -1,
-			letter: '',
-			position: -1
 		};
 	}
 
@@ -58,17 +53,17 @@ class LetterColumnsController {
 	}
 
 	onLetterClick(letter, column, index, pos) {
-		this.$log.info('onLetterClick()', letter, column, index);
+		var data = {
+			column: column,
+			index: index,
+			letter: letter,
+			position: pos
+		};
 
-		if (this.$scope.selected.position != pos) {
-			this.$scope.selected = {
-				column: column,
-				index: index,
-				letter: letter,
-				position: pos
-			};
+		if (this.lcModel.selected.position != pos) {
+			this.lcModel.selectLetter(data);
 		} else {
-			this.clearSelected();
+			this.lcModel.clearSelected();
 		}
 	}
 }

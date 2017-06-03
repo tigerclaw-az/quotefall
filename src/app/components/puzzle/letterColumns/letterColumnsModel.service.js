@@ -11,6 +11,7 @@ export class LetterColumnsModelService {
 		// };
 
 		this.columns = [];
+		this.selected = {};
 		this.used = [];
 	}
 
@@ -26,20 +27,39 @@ export class LetterColumnsModelService {
 		this.setColumns(grouped);
 	}
 
+	clearSelected() {
+		angular.copy({
+			column: -1,
+			index: -1,
+			letter: '',
+			position: -1
+		}, this.selected);
+	}
+
+	selectLetter(data) {
+		angular.copy(data, this.selected);
+	}
+
 	setColumns(group) {
+		var groupArr = this._.values(group),
+			// FIXME: Get size of puzzle from puzzleModel?
+			size = groupArr.length * groupArr[0].length;
+
+		this.$log.info('setColumns()', group, size);
+
 		// angular.copy(this._.values(group), this.data.columns);
-		angular.copy(this._.values(group), this.columns);
-		angular.copy(this._.fill(Array(this.columns.length * this.columns[0].length), false), this.used);
+		angular.copy(groupArr, this.columns);
+		angular.copy(this._.fill(Array(size), false), this.used);
 	}
 
 	setUsed(pos) {
 		this.used[pos] = true;
-		this.$log.info('setUsed()', pos, this);
 	}
 
 	clear() {
 		// this.data.columns = [];
 		// Clear array properly in order to update any references
 		this.columns.splice(0, this.columns.length);
+		this.clearSelected();
 	}
 }
