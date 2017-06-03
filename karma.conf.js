@@ -32,42 +32,46 @@ function listFiles() {
 
 module.exports = function(config) {
 	var configuration = {
-		files: listFiles(),
+		browsers: ['Chrome', 'PhantomJS'],
 
-		singleRun: true,
-
-		autoWatch: false,
-
-		ngHtml2JsPreprocessor: {
-			stripPrefix: conf.paths.src + '/',
-			moduleName: 'quotefall'
+		client: {
+			captureConsole: true
 		},
-
-		logLevel: 'WARN',
-
-		frameworks: ['phantomjs-shim', 'jasmine'],
-
-		browsers: ['PhantomJS'],
-
-		plugins: [
-			'karma-phantomjs-launcher',
-			'karma-phantomjs-shim',
-			'karma-coverage',
-			'karma-jasmine',
-			'karma-ng-html2js-preprocessor',
-			'karma-verbose-reporter'
-		],
 
 		coverageReporter: {
 			type: 'html',
 			dir: 'coverage/'
 		},
 
-		reporters: ['verbose', 'progress'],
+		files: listFiles(),
 
-		proxies: {
-			'/assets/': path.join('/base/', conf.paths.assets.source)
-		}
+		frameworks: ['phantomjs-shim', 'jasmine'],
+
+		logLevel: 'WARN',
+
+		loggers: [
+			{ type: 'console' }
+		],
+
+		ngHtml2JsPreprocessor: {
+			stripPrefix: conf.paths.src + '/',
+			moduleName: 'quotefall'
+		},
+
+		plugins: [
+			'karma-chrome-launcher',
+			'karma-phantomjs-launcher',
+			'karma-phantomjs-shim',
+			'karma-coverage',
+			'karma-jasmine',
+			'karma-ng-html2js-preprocessor',
+			'karma-spec-reporter',
+			'karma-jasmine-html-reporter'
+		],
+
+		// proxies: {
+		// 	'/assets/': path.join('/base/', conf.paths.assets.source)
+		// }
 	};
 
 	// This is the default preprocessors configuration for a usage with Karma cli
