@@ -11,13 +11,11 @@ describe('puzzleModel service', () => {
 
 	beforeEach(inject((_puzzleModel_) => {
 		pModel = _puzzleModel_;
+
+		pModel.newPuzzle('araoefaaleareofenunreseesyptozleq ot thlv  ut lus t   oly   z o ', 4);
 	}));
 
 	describe('newPuzzle()', () => {
-		beforeEach(() => {
-			pModel.newPuzzle('araoefaaleareofenunreseesyptozleq ot thlv  ut lus t   oly   z o ', 4);
-		});
-
 		it('should have 4 rows', () => {
 			expect(pModel.rowSize).toEqual(4);
 		});
@@ -38,8 +36,10 @@ describe('puzzleModel service', () => {
 
 		it('should clear puzzle data', () => {
 			pModel.clear();
-			expect(pModel.totalRows).toEqual(4);
-			expect(pModel.totalColumns).toEqual(0);
+			expect(pmodel.id).toEqual(null);
+			expect(pmodel.title).toEqual('');
+			expect(pModel.rowSize).toEqual(4);
+			expect(pModel.columnSize).toEqual(0);
 			expect(pModel.size).toEqual(0);
 		});
 	});
