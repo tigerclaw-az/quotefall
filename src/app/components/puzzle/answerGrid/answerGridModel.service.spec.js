@@ -23,7 +23,7 @@ describe('answerGridModel service', () => {
 		});
 
 		it('should have different objects', () => {
-			expect(agModel.grid[0]).not.toEqual(agModel.grid[1]);
+			expect(agModel.grid[0] === agModel.grid[1]).not.toBeTruthy();
 		});
 	});
 });
