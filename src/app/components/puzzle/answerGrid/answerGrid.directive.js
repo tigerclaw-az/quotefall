@@ -4,7 +4,7 @@ export function AnswerGridDirective() {
 	let directive = {
 		bindToController: true,
 		controller: AnswerGridController,
-		controllerAs: 'answerGrid',
+		controllerAs: 'answerGridCtrl',
 		replace: true,
 		restrict: 'E',
 		scope: false,
@@ -15,13 +15,18 @@ export function AnswerGridDirective() {
 }
 
 class AnswerGridController {
-	constructor($scope, $log, answerGridModel) {
+	constructor($scope, $log) {
 		'ngInject';
 
 		this.$scope = $scope;
+		this.$parent = this.$scope.$parent;
 		this.$log = $log;
 
-		this.agModel = answerGridModel;
+		this.puzzle = this.$scope.puzzle;
+		this.puzzleModel = this.$scope.puzzle.model;
+
+		this.agModel = this.puzzle.agModel;
+		this.lcModel = this.puzzle.lcModel;
 	}
 
 	$onInit() {
@@ -38,6 +43,17 @@ class AnswerGridController {
 
 	onClickAnswerSquare(pos) {
 		this.$log.info('onClickAnswerSquare()', pos);
-		this.agModel.setReserved(pos);
+
+		if (this.puzzle.model.id) {
+			this.agModel.setLetter(this.lcModel.selected.letter, pos);
+		} else {
+			this.agModel.setReserved(pos);
+		}
+	}
+
+	isLetterSelected(pos) {
+		var col = this.puzzleModel.getColumnFromPosition(pos);
+
+		return col === this.lcModel.selected.column;
 	}
 }

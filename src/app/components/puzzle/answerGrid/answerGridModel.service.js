@@ -9,18 +9,33 @@ export class AnswerGridModelService {
 	}
 
 	init(size) {
-		this.setGrid(this._.fill(Array(size), false));
-	}
+		var defaultGrid = [];
 
-	setGrid(grid) {
-		angular.copy(grid, this.grid);
-	}
+		for (let i = 0; i < size; ++i) {
+			defaultGrid[i] = {
+				isReserved: false,
+				letter: ''
+			};
+		}
 
-	setReserved(pos) {
-		this.grid[pos] = !this.grid[pos];
+		this.setGrid(defaultGrid);
 	}
 
 	clear() {
 		this.grid.splice(0, this.grid.length);
+	}
+
+	setGrid(grid) {
+		this.$log.info('setGrid()', grid);
+		angular.copy(grid, this.grid);
+	}
+
+	setLetter(letter, pos) {
+		this.grid[pos].letter = letter;
+	}
+
+	setReserved(pos) {
+		this.grid[pos].isReserved = !this.grid[pos].isReserved;
+		this.$log.info('setReserved()', pos, this.grid);
 	}
 }

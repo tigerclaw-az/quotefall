@@ -1,8 +1,12 @@
 <div class="qf-answer-grid">
-	<span
+	<button
 		class="qf-answer-square"
-		ng-repeat="square in puzzle.answerGrid track by $index"
-		ng-click="puzzleModel.id || answerGrid.onClickAnswerSquare($index)"
-		ng-class="{'qf-reserved': puzzle.answerGrid[$index]}"
-	></span>
+		ng-repeat="grid in puzzle.answerGrid track by $index"
+		ng-click="answerGridCtrl.onClickAnswerSquare($index)"
+		ng-class="{
+			'qf-reserved': puzzle.answerGrid[$index].isReserved,
+			highlight: answerGridCtrl.isLetterSelected($index),
+			'has-letter': grid
+		}"
+	>{{grid.letter}}</button>
 </div>
