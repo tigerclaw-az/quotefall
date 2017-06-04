@@ -41,18 +41,27 @@ class AnswerGridController {
 		};
 	}
 
-	onClickAnswerSquare(pos) {
-		this.$log.info('onClickAnswerSquare()', pos);
+	onClickAnswerSquare(index) {
+		this.$log.info('onClickAnswerSquare()', index);
 
 		if (this.puzzle.model.id) {
-			this.agModel.setLetter(this.lcModel.selected.letter, pos);
+			// TODO: Don't allow click if outside selected "column"
+			this.agModel.update('letter', {
+				letter: this.lcModel.selected.letter,
+				index: index,
+				lcPosition: this.lcModel.selected.position
+			});
+
+			this.lcModel.clearSelected();
 		} else {
-			this.agModel.setReserved(pos);
+			this.agModel.update('reserved', {
+				index: index
+			});
 		}
 	}
 
-	isLetterSelected(pos) {
-		var col = this.puzzleModel.getColumnFromPosition(pos);
+	isLetterSelected(index) {
+		var col = this.puzzleModel.getColumnFromPosition(index);
 
 		return col === this.lcModel.selected.column;
 	}

@@ -14,6 +14,7 @@ export class AnswerGridModelService {
 		for (let i = 0; i < size; ++i) {
 			defaultGrid[i] = {
 				isReserved: false,
+				lcPosition: null,
 				letter: ''
 			};
 		}
@@ -25,17 +26,20 @@ export class AnswerGridModelService {
 		this.grid.splice(0, this.grid.length);
 	}
 
+	containsLetter(pos) {
+		// TODO: Find index of grid that contains lcPosition == pos?
+	}
+
 	setGrid(grid) {
-		this.$log.info('setGrid()', grid);
 		angular.copy(grid, this.grid);
 	}
 
-	setLetter(letter, pos) {
-		this.grid[pos].letter = letter;
-	}
-
-	setReserved(pos) {
-		this.grid[pos].isReserved = !this.grid[pos].isReserved;
-		this.$log.info('setReserved()', pos, this.grid);
+	update(type, obj) {
+		if (type === 'reserved') {
+			this.grid[obj.index].isReserved = !this.grid[obj.index].isReserved;
+		} else {
+			this.grid[obj.index].letter = obj.letter;
+			this.grid[obj.index].lcPosition = obj.lcPosition;
+		}
 	}
 }
