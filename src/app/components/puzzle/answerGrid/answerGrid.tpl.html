@@ -4,9 +4,10 @@
 		ng-repeat="grid in puzzle.answerGrid track by $index"
 		ng-click="answerGridCtrl.onClickAnswerSquare($index)"
 		ng-class="{
-			'qf-reserved': puzzle.answerGrid[$index].isReserved,
-			highlight: answerGridCtrl.isLetterSelected($index),
-			'has-letter': grid
+			'qf-reserved': grid.isReserved,
+			highlight: puzzleModel.isLetterSelected($index),
+			'has-letter': grid.letter
 		}"
+		ng-disabled="!puzzleModel.isLetterSelected($index) && !grid.letter"
 	>{{grid.letter}}</button>
 </div>

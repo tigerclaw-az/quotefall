@@ -45,7 +45,6 @@ class AnswerGridController {
 		this.$log.info('onClickAnswerSquare()', index);
 
 		if (this.puzzle.model.id) {
-			// TODO: Don't allow click if outside selected "column"
 			this.agModel.update('letter', {
 				letter: this.lcModel.selected.letter,
 				index: index,
@@ -58,11 +57,5 @@ class AnswerGridController {
 				index: index
 			});
 		}
-	}
-
-	isLetterSelected(index) {
-		var col = this.puzzleModel.getColumnFromPosition(index);
-
-		return col === this.lcModel.selected.column;
 	}
 }
