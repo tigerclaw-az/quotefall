@@ -11,7 +11,9 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 			controllerAs: 'main',
 			templateUrl: 'app/main/main.tpl.html',
 			resolve: {
-				puzzles: (puzzleStore) => {
+				// Ensure that puzzles are loaded properly before other route(s) that
+				// requires them is run.
+				puzzlesLoaded: (puzzleStore) => {
 					return puzzleStore.loadPuzzles('puzzles.json');
 				}
 			}
@@ -39,6 +41,11 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 		})
 		.state('app.list', {
 			url: '/list',
+			resolve: {
+				allPuzzles: (puzzlesLoaded) => {
+					return puzzlesLoaded;
+				}
+			},
 			views: {
 				content: {
 					controller: 'puzzleListController as puzzleList',

@@ -1,9 +1,11 @@
 export class PuzzleListController {
-	constructor ($scope, $state, $log, puzzleStore) {
+	constructor ($scope, $state, $log, allPuzzles) {
 		'ngInject';
 
 		this.$scope = $scope;
 		this.$log = $log;
+
+		this.$scope.allPuzzles = allPuzzles;
 
 		this.$log.info('constructor()', this, $scope);
 	}

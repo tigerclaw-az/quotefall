@@ -41,11 +41,15 @@ export class PuzzleStoreService {
 				this.$log.info(response);
 
 				angular.copy(data, this.data.puzzles);
+
+				return this.data.puzzles;
 			},
 			errorCb = (response) => {
 				this.$log.info(response);
+
+				return [];
 			};
 
-		this.$http.get(url).then(successCb, errorCb);
+		return this.$http.get(url).then(successCb, errorCb);
 	}
 }

@@ -60,19 +60,25 @@ export class PuzzleModelService {
 		this.$state.go('app.list');
 	}
 
-	setupPuzzle(id) {
-		this.id = id;
+	setupPuzzle(data) {
+		this.$log.info('setupPuzzle()', this, data);
 
-		let data = this.puzzleStore.get(id);
+		try {
+			this.id = data.id;
 
-		this.columnSize = data.columnSize;
-		this.rowSize = data.rowSize;
-		this.title = data.title;
+			this.columnSize = data.columnSize;
+			this.rowSize = data.rowSize;
+			this.title = data.title;
 
-		this.agModel.setGrid(data.answerGrid);
-		this.lcModel.setColumns(data.letterColumns);
+			this.agModel.setGrid(data.answerGrid);
+			this.lcModel.setColumns(data.letterColumns);
 
-		this.$log.info('setupPuzzle()', this, id, data);
+			return true;
+		} catch (e) {
+			console.error(e);
+
+			return false;
+		}
 	}
 
 	clear() {
