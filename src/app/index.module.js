@@ -1,5 +1,6 @@
 import { config } from './index.config';
 import { routerConfig } from './index.route';
+import { runBlock } from './index.run';
 
 /* import-inject:js */
 /* endinject */
@@ -27,6 +28,7 @@ var mod;
 		.constant('_', _)
 		.config(config)
 		.config(routerConfig)
+		.run(runBlock)
 		/* module-inject:js */
 		/* endinject */
 	;
