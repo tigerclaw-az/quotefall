@@ -2,6 +2,8 @@ $letter-column-color: $body-bg;
 $letter-column-selected-color: map-get($colors, palma);
 
 .qf-letter-columns {
+	@include clearfix;
+
 	user-select: none;
 
 	.qf-column {
