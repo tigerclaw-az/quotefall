@@ -34,7 +34,6 @@ class LetterColumnsController {
 		this.$scope.$on('$destroy', this.destroy());
 
 		this.$scope.selected = this.lcModel.selected;
-		this.$scope.used = this.lcModel.used;
 		this.lcModel.clearSelected();
 	}
 
@@ -47,9 +46,10 @@ class LetterColumnsController {
 	}
 
 	isClickable(pos) {
+		this.$log.info('isClickable()', this, pos);
+
 		return this.$scope.selected.position == -1 ||
-				this.$scope.selected.position == pos &&
-				!this.$scope.used[pos];
+				this.$scope.selected.position == pos;
 	}
 
 	onLetterClick(letter, column, index, pos) {
@@ -59,6 +59,8 @@ class LetterColumnsController {
 			letter: letter,
 			position: pos
 		};
+
+		this.$log.info('onLetterClick()', letter, column, index, pos);
 
 		if (this.lcModel.selected.position != pos) {
 			this.lcModel.selectLetter(data);
