@@ -27,7 +27,11 @@ export class AnswerGridModelService {
 	}
 
 	containsLetter(pos) {
-		// TODO: Find index of grid that contains lcPosition == pos?
+		let index = this._.findIndex(this.grid, function(o) {
+			return o.lcPosition === pos;
+		});
+
+		return index >= 0 ? true : false;
 	}
 
 	setGrid(grid) {
