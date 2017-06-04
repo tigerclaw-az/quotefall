@@ -26,5 +26,13 @@ $body-bg: lighten(map-get($colors, 'black'), 7);
 $headings-color: invert($body-bg);
 
 // Buttons
+$btn-default-bg: $brand-primary;
+$btn-default-color: map-get($colors, 'black');
+$btn-default-border: transparent;
+
 $btn-primary-bg: map-get($colors, fountain);
-$btn-primary-color: $body-bg;
+$btn-primary-color: map-get($colors, 'black');
+
+$btn-border-radius-base: 0;
+$btn-border-radius-large: 0;
+$btn-border-radius-small: 0;
