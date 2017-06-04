@@ -1,7 +1,10 @@
-export function config($logProvider, $httpProvider, toastrConfig) {
+export function config(logEnhancerProvider, $httpProvider, toastrConfig, appConfig) {
 	'ngInject';
+
 	// Enable log
-	$logProvider.debugEnabled(true);
+	logEnhancerProvider.logLevels = {
+		'*': logEnhancerProvider.LEVEL[appConfig.logLevel]
+	};
 
 	// Setup http cache
 	$httpProvider.defaults.cache = true;

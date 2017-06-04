@@ -19,7 +19,8 @@
     "angular-mocks": "^1.6.4",
     "angular-animate": "^1.6.4",
     "angular-ui-router": "^1.0.3",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "angular-logger": "^1.4.0"
   },
   "resolutions": {
     "angular": "~1.6.4"

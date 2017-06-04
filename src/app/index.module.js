@@ -18,6 +18,7 @@ var mod;
 		'ngResource',
 		'ngSanitize',
 		'ngTouch',
+		'angular-logger',
 		'toastr',
 		'ui.bootstrap',
 		'ui.router'
