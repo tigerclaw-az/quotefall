@@ -27,6 +27,13 @@ export class LetterColumnsModelService {
 		this.setColumns(grouped);
 	}
 
+	clear() {
+		// this.data.columns = [];
+		// Clear array properly in order to update any references
+		this.columns.splice(0, this.columns.length);
+		this.clearSelected();
+	}
+
 	clearSelected() {
 		angular.copy({
 			column: -1,
@@ -50,16 +57,5 @@ export class LetterColumnsModelService {
 		// angular.copy(this._.values(group), this.data.columns);
 		angular.copy(groupArr, this.columns);
 		angular.copy(this._.fill(Array(size), false), this.used);
-	}
-
-	setUsed(pos) {
-		this.used[pos] = true;
-	}
-
-	clear() {
-		// this.data.columns = [];
-		// Clear array properly in order to update any references
-		this.columns.splice(0, this.columns.length);
-		this.clearSelected();
 	}
 }
