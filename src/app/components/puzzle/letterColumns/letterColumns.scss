@@ -18,13 +18,14 @@ $letter-column-selected-color: map-get($colors, palma);
 			font-weight: 600;
 			height: #{$letter-height / 2}em;
 			transition: color .3s ease;
+			width: 100%;
 
 			&.inactive,
-			&.used {
+			&[disabled] {
 				color: lighten($letter-column-color, 75);
 			}
 
-			&.used {
+			&[disabled] {
 				text-decoration: line-through;
 			}
 
