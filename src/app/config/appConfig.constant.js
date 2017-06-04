@@ -2,5 +2,5 @@
 
 export const AppConfigConstant = {
 	debug: true,
-	logLevel: 'WARN'
+	logLevel: 'INFO'
 };
