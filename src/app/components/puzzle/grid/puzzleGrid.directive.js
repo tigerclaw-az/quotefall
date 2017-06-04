@@ -15,12 +15,11 @@ export function PuzzleGridDirective() {
 }
 
 class PuzzleGridController {
-	constructor($scope, $log, $stateParams) {
+	constructor($scope, $log) {
 		'ngInject';
 
 		this.$scope = $scope;
 		this.$log = $log;
-		this.$stateParams = $stateParams;
 
 		this.main = $scope.main;
 
