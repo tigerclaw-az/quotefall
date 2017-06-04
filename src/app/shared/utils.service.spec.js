@@ -9,13 +9,19 @@ describe('utils service', () => {
 		utils = _utils_;
 	}));
 
-	it('should have getRandom()', () => {
+	it('getRandom()', () => {
 		let rnd = utils.getRandom(0, 5);
 
 		expect(rnd > 0 && rnd < 5).toBeTruthy();
 	});
 
-	it('should have getUuid()', () => {
+	it('getRandomStr()', () => {
+		let rnd = utils.getRandomStr(8);
+
+		expect(rnd.match(/[\w\s]{8}/)).toBeTruthy();
+	})
+
+	it('getUuid() long', () => {
 		let uuid = utils.getUuid();
 
 		expect(uuid).toMatch(/[a-z\d]{8}-[a-z\d]{4}-4[a-z\d]{3}-[a-z\d]{4}-[a-z\d]{12}/);

@@ -1,9 +1,10 @@
 'use strict';
 
 export class UtilsService {
-	constructor($log) {
+	constructor($log, _) {
 		'ngInject';
 
+		this._ = _;
 		this.$log = $log;
 
 		this.$log.info('constructor()', this);
@@ -19,6 +20,14 @@ export class UtilsService {
 
 	getRandom(from, to) {
 		return Math.random() * (to - from) + from;
+	}
+
+	getRandomStr(num) {
+		var self = this;
+
+		return this._.times(num, function() {
+			return String.fromCharCode(self.getRandom(96, 122));
+		}).join('').replace(/`/g, ' ');
 	}
 
 	getUuid(isShort = false) {
