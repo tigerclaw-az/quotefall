@@ -24,16 +24,7 @@ export class PuzzleStoreService {
 	}
 
 	insert(puzzleData) {
-		let obj = {
-				date: moment.now(),
-				id: this.utils.encode(this.utils.getUuid(true))
-			};
-			// newPuzzles = this.puzzles.slice();
-
-		// newPuzzles.push(angular.merge({}, obj, puzzleData));
-		// angular.copy(newPuzzles, this.puzzles);
-
-		this.data.puzzles.push(angular.merge({}, obj, puzzleData));
+		this.data.puzzles.push(puzzleData);
 
 		this.$log.info('insert()', angular.toJson(this.data.puzzles));
 	}

@@ -1,5 +1,5 @@
 export class PuzzleModelService {
-	constructor($log, $state, answerGridModel, letterColumnsModel, puzzleStore) {
+	constructor($log, $state, utils, answerGridModel, letterColumnsModel, puzzleStore) {
 		'ngInject';
 
 		this.$log = $log;
@@ -8,13 +8,11 @@ export class PuzzleModelService {
 		this.agModel = answerGridModel;
 		this.lcModel = letterColumnsModel;
 		this.puzzleStore = puzzleStore;
-
-		this.answerGrid = this.agModel.grid;
-		this.letterColumns = this.lcModel.columns;
-
-		this.$log.info('constructor()', this);
+		this.utils = utils;
 
 		this.clear();
+
+		this.$log.info('constructor()', this);
 	}
 
 	getColumnFromPosition(pos) {
@@ -47,14 +45,18 @@ export class PuzzleModelService {
 
 	save() {
 		let data = {
+			date: moment.now(),
+			id: this.utils.encode(this.utils.getUuid(true)),
 			title: this.title,
-			answerGrid: this.answerGrid,
-			letterColumns: this.letterColumns,
+			answerGrid: this.agModel.grid,
+			letterColumns: this.lcModel.columns,
 			columnSize: this.columnSize,
 			rowSize: this.rowSize
 		};
 
-		this.puzzleStore.insert(data);
+		this.$log.info('save()', data, this);
+
+		this.puzzleStore.insert(angular.merge({}, data));
 		this.$state.go('app.list');
 	}
 
