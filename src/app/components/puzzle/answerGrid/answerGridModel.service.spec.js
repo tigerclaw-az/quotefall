@@ -1,29 +1,49 @@
 /* jscs:disable */
 
+import { AnswerGridModelService } from './answerGridModel.service.js';
+
+let agModel;
+
 describe('answerGridModel service', () => {
 	beforeEach(angular.mock.module('quotefall'));
 
-	let agModel;
+	beforeEach(() => {
+		agModel = new AnswerGridModelService();
 
-	it('should be registered', inject(answerGridModel => {
-		expect(answerGridModel).not.toEqual(undefined);
-	}));
+		agModel.init(64);
+	});
 
-	beforeEach(inject((_answerGridModel_) => {
-		agModel = _answerGridModel_;
-	}));
+	it('should create empty grid of size 64', () => {
+		expect(agModel.grid.length).toEqual(64);
+	});
 
-	describe('init', () => {
-		beforeEach(() => {
-			agModel.init(64);
+	it('should contain default objects in grid', () => {
+		expect(agModel.grid[0].isReserved).not.toBeTruthy();
+		expect(agModel.grid[0].letter).toEqual('');
+	});
+
+	it('should have different objects in grid', () => {
+		expect(agModel.grid[0] === agModel.grid[1]).not.toBeTruthy();
+	});
+
+	describe('update()', () => {
+		it('should set letter', () => {
+			agModel.update('letter', {
+				index: 0,
+				letter: 'A'
+			});
+
+			expect(agModel.grid[0].letter).toEqual('A');
+			expect(agModel.grid[1].letter).toEqual('');
 		});
 
-		it('should create empty grid', () => {
-			expect(agModel.grid.length).toEqual(64);
-		});
+		it('should set isReserved', () => {
+			agModel.update('reserved', {
+				index: 0
+			});
 
-		it('should have different objects', () => {
-			expect(agModel.grid[0] === agModel.grid[1]).not.toBeTruthy();
+			expect(agModel.grid[0].isReserved).toBeTruthy();
+			expect(agModel.grid[1].isReserved).not.toBeTruthy();
 		});
 	});
 });
