@@ -9,7 +9,7 @@ export function runBlock($log, $state, $trace, $transitions) {
 		// console.error('error:', error);
 	});
 
-	$transitions.onStart({ to: 'puzzle' }, function(trans) {
+	$transitions.onEnter({ to: 'puzzle' }, function(trans) {
 		var id = trans.params().id,
 			pModel = trans.injector().get('puzzleModel'),
 			pStore = trans.injector().get('puzzleStore'),
