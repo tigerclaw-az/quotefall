@@ -19,7 +19,7 @@ export class PuzzleStoreService {
 		this.$log.info('get()', id, this);
 
 		return this._.find(this.data.puzzles, function(o) {
-			return o.id == id;
+			return o.id === id;
 		});
 	}
 

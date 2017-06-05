@@ -25,7 +25,7 @@ $letter-column-selected-color: map-get($colors, palma);
 				color: lighten($letter-column-color, 75);
 			}
 
-			&[disabled] {
+			&.used {
 				text-decoration: line-through;
 			}
 
