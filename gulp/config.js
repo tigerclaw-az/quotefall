@@ -65,8 +65,7 @@ paths = Object.assign(paths, {
 		source: {
 			all: [
 				path.join(paths.app, '**/*.scss'),
-				path.join('!', paths.app, 'config/_bootstrap-settings.scss')
-				path.join('!', paths.app, 'config/_variables.scss')
+				path.join('!', paths.app, 'config/*.scss')
 			],
 			index: path.join(paths.app, 'index.scss')
 		},
