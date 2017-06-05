@@ -1,25 +1,8 @@
-export function AnswerGridDirective() {
-	'ngInject';
-
-	let directive = {
-		bindToController: true,
-		controller: AnswerGridController,
-		controllerAs: 'answerGridCtrl',
-		replace: true,
-		restrict: 'E',
-		scope: false,
-		templateUrl: 'app/components/puzzle/answerGrid/answerGrid.tpl.html'
-	};
-
-	return directive;
-}
-
-class AnswerGridController {
+export default class AnswerGridController {
 	constructor($scope, $log, answerGridModel, puzzleModel) {
 		'ngInject';
 
 		this.$scope = $scope;
-		this.$parent = this.$scope.$parent;
 		this.$log = $log;
 
 		this.agModel = answerGridModel;
@@ -30,11 +13,9 @@ class AnswerGridController {
 
 	$onInit() {
 		this.$log.info('$onInit()', this);
-
-		this.$scope.$on('$destroy', this.destroy());
 	}
 
-	destroy() {
+	$onDestroy() {
 		return () => {
 			this.$log.info('destroy', this);
 		};
@@ -59,4 +40,4 @@ class AnswerGridController {
 			});
 		}
 	}
-}
+};
