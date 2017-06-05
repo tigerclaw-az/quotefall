@@ -15,18 +15,17 @@ export function AnswerGridDirective() {
 }
 
 class AnswerGridController {
-	constructor($scope, $log) {
+	constructor($scope, $log, answerGridModel, puzzleModel) {
 		'ngInject';
 
 		this.$scope = $scope;
 		this.$parent = this.$scope.$parent;
 		this.$log = $log;
 
-		this.puzzle = this.$scope.puzzle;
-		this.puzzleModel = this.$scope.puzzle.model;
+		this.agModel = answerGridModel;
+		this.puzzleModel = puzzleModel;
 
-		this.agModel = this.puzzle.agModel;
-		this.lcModel = this.puzzle.lcModel;
+		this.$log.info('constructor()', this);
 	}
 
 	$onInit() {
@@ -42,16 +41,18 @@ class AnswerGridController {
 	}
 
 	onClickAnswerSquare(index) {
+		let selectedLetter = this.puzzleModel.getSelectedLetter();
+
 		this.$log.info('onClickAnswerSquare()', index);
 
-		if (this.puzzle.model.id) {
+		if (this.puzzleModel.id) {
 			this.agModel.update('letter', {
-				letter: this.lcModel.selected.letter,
+				letter: selectedLetter.letter,
 				index: index,
-				lcPosition: this.lcModel.selected.position
+				lcPosition: selectedLetter.position
 			});
 
-			this.lcModel.clearSelected();
+			this.$scope.$emit('answerGrid.update', {});
 		} else {
 			this.agModel.update('reserved', {
 				index: index

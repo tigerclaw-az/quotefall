@@ -15,33 +15,39 @@ export function LetterColumnsDirective() {
 }
 
 class LetterColumnsController {
-	constructor($scope, $log) {
+	constructor($scope, $log, letterColumnsModel) {
 		'ngInject';
 
 		this.$scope = $scope;
 		this.$parent = this.$scope.$parent;
 		this.$log = $log;
 
-		this.puzzle = this.$scope.puzzle;
+		this.lcModel = letterColumnsModel;
 
 		this.$log.info('constructor()', this, $scope);
-
-		this.lcModel = this.puzzle.lcModel;
 	}
 
 	$onInit() {
-		this.$log.info('$onInit', this);
+		/**
+		 * Clear selected letter when the answerGrid is updated
+		 */
+		this.$scope.$on('answerGrid.update', () => {
+			this.lcModel.clearSelected();
+		});
+
 		this.$scope.$on('$destroy', this.destroy());
 
 		this.$scope.selected = this.lcModel.selected;
 		this.lcModel.clearSelected();
+
+		this.$log.info('$onInit()', this);
 	}
 
 	destroy() {
 		return () => {
 			this.lcModel.clearSelected();
 
-			this.$log.info('destroy', this);
+			this.$log.info('destroy()', this);
 		};
 	}
 

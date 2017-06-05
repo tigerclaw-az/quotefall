@@ -19,6 +19,10 @@ export class PuzzleModelService {
 		return pos < this.columnSize ? pos : pos % this.columnSize;
 	}
 
+	getSelectedLetter() {
+		return this.lcModel.selected;
+	}
+
 	isLetterSelected(index) {
 		var col = this.getColumnFromPosition(index);
 
