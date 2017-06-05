@@ -1,28 +1,16 @@
-export function LetterColumnsDirective() {
-	'ngInject';
-
-	let directive = {
-		bindToController: true,
-		controller: LetterColumnsController,
-		controllerAs: 'letterColumnsCtrl',
-		replace: true,
-		restrict: 'E',
-		scope: false,
-		templateUrl: '/app/components/puzzle/letterColumns/letterColumns.tpl.html'
-	};
-
-	return directive;
-}
-
-class LetterColumnsController {
-	constructor($scope, $log, letterColumnsModel) {
+export
+default class LetterColumnsController {
+	constructor($rootScope, $scope, $log, letterColumnsModel, puzzleModel) {
 		'ngInject';
 
+		this.$rootScope = $rootScope;
 		this.$scope = $scope;
 		this.$parent = this.$scope.$parent;
 		this.$log = $log;
 
 		this.lcModel = letterColumnsModel;
+		this.$scope.puzzleModel = puzzleModel;
+		this.$scope.puzzle = this.$parent.puzzle;
 
 		this.$log.info('constructor()', this, $scope);
 	}
@@ -31,11 +19,9 @@ class LetterColumnsController {
 		/**
 		 * Clear selected letter when the answerGrid is updated
 		 */
-		this.$scope.$on('answerGrid.update', () => {
+		this.$rootScope.$on('answerGrid.update', () => {
 			this.lcModel.clearSelected();
 		});
-
-		this.$scope.$on('$destroy', this.destroy());
 
 		this.$scope.selected = this.lcModel.selected;
 		this.lcModel.clearSelected();
@@ -43,7 +29,7 @@ class LetterColumnsController {
 		this.$log.info('$onInit()', this);
 	}
 
-	destroy() {
+	$onDestroy() {
 		return () => {
 			this.lcModel.clearSelected();
 

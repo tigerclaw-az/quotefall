@@ -4,7 +4,7 @@
 			class="qf-letter btn btn-default"
 			ng-repeat="letter in column track by $index" ng-init="pos = col + puzzleModel.columnSize * $index"
 			ng-class="{
-				selected: selected.position == pos,
+				selected: letterColumnsCtrl.selected.position == pos,
 				used: puzzle.agModel.containsLetter(pos)
 			}"
 			ng-disabled="puzzle.agModel.containsLetter(pos) || letter == ' ' || selected.position >= 0 && selected.position != pos"
