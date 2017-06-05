@@ -9,6 +9,6 @@
 			'qf-unavailable': !puzzleModel.isLetterSelected($index),
 			'has-letter': grid.letter
 		}"
-		ng-disabled="!puzzleModel.isLetterSelected($index) && !grid.letter"
+		ng-disabled="puzzleModel.id && !puzzleModel.isLetterSelected($index) && !grid.letter"
 	><span class="qf-answer-letter">{{grid.letter}}</span></button>
 </div>
