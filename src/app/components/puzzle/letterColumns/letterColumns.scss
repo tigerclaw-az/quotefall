@@ -1,4 +1,5 @@
 $letter-column-color: $body-bg;
+$letter-column-font-size: 1.8rem;
 $letter-column-selected-color: map-get($colors, palma);
 
 .qf-letter-columns {
@@ -14,8 +15,7 @@ $letter-column-selected-color: map-get($colors, palma);
 		.qf-letter {
 			color: $letter-column-color;
 			display: block;
-			font-size: 1.8rem;
-			font-weight: 600;
+			font-size: $letter-column-font-size;
 			height: #{$letter-height / 2}em;
 			transition: color .3s ease;
 			width: 100%;
@@ -26,7 +26,17 @@ $letter-column-selected-color: map-get($colors, palma);
 			}
 
 			&.used {
-				text-decoration: line-through;
+				position: relative;
+
+				&::after {
+					color: map-get($colors, 'red');
+					content: '/';
+					font-size: inherit;
+					left: 50%;
+					position: absolute;
+					top: 10%;
+					transform: translateX(-50%) rotate(25deg);
+				}
 			}
 
 			&.selected {

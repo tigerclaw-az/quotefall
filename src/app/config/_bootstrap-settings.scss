@@ -26,6 +26,8 @@ $body-bg: lighten(map-get($colors, 'black'), 7);
 $headings-color: invert($body-bg);
 
 // Buttons
+$btn-font-weight: 600;
+
 $btn-default-bg: $brand-primary;
 $btn-default-color: map-get($colors, 'black');
 $btn-default-border: transparent;

@@ -5,7 +5,6 @@
 	user-select: none;
 
 	.qf-answer-square {
-		background-color: map-get($colors, 'white');
 		border: 1px solid map-get($colors, 'black');
 		float: left;
 		height: #{$letter-height}em;
@@ -13,6 +12,7 @@
 
 		&.qf-reserved {
 			background-color: map-get($colors, 'black');
+			opacity: 1; // Override .btn[disabled]
 		}
 
 		&.highlight:not(.qf-reserved) {
