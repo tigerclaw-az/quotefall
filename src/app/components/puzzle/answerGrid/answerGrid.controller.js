@@ -1,7 +1,9 @@
-export default class AnswerGridController {
-	constructor($scope, $log, answerGridModel, puzzleModel) {
+export
+default class AnswerGridController {
+	constructor($rootScope, $scope, $log, answerGridModel, puzzleModel) {
 		'ngInject';
 
+		this.$rootScope = $rootScope;
 		this.$scope = $scope;
 		this.$log = $log;
 
@@ -33,7 +35,7 @@ export default class AnswerGridController {
 				lcPosition: selectedLetter.position
 			});
 
-			this.$scope.$emit('answerGrid.update', {});
+			this.$rootScope.$emit('answerGrid.update', {});
 		} else {
 			this.agModel.update('reserved', {
 				index: index
