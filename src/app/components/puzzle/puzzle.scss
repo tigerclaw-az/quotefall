@@ -1,6 +1,6 @@
 .qf-puzzle {
-	background-color: map-get($colors, 'white');
-	color: map-get($colors, 'black');
+	background-color: get-color(white);
+	color: get-color(black);
 
 	.qf-column {
 		float: left;

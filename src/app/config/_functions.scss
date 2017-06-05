@@ -1,4 +1,18 @@
 /**
+ * Return a color from the $colors map, if it exists
+ *
+ * @param  {String} $color The color value to select from map
+ * @return {String}        The color value found in map, or CSS color
+ */
+@function get-color($color) {
+	@if (map-has-key($colors, $color)) {
+		@return map-get($colors, $color);
+	}
+
+	@return $color;
+}
+
+/**
  * Convert font-size from px to rem with px fallback
  *
  * @param $size - the value in pixel you want to convert
@@ -6,17 +20,8 @@
  * e.g. p {@include fontSize(12px);}
  *
  */
-
-// Function for converting a px based font-size to rem.
 @function rem-calc($size) {
-  $rem-size: $size / 16px;
+	$rem-size: $size / $font-size-base;
 
-//Default font size on html element is 100%, equivalent to 16px;
-  @return #{$rem-size}rem;
-}
-
-// Mixin that will include the fall back px declaration as well as the calculated rem value.
-@mixin fallback-font-size($size) {
-  font-size: $size;
-  font-size: rem-calc($size);
+	@return #{$rem-size}rem;
 }

@@ -1,6 +1,6 @@
 $letter-column-color: $body-bg;
 $letter-column-font-size: 1.8rem;
-$letter-column-selected-color: map-get($colors, palma);
+$letter-column-selected-color: get-color('fountain');
 
 .qf-letter-columns {
 	@include clearfix;
@@ -8,7 +8,7 @@ $letter-column-selected-color: map-get($colors, palma);
 	user-select: none;
 
 	.qf-column {
-		border: 1px solid map-get($colors, 'black');
+		border: 1px solid get-color(black);
 		border-bottom: 0;
 		width: #{$column-width}em;
 
@@ -17,6 +17,7 @@ $letter-column-selected-color: map-get($colors, palma);
 			display: block;
 			font-size: $letter-column-font-size;
 			height: #{$letter-height / 2}em;
+			padding: 0; // Override .btn
 			transition: color .3s ease;
 			width: 100%;
 
@@ -29,7 +30,7 @@ $letter-column-selected-color: map-get($colors, palma);
 				position: relative;
 
 				&::after {
-					color: map-get($colors, 'red');
+					color: get-color('red-light');
 					content: '/';
 					font-size: inherit;
 					left: 50%;
