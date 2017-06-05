@@ -21,8 +21,6 @@ class PuzzleGridController {
 		this.$scope = $scope;
 		this.$log = $log;
 
-		this.main = $scope.main;
-
 		this.$log.info('constructor()', this, $scope);
 	}
 
