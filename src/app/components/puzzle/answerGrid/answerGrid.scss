@@ -16,6 +16,14 @@
 
 		&.qf-available:not(.qf-reserved) {
 			background-color: get-color('schoolbus');
+
+			&:hover {
+				background-color: get-color(white);
+			}
+
+			&:focus {
+				background-color: inherit;
+			}
 		}
 
 		&.qf-unavailable:not(.qf-reserved) {
@@ -27,6 +35,23 @@
 			height: 100%;
 			line-height: 1;
 			width: 100%;
+		}
+	}
+
+	.btn,
+	.btn-default {
+		&.disabled,
+		&[disabled] {
+			&:hover,
+			&:focus {
+				border-color: inherit;
+			}
+		}
+
+		&:active,
+		&:hover,
+		&:focus {
+			background-color: inherit;
 		}
 	}
 }
