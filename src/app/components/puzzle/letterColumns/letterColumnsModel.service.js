@@ -12,7 +12,6 @@ export class LetterColumnsModelService {
 
 		this.columns = [];
 		this.selected = {};
-		this.used = [];
 	}
 
 	init(letters, columnSize) {
@@ -54,8 +53,6 @@ export class LetterColumnsModelService {
 
 		this.$log.info('setColumns()', group, size);
 
-		// angular.copy(this._.values(group), this.data.columns);
 		angular.copy(groupArr, this.columns);
-		angular.copy(this._.fill(Array(size), false), this.used);
 	}
 }
