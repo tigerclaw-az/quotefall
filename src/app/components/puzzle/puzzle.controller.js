@@ -23,7 +23,7 @@ export class PuzzleController {
 		this.letterColumns = this.lcModel.columns;
 
 		this.$scope.puzzleModel = this.model;
-		this.$scope.title = this.model.title;
+		this.title = this.model.title;
 
 		this.$log.info('$onInit()', this);
 	}
