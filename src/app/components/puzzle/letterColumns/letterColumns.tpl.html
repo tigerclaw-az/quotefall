@@ -1,13 +1,13 @@
 <div class="qf-letter-columns">
-	<div class="qf-column" ng-repeat="column in puzzleCtrl.letterColumns track by $index" ng-init="col = $index">
+	<div class="qf-column" ng-repeat="column in letterColumnsCtrl.pc.letterColumns track by $index" ng-init="col = $index">
 		<button
 			class="qf-letter btn btn-default"
 			ng-repeat="letter in column track by $index" ng-init="pos = col + letterColumnsCtrl.puzzleModel.columnSize * $index"
 			ng-class="{
-				selected: selected.position == pos,
+				selected: letterColumnsCtrl.selected.position == pos,
 				used: letterColumnsCtrl.puzzleModel.isLetterUsed(pos)
 			}"
-			ng-disabled="letterColumnsCtrl.puzzleModel.isLetterUsed(pos) || letter == ' ' || selected.position >= 0 && selected.position != pos"
+			ng-disabled="letterColumnsCtrl.puzzleModel.isLetterUsed(pos) || letter == ' ' || letterColumnsCtrl.selected.position >= 0 && letterColumnsCtrl.selected.position != pos"
 			ng-click="letterColumnsCtrl.isClickable(pos) && letterColumnsCtrl.onLetterClick(letter, col, $index, pos)"
 		>{{letter}}</button>
 	</div>

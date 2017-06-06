@@ -1,14 +1,13 @@
 <div class="qf-answer-grid">
 	<button
 		class="qf-answer-square btn btn-default btn-large"
-		ng-repeat="grid in $parent.puzzleCtrl.answerGrid track by $index"
+		ng-repeat="square in grid track by $index"
 		ng-click="answerGridCtrl.onClickAnswerSquare($index)"
 		ng-class="{
-			'qf-reserved': grid.isReserved,
-			'qf-available': answerGridCtrl.puzzleModel.isLetterSelected($index),
-			'qf-unavailable': !answerGridCtrl.puzzleModel.isLetterSelected($index),
-			'has-letter': grid.letter
+			'qf-reserved': square.isReserved,
+			'qf-available': answerGridCtrl.puzzleModel.isLetterSelectedInColumn($index),
+			'qf-unavailable': !answerGridCtrl.puzzleModel.isLetterSelectedInColumn($index)
 		}"
-		ng-disabled="answerGridCtrl.puzzleModel.id && !answerGridCtrl.puzzleModel.isLetterSelected($index) && !grid.letter"
-	><span class="qf-answer-letter">{{grid.letter}}</span></button>
+		ng-disabled="!answerGridCtrl.pc.isEditable && !answerGridCtrl.puzzleModel.isLetterSelectedInColumn($index) && !square.letter"
+	><span class="qf-answer-letter">{{square.letter}}</span></button>
 </div>

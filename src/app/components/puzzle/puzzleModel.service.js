@@ -35,7 +35,7 @@ export class PuzzleModelService {
 		return this.lcModel.selected;
 	}
 
-	isLetterSelected(index) {
+	isLetterSelectedInColumn(index) {
 		var col = this.getColumnFromPosition(index);
 
 		return col === this.lcModel.selected.column;

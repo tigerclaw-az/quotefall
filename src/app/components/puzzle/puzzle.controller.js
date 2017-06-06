@@ -16,13 +16,14 @@ export class PuzzleController {
 
 		this.mainCtrl = this.$scope.main;
 		this.model = this.mainCtrl.puzzleModel;
+		this.isEditable = this.model.id ? false : true;
 
 		this.agModel = this.mainCtrl.answerGridModel;
 		this.lcModel = this.mainCtrl.letterColumnsModel;
 		this.answerGrid = this.agModel.grid;
 		this.letterColumns = this.lcModel.columns;
 
-		this.$scope.puzzleModel = this.model;
+		// this.$scope.puzzleModel = this.model;
 		this.title = this.model.title;
 
 		this.$log.info('$onInit()', this);

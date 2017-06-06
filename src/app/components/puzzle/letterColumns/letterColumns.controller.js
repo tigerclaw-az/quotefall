@@ -10,7 +10,6 @@ default class LetterColumnsController {
 
 		this.lcModel = letterColumnsModel;
 		this.puzzleModel = puzzleModel;
-		this.$scope.puzzleCtrl = this.$parent.puzzleCtrl;
 
 		this.$log.info('constructor()', this, $scope);
 	}
@@ -23,7 +22,6 @@ default class LetterColumnsController {
 			this.lcModel.clearSelected();
 		});
 
-		this.$scope.selected = this.lcModel.selected;
 		this.lcModel.clearSelected();
 
 		this.$log.info('$onInit()', this);
@@ -40,8 +38,8 @@ default class LetterColumnsController {
 	isClickable(pos) {
 		this.$log.info('isClickable()', this, pos);
 
-		return this.$scope.selected.position == -1 ||
-				this.$scope.selected.position == pos;
+		return this.selected.position == -1 ||
+				this.selected.position == pos;
 	}
 
 	onLetterClick(letter, column, index, pos) {
@@ -54,7 +52,7 @@ default class LetterColumnsController {
 
 		this.$log.info('onLetterClick()', letter, column, index, pos);
 
-		if (this.lcModel.selected.position != pos) {
+		if (this.selected.position != pos) {
 			this.lcModel.selectLetter(data);
 		} else {
 			this.lcModel.clearSelected();

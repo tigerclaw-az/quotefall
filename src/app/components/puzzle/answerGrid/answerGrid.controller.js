@@ -14,7 +14,14 @@ default class AnswerGridController {
 	}
 
 	$onInit() {
+		this.$scope.sl = this.puzzleModel.lcModel.selected;
+		this.$scope.grid = this.agModel.grid;
+
 		this.$log.info('$onInit()', this);
+	}
+
+	$onChanges(obj) {
+		this.$log.info('$onChanges()', this, obj);
 	}
 
 	$onDestroy() {
