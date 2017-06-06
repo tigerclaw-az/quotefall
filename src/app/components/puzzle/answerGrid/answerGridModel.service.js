@@ -26,14 +26,6 @@ export class AnswerGridModelService {
 		this.grid.splice(0, this.grid.length);
 	}
 
-	containsLetter(pos) {
-		let index = this._.findIndex(this.grid, function(o) {
-			return o.lcPosition === pos;
-		});
-
-		return index >= 0 ? true : false;
-	}
-
 	setGrid(grid) {
 		angular.copy(grid, this.grid);
 	}
