@@ -1,18 +1,30 @@
 export class PuzzleModelService {
-	constructor($log, $state, utils, answerGridModel, letterColumnsModel, puzzleStore) {
+	constructor($log, $state, _, utils, answerGridModel, letterColumnsModel, puzzleStore) {
 		'ngInject';
 
 		this.$log = $log;
 		this.$state = $state;
+		this._ = _;
+		this.utils = utils;
 
 		this.agModel = answerGridModel;
 		this.lcModel = letterColumnsModel;
 		this.puzzleStore = puzzleStore;
-		this.utils = utils;
 
 		this.clear();
 
 		this.$log.info('constructor()', this);
+	}
+
+	clear() {
+		this.id = null;
+		this.title = '';
+		this.columnSize = 0;
+		this.rowSize = 4;
+		this.size = 0;
+
+		this.lcModel.clear();
+		this.agModel.clear();
 	}
 
 	getColumnFromPosition(pos) {
@@ -97,16 +109,5 @@ export class PuzzleModelService {
 
 			return false;
 		}
-	}
-
-	clear() {
-		this.id = null;
-		this.title = '';
-		this.columnSize = 0;
-		this.rowSize = 4;
-		this.size = 0;
-
-		this.lcModel.clear();
-		this.agModel.clear();
 	}
 }

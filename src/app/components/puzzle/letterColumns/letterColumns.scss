@@ -21,7 +21,6 @@ $letter-column-selected-color: get-color('fountain');
 			transition: color .3s ease;
 			width: 100%;
 
-			&.inactive,
 			&[disabled] {
 				color: lighten($letter-column-color, 75);
 			}
