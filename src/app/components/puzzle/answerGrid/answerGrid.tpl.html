@@ -1,7 +1,7 @@
 <div class="qf-answer-grid">
 	<button
 		class="qf-answer-square btn btn-default btn-large"
-		ng-repeat="grid in $parent.puzzle.answerGrid track by $index"
+		ng-repeat="grid in $parent.puzzleCtrl.answerGrid track by $index"
 		ng-click="answerGridCtrl.onClickAnswerSquare($index)"
 		ng-class="{
 			'qf-reserved': grid.isReserved,

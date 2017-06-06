@@ -9,8 +9,8 @@ default class LetterColumnsController {
 		this.$log = $log;
 
 		this.lcModel = letterColumnsModel;
-		this.$scope.puzzleModel = puzzleModel;
-		this.$scope.puzzle = this.$parent.puzzle;
+		this.puzzleModel = puzzleModel;
+		this.$scope.puzzleCtrl = this.$parent.puzzleCtrl;
 
 		this.$log.info('constructor()', this, $scope);
 	}

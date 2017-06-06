@@ -34,7 +34,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 			url: '/edit',
 			views: {
 				content: {
-					controller: 'puzzleController as puzzle',
+					controller: 'puzzleController as puzzleCtrl',
 					templateUrl: 'app/components/puzzle/puzzle.tpl.html'
 				}
 			}
@@ -61,7 +61,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 			},
 			views: {
 				content: {
-					controller: 'puzzleController as puzzle',
+					controller: 'puzzleController as puzzleCtrl',
 					templateUrl: 'app/components/puzzle/puzzle.tpl.html'
 				}
 			}
