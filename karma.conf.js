@@ -32,7 +32,7 @@ function listFiles() {
 
 module.exports = function(config) {
 	var configuration = {
-		browsers: ['Chrome', 'PhantomJS'],
+		browsers: ['PhantomJS'],
 
 		client: {
 			captureConsole: true
