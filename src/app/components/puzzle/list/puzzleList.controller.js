@@ -5,7 +5,7 @@ export class PuzzleListController {
 		this.$scope = $scope;
 		this.$log = $log;
 
-		this.$scope.allPuzzles = allPuzzles;
+		this.allPuzzles = allPuzzles;
 
 		this.$log.info('constructor()', this, $scope);
 	}

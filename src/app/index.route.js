@@ -48,7 +48,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 			},
 			views: {
 				content: {
-					controller: 'puzzleListController as puzzleList',
+					controller: 'puzzleListController as puzzleListCtrl',
 					templateUrl: 'app/components/puzzle/list/puzzleList.tpl.html'
 				}
 			}
