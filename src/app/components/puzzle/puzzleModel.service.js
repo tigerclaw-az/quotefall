@@ -29,6 +29,14 @@ export class PuzzleModelService {
 		return col === this.lcModel.selected.column;
 	}
 
+	isLetterUsed(pos) {
+		let index = this._.findIndex(this.agModel.grid, function(o) {
+			return o.lcPosition === pos;
+		});
+
+		return index >= 0 ? true : false;
+	}
+
 	newPuzzle(quote, rows, title) {
 		var self = this,
 			totalChars = quote.length,
