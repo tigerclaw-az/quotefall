@@ -11,6 +11,17 @@ export class PuzzleModelService {
 		this.lcModel = letterColumnsModel;
 		this.puzzleStore = puzzleStore;
 
+		this.difficultyOptions = [{
+			name: 'Easy',
+			value: 1
+		}, {
+			name: 'Hard',
+			value: 2
+		}, {
+			name: 'Expert',
+			value: 3
+		}];
+
 		this.clear();
 
 		this.$log.info('constructor()', this);
@@ -18,8 +29,9 @@ export class PuzzleModelService {
 
 	clear() {
 		this.id = null;
-		this.title = '';
 		this.columnSize = 0;
+		this.difficulty = null;
+		this.title = '';
 		this.rowSize = 4;
 		this.size = 0;
 
@@ -29,6 +41,16 @@ export class PuzzleModelService {
 
 	getColumnFromPosition(pos) {
 		return pos < this.columnSize ? pos : pos % this.columnSize;
+	}
+
+	getDifficulty(prop, value) {
+		if (!prop) {
+			return this.difficultyOptions;
+		}
+
+		return this._.find(this.difficultyOptions, function(o) {
+			return o[prop] === value;
+		});
 	}
 
 	getSelectedLetter() {
@@ -49,21 +71,22 @@ export class PuzzleModelService {
 		return index >= 0 ? true : false;
 	}
 
-	newPuzzle(quote, rows, title) {
+	newPuzzle(data) {
 		var self = this,
+			quote = data.letters,
 			totalChars = quote.length,
+			rows = data.numRows,
 			remainder = totalChars % rows;
 
 		this.rowSize = rows;
 		this.columnSize = Math.ceil(totalChars / this.rowSize);
-
+		this.difficulty = data.difficulty;
+		this.title = data.title;
 		this.size = this.columnSize * this.rowSize;
-
-		this.title = title;
 
 		/* Pad the end of quote if size doesn't match columns */
 		if (remainder > 0) {
-			remainder = rows - remainder;
+			remainder = this.rowSize - remainder;
 			quote += Array(remainder + 1).join(' ');
 		}
 
@@ -71,12 +94,15 @@ export class PuzzleModelService {
 
 		this.lcModel.init(letters, this.columnSize);
 		this.agModel.init(this.size);
+
+		this.$log.info('newPuzzle()', this, data);
 	}
 
 	save() {
 		let data = {
 			date: moment.now(),
 			id: this.utils.encode(this.utils.getUuid(true)),
+			difficulty: this.difficulty,
 			title: this.title,
 			answerGrid: this.agModel.grid,
 			letterColumns: this.lcModel.columns,
@@ -97,6 +123,7 @@ export class PuzzleModelService {
 			this.id = data.id;
 
 			this.columnSize = data.columnSize;
+			this.difficulty = data.difficulty;
 			this.rowSize = data.rowSize;
 			this.title = data.title;
 

@@ -24,6 +24,7 @@ export class PuzzleController {
 		this.letterColumns = this.lcModel.columns;
 
 		// this.$scope.puzzleModel = this.model;
+		this.difficulty = this.model.getDifficulty('value', this.model.difficulty).name;
 		this.title = this.model.title;
 
 		this.$log.info('$onInit()', this);

@@ -14,7 +14,25 @@ export class PuzzleFormController {
 	}
 
 	$onInit() {
+		let options = {
+			rows: [{
+				name: '4',
+				value: 4
+			}, {
+				name: '5',
+				value: 5
+			}, {
+				name: '6',
+				value: 6
+			}],
+			difficulty: this.puzzleModel.getDifficulty()
+		};
+
 		this.$log.info('onInit()', this);
+
+		this.$scope.formOptions = options;
+		this.$scope.numRows = options.rows[0];
+		this.$scope.difficulty = options.difficulty[0];
 
 		if (this.cfg.debug) {
 			this.$scope.scrambledLetters = this.utils.getRandomStr(64);
@@ -22,10 +40,10 @@ export class PuzzleFormController {
 		}
 	}
 
-	setup(letters, title, numRows = 4) {
+	setup(data) {
 		this.$log.info('setup()', this);
 
-		this.puzzleModel.newPuzzle(letters, numRows, title);
+		this.puzzleModel.newPuzzle(data);
 		this.$state.go('app.edit');
 	}
 }

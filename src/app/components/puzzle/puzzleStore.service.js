@@ -50,6 +50,8 @@ export class PuzzleStoreService {
 				return [];
 			};
 
+		this.$log.info('loadPuzzles()', this, url);
+
 		return this.$http.get(url).then(successCb, errorCb);
 	}
 }
