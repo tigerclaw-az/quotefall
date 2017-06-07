@@ -29,13 +29,14 @@ $letter-column-selected-color: get-color('fountain');
 				position: relative;
 
 				&::after {
-					color: get-color('red-light');
-					content: '/';
-					font-size: inherit;
-					left: 50%;
+					border-bottom: .125em solid get-color('red-light');
+					content: '';
+					left: 0;
+					line-height: 1em;
 					position: absolute;
-					top: 10%;
-					transform: translateX(-50%) rotate(25deg);
+					right: 0;
+					top: 50%;
+					transform: translateY(-50%) rotate(-25deg);
 				}
 			}
 
