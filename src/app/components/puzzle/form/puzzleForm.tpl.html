@@ -1,27 +1,36 @@
-<form ng-show="!myForm.$submitted" name="myForm">
-	<div class="form-group row">
-		<div class="col-xs-6">
-			<label class="sr-only col-form-label" for="rows">Rows</label>
-			<input
-				ng-model="numRows"
-				ng-maxlength="2"
-				panther-parser
-				class="form-control input-lg qf-input-rows"
-				name="numRows"
-				placeholder="Rows (4)"
-				type="text"
-				maxlength="2"
-			>
+<form ng-show="!myForm.$submitted" class="form-horizontal" name="myForm">
+	<div class="form-group form-group-lg row">
+		<label class="control-label col-xs-2" for="difficulty">Difficulty</label>
+		<div class="col-xs-10">
+			<select
+				class="form-control qf-input-rows"
+				name="difficulty"
+				ng-model="difficulty"
+				ng-options="option.name for option in formOptions.difficulty"
+			></select>
 		</div>
-		<div class="col-xs-6">
-			<label class="sr-only col-form-label" for="puzzle-title">Title</label>
+	</div>
+	<div class="form-group form-group-lg row">
+		<label class="col-xs-2 control-label" for="rows">Rows</label>
+		<div class="col-xs-10">
+			<select
+				class="form-control qf-input-rows"
+				name="numRows"
+				ng-model="numRows"
+				ng-options="option.name for option in formOptions.rows"
+			></select>
+		</div>
+	</div>
+	<div class="form-group form-group-lg row">
+		<label class="control-label col-xs-2" for="puzzle-title">Title</label>
+		<div class="col-xs-10">
 			<input
 				ng-model="puzzleTitle"
 				ng-maxlength="128"
 				ng-minlength="8"
 				panther-parser
 				panther-type="alpha"
-				class="form-control input-lg qf-input-title"
+				class="form-control qf-input-title"
 				name="puzzle-title"
 				placeholder="Puzzle title"
 				type="text"
@@ -30,15 +39,15 @@
 			>
 		</div>
 	</div>
-	<div class="form-group row">
-		<div class="col-xs-12">
-			<label class="sr-only col-form-label" for="scrambled">Scrambled</label>
+	<div class="form-group form-group-lg row">
+		<label class="control-label col-xs-2" for="scrambled">Scrambled</label>
+		<div class="col-xs-10">
 			<textarea
 				ng-model="scrambledLetters"
 				ng-minlength="16"
 				panther-parser
 				panther-type="alpha"
-				class="form-control input-lg qf-input-letters"
+				class="form-control qf-input-letters"
 				name="scrambled"
 				placeholder="Scrambled Letters"
 				rows="4"
@@ -46,9 +55,20 @@
 			></textarea>
 		</div>
 	</div>
-	<div class="form-group row">
-		<div class="col-xs-3">
-			<button type="submit" class="btn btn-lg btn-default qf-setup-puzzle" ng-click="puzzleForm.setup(scrambledLetters, puzzleTitle, numRows)" ng-disabled="myForm.$invalid">Setup</button>
+	<div class="form-group form-group-lg row">
+		<div class="col-xs-8"></div>
+		<div class="col-xs-4">
+			<button
+				type="submit"
+				class="btn btn-lg btn-default col-xs-12 qf-setup-puzzle"
+				ng-click="puzzleForm.setup({
+					letters: scrambledLetters,
+					title: puzzleTitle,
+					numRows: numRows.value,
+					difficulty: difficulty.value
+				})"
+				ng-disabled="myForm.$invalid"
+			>Setup</button>
 		</div>
 	</div>
 </form>
