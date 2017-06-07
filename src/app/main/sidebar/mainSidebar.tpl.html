@@ -1,17 +1,23 @@
-<nav class="navbar navbar-inverse sidebar" role="navigation">
-	<div class="container-fluid">
-		<div class="navbar-collapse collapse">
-			<ul class="nav nav-pills nav-stacked">
-				<li ui-sref-active="active"><a ui-sref="app.home">Home</a></li>
-				<li>
-					<a href="#" class="has-submenu">Puzzles</a>
-					<ul class="submenu">
-						<li ui-sref-active="active"><a ui-sref="app.new">New</a></li>
-						<li ui-sref-active="active"><a ui-sref="app.list">View All</a></li>
-					</ul>
-				</li>
-				<li ui-sref-active="active"><a ui-srref="app.help">Help</a></li>
-			</ul>
-		</div>
+<nav class="nav nav-sidebar qf-sidebar" role="navigation">
+	<div class="menu-list">
+		<ul class="menu-content">
+			<li ui-sref-active="active" class="">
+				<a ui-sref="app.home">Home</a>
+			</li>
+			<li>
+				<a href="#" class="has-submenu">Puzzles</a>
+				<ul class="submenu">
+					<li ui-sref-active="active" class="">
+						<a ui-sref="app.new">New</a>
+					</li>
+					<li ui-sref-active="active" class="">
+						<a ui-sref="app.list">View All</a>
+					</li>
+				</ul>
+			</li>
+			<li ui-sref-active="active">
+				<a ui-srref="app.help">Help</a>
+			</li>
+		</ul>
 	</div>
 </nav>
