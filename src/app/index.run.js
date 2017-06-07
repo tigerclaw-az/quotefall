@@ -15,12 +15,22 @@ export function runBlock($log, $state, $trace, $transitions) {
 			pStore = trans.injector().get('puzzleStore'),
 			puzzle = pStore.get(id);
 
-		$log.info('onEnter()', trans, pModel, puzzle);
+		$log.info('onEnter(puzzle)', trans, pModel, puzzle);
 
 		if (!puzzle) {
 			$state.go('app.list');
 		} else {
 			pModel.setupPuzzle(puzzle);
+		}
+	});
+
+	$transitions.onEnter({ to: 'app.edit' }, function(trans) {
+		var pModel = trans.injector().get('puzzleModel');
+
+		$log.info('onEnter(edit)', trans, pModel);
+
+		if (!pModel.title) {
+			$state.go('app.new');
 		}
 	});
 };
