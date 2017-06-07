@@ -5,6 +5,8 @@
 	<puzzle-grid pc="puzzleCtrl"></puzzle-grid>
 
 	<div class="row" ng-show="{{puzzleCtrl.isEditable ? true : false}}">
-		<button type="submit" class="btn btn-lg btn-primary qf-save-puzzle" ng-click="puzzleCtrl.model.save()">Save</button>
+		<button type="submit" class="btn btn-lg btn-primary qf-save-puzzle" ng-click="puzzleCtrl.model.save()">
+			<span class="glyphicon glyphicon-save"></span>Save
+		</button>
 	</div>
 </div>

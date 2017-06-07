@@ -60,7 +60,7 @@
 		<div class="col-xs-4">
 			<button
 				type="submit"
-				class="btn btn-lg btn-default col-xs-12 qf-setup-puzzle"
+				class="btn btn-lg btn-primary col-xs-12 qf-setup-puzzle"
 				ng-click="puzzleForm.setup({
 					letters: scrambledLetters,
 					title: puzzleTitle,
@@ -68,7 +68,7 @@
 					difficulty: difficulty.value
 				})"
 				ng-disabled="myForm.$invalid"
-			>Setup</button>
+			><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Setup</button>
 		</div>
 	</div>
 </form>
