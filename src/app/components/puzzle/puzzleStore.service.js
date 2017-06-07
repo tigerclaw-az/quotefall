@@ -30,7 +30,11 @@ export class PuzzleStoreService {
 	}
 
 	delete(id) {
+		let removed = this._.remove(this.data.puzzles, function(o) {
+			return o.id === id;
+		});
 
+		return removed.length > 0 ? true : false;
 	}
 
 	loadPuzzles(url) {

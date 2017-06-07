@@ -1,5 +1,10 @@
 <ul>
-	<li ng-repeat="puzzle in puzzleListCtrl.allPuzzles track by $index">
+	<li ng-repeat="puzzle in puzzleListCtrl.puzzles track by $index">
 		<a ui-sref="puzzle({ id: puzzle.id })">{{puzzle.title}}</a>
+		<a href="#"
+			class="btn btn-link text-danger"
+			ng-click="puzzleListCtrl.puzzleStore.delete(puzzle.id)">
+			<span class="glyphicon glyphicon-trash"></span>
+		</a>
 	</li>
 </ul>
