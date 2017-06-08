@@ -55,19 +55,15 @@ gulp.task('inject', function() {
 									fileNameParse.name :
 									changeCase.camelCase(fileName);
 
-			if (!moduleType) {
+			if (!moduleType || !moduleType.includes('module')) {
 				return;
-			}
-
-			if (moduleType.includes('model')) {
-				moduleType = '.service';
 			}
 
 			if (injectName === 'import-inject') {
 				return `import { ${moduleName} } from './${modulePath}';`;
 			}
 
-			return `${moduleType}('${moduleRef}', ${moduleName})`;
+			return `,'${moduleRef}'`;
 		},
 		injectOpts = {
 			endtag: '/* endinject */',
@@ -79,8 +75,10 @@ gulp.task('inject', function() {
 			starttag: '/* import-inject:js */'
 		}),
 		moduleInjectOpts = Object.assign({}, injectOpts, {
-			name: 'module-inject',
-			starttag: '/* module-inject:js */'
+			name: 'deps-inject',
+			// name: 'module-inject',
+			starttag: '/* deps-inject:js */'
+			// starttag: '/* module-inject:js */'
 		});
 
 	return gulp.src(paths.scripts.source.index, { cwd: './' })
