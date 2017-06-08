@@ -8,7 +8,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 			abstract: true,
 			url: '',
 			controller: 'mainController',
-			controllerAs: 'main',
+			controllerAs: 'mainCtrl',
 			templateUrl: 'app/main/main.tpl.html',
 			resolve: {
 				// Ensure that puzzles are loaded properly before other route(s) that
@@ -25,7 +25,7 @@ export function routerConfig($stateProvider, $urlRouterProvider) {
 			url: '/new',
 			views: {
 				content: {
-					controller: 'puzzleFormController as puzzleForm',
+					controller: 'puzzleFormController as puzzleFormCtrl',
 					templateUrl: 'app/components/puzzle/form/puzzleForm.tpl.html'
 				}
 			}

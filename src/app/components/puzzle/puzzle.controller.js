@@ -14,7 +14,7 @@ export class PuzzleController {
 	$onInit() {
 		this.$scope.$on('$destroy', this.destroy());
 
-		this.mainCtrl = this.$scope.main;
+		this.mainCtrl = this.$scope.mainCtrl;
 		this.model = this.mainCtrl.puzzleModel;
 		this.isEditable = this.model.id ? false : true;
 
