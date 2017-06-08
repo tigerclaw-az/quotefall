@@ -30,10 +30,10 @@ default class AnswerGridController {
 		};
 	}
 
-	onClickAnswerSquare(index) {
+	onClickAnswerSquare($event, index) {
 		let selectedLetter = this.puzzleModel.getSelectedLetter();
 
-		this.$log.info('onClickAnswerSquare()', index);
+		this.$log.info('onClickAnswerSquare()', $event, index);
 
 		if (this.puzzleModel.id) {
 			this.agModel.update('letter', {
@@ -48,5 +48,8 @@ default class AnswerGridController {
 				index: index
 			});
 		}
+
+		// Take focus off button when clicked
+		$event.target.blur();
 	}
 };

@@ -2,7 +2,7 @@
 	<button
 		class="qf-answer-square btn btn-default btn-large"
 		ng-repeat="square in grid track by $index"
-		ng-click="answerGridCtrl.onClickAnswerSquare($index)"
+		ng-click="answerGridCtrl.onClickAnswerSquare($event, $index)"
 		ng-class="{
 			'qf-reserved': square.isReserved,
 			'qf-available': answerGridCtrl.puzzleModel.isLetterSelectedInColumn($index),

@@ -20,10 +20,6 @@
 			&:hover {
 				background-color: get-color(white);
 			}
-
-			&:focus {
-				background-color: inherit;
-			}
 		}
 
 		&.qf-unavailable:not(.qf-reserved) {
