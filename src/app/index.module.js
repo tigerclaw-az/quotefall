@@ -12,7 +12,6 @@ let deps = [
 	'ngCookies',
 	'ngMessages',
 	'ngResource',
-	'ngSanitize',
 	'ngTouch',
 	'angular-logger',
 	'toastr',
