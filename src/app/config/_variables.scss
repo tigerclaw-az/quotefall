@@ -168,7 +168,7 @@ $input-border-radius-small:      $border-radius-small;
 $input-border-focus:             get-color('viking');
 
 //** Placeholder text color
-$input-color-placeholder:        $gray-darker;
+$input-color-placeholder:        $gray-lighter;
 
 //** Default `.form-control` height
 $input-height-base:              ($line-height-computed + ($padding-base-vertical * 2) + 2);

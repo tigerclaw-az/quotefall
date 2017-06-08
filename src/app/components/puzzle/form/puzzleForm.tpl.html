@@ -21,8 +21,12 @@
 			></select>
 		</div>
 	</div>
-	<div class="form-group form-group-lg row">
-		<label class="control-label col-xs-2" for="puzzle-title">Title</label>
+	<div class="form-group form-group-lg row"
+		ng-class="{
+			'has-error': myForm.puzzleTitle.$invalid,
+			'has-success': myForm.puzzleTitle.$valid
+		}">
+		<label class="control-label col-xs-2" for="puzzleTitle">Title</label>
 		<div class="col-xs-10">
 			<input
 				ng-model="puzzleTitle"
@@ -31,15 +35,26 @@
 				panther-parser
 				panther-type="alpha"
 				class="form-control qf-input-title"
-				name="puzzle-title"
+				name="puzzleTitle"
 				placeholder="Puzzle title"
 				type="text"
 				maxlength="128"
 				required
 			>
+			<span class="form-control-feedback">
+				<span class="glyphicon glyphicon-ok" ng-show="myForm.puzzleTitle.$valid" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-remove" ng-show="myForm.puzzleTitle.$invalid" aria-hidden="true"></span>
+			</span>
+			<span class="help-block" ng-show="myForm.puzzleTitle.$invalid">
+				Enter a valid Title
+			</span>
 		</div>
 	</div>
-	<div class="form-group form-group-lg row">
+	<div class="form-group form-group-lg row"
+		ng-class="{
+			'has-error': myForm.scrambled.$invalid,
+			'has-success': myForm.scrambled.$valid
+		}">
 		<label class="control-label col-xs-2" for="scrambled">Scrambled</label>
 		<div class="col-xs-10">
 			<textarea
@@ -53,6 +68,10 @@
 				rows="4"
 				required
 			></textarea>
+			<span class="form-control-feedback">
+				<span class="glyphicon glyphicon-ok" ng-show="myForm.scrambled.$valid" aria-hidden="true"></span>
+				<span class="glyphicon glyphicon-remove" ng-show="myForm.scrambled.$invalid" aria-hidden="true"></span>
+			</span>
 		</div>
 	</div>
 	<div class="form-group form-group-lg row">
@@ -68,7 +87,7 @@
 					difficulty: difficulty.value
 				})"
 				ng-disabled="myForm.$invalid"
-			><span class="glyphicon glyphicon-ok" aria-hidden="true"></span>Setup</button>
+			><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>Setup</button>
 		</div>
 	</div>
 </form>
