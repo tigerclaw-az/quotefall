@@ -44,10 +44,12 @@
 			}
 		}
 
-		&:active,
-		&:hover,
-		&:focus {
-			background-color: inherit;
+		&:not(.qf-reserved) {
+			&:active,
+			&:hover,
+			&:focus {
+				background-color: inherit;
+			}
 		}
 	}
 }
