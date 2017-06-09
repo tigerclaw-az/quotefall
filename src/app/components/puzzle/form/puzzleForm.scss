@@ -4,3 +4,11 @@
 		opacity: .25;
 	}
 }
+
+.has-error,
+.has-success,
+.has-warning {
+	.control-label {
+		color: inherit;
+	}
+}
