@@ -31,6 +31,8 @@ export class AnswerGridModelService {
 	}
 
 	update(type, obj) {
+		this.$log.info('update()', type, obj);
+
 		if (type === 'reserved') {
 			this.grid[obj.index].isReserved = !this.grid[obj.index].isReserved;
 		} else {

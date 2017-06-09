@@ -14,8 +14,15 @@ default class AnswerGridController {
 	}
 
 	$onInit() {
+		var self = this;
+
 		this.$scope.sl = this.puzzleModel.lcModel.selected;
 		this.$scope.grid = this.agModel.grid;
+
+		this.$rootScope.$on('letterColumns.update', ($event, data) => {
+			self.$log.info('letterColumns.update', data);
+			self.agModel.update('letter', data);
+		});
 
 		this.$log.info('$onInit()', this);
 	}
@@ -30,10 +37,14 @@ default class AnswerGridController {
 		};
 	}
 
+	isSelectedInColumn(index) {
+		return this.puzzleModel.isLetterSelectedInColumn(index);
+	}
+
 	onClickAnswerSquare($event, index) {
 		let selectedLetter = this.puzzleModel.getSelectedLetter();
 
-		this.$log.info('onClickAnswerSquare()', $event, index);
+		this.$log.info('onClickAnswerSquare()', $event, index, selectedLetter);
 
 		if (this.puzzleModel.id) {
 			this.agModel.update('letter', {

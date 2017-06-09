@@ -5,9 +5,10 @@
 		ng-click="answerGridCtrl.onClickAnswerSquare($event, $index)"
 		ng-class="{
 			'qf-reserved': square.isReserved,
-			'qf-available': answerGridCtrl.puzzleModel.isLetterSelectedInColumn($index),
-			'qf-unavailable': !answerGridCtrl.puzzleModel.isLetterSelectedInColumn($index)
+			'qf-available': answerGridCtrl.isSelectedInColumn($index),
+			'qf-unavailable': !answerGridCtrl.isSelectedInColumn($index),
+			'qf-filled': square.letter
 		}"
-		ng-disabled="!answerGridCtrl.pc.isEditable && !answerGridCtrl.puzzleModel.isLetterSelectedInColumn($index) && !square.letter"
+		ng-disabled="!answerGridCtrl.pc.isEditable && !answerGridCtrl.isSelectedInColumn($index)"
 	><span class="qf-answer-letter">{{square.letter}}</span></button>
 </div>

@@ -54,7 +54,15 @@ export class PuzzleModelService {
 	}
 
 	getSelectedLetter() {
+		this.$log.info('getSelectedLetter()', this.lcModel.selected);
+
 		return this.lcModel.selected;
+	}
+
+	getLetterUsedIndex(pos) {
+		return this._.findIndex(this.agModel.grid, function(o) {
+			return o.lcPosition === pos;
+		});
 	}
 
 	isLetterSelectedInColumn(index) {
@@ -64,11 +72,9 @@ export class PuzzleModelService {
 	}
 
 	isLetterUsed(pos) {
-		let index = this._.findIndex(this.agModel.grid, function(o) {
-			return o.lcPosition === pos;
-		});
+		// this.$log.info('isLetterUsed()', this, pos);
 
-		return index >= 0 ? true : false;
+		return this.getLetterUsedIndex(pos) >= 0 ? true : false;
 	}
 
 	newPuzzle(data) {

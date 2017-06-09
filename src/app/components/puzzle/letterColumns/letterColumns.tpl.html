@@ -5,10 +5,10 @@
 			ng-repeat="letter in column track by $index" ng-init="pos = col + letterColumnsCtrl.puzzleModel.columnSize * $index"
 			ng-class="{
 				selected: letterColumnsCtrl.selected.position == pos,
-				used: letterColumnsCtrl.puzzleModel.isLetterUsed(pos)
+				used: letterColumnsCtrl.isLetterUsed(pos)
 			}"
-			ng-disabled="letterColumnsCtrl.puzzleModel.isLetterUsed(pos) || letter == ' ' || letterColumnsCtrl.selected.position >= 0 && letterColumnsCtrl.selected.position != pos"
-			ng-click="letterColumnsCtrl.isClickable(pos) && letterColumnsCtrl.onLetterClick(letter, col, $index, pos)"
+			ng-disabled="letter == ' ' || !letterColumnsCtrl.isClickable(pos)"
+			ng-click="letterColumnsCtrl.onLetterClick($event, letter, col, $index, pos)"
 		>{{letter}}</button>
 	</div>
 </div>

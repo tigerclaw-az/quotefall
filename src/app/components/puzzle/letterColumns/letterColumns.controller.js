@@ -36,13 +36,14 @@ default class LetterColumnsController {
 	}
 
 	isClickable(pos) {
-		this.$log.info('isClickable()', this, pos);
-
-		return this.selected.position == -1 ||
-				this.selected.position == pos;
+		return this.selected.position === -1 || this.selected.position == pos;
 	}
 
-	onLetterClick(letter, column, index, pos) {
+	isLetterUsed(pos) {
+		return this.puzzleModel.isLetterUsed(pos);
+	}
+
+	onLetterClick($event, letter, column, index, pos) {
 		var data = {
 			column: column,
 			index: index,
@@ -50,9 +51,19 @@ default class LetterColumnsController {
 			position: pos
 		};
 
-		this.$log.info('onLetterClick()', letter, column, index, pos);
+		$event.target.blur();
 
-		if (this.selected.position != pos) {
+		this.$log.info('onLetterClick()', letter, column, index, pos, this.selected, this.isLetterUsed(pos));
+
+		if (this.isLetterUsed(pos)) {
+			let answerIndex = this.puzzleModel.getLetterUsedIndex(pos);
+
+			this.$rootScope.$emit('letterColumns.update', {
+				letter: '',
+				index: answerIndex,
+				lcPosition: -1
+			});
+		} else if (this.selected.position != pos) {
 			this.lcModel.selectLetter(data);
 		} else {
 			this.lcModel.clearSelected();
