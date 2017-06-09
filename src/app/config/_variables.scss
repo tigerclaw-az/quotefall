@@ -1,3 +1,5 @@
+$font-size-base: 16px;
+
 @import 'functions';
 @import 'mixins';
 @import 'colors';
@@ -49,7 +51,6 @@ $font-family-serif:       Georgia, 'Times New Roman', Times, serif;
 $font-family-monospace:   Menlo, Monaco, Consolas, 'Courier New', monospace;
 $font-family-base:        $font-family-sans-serif;
 
-$font-size-base:          16px;
 $font-size-large:         ceil(($font-size-base * 1.25)); // ~18px
 $font-size-small:         ceil(($font-size-base * .85)); // ~12px
 
@@ -100,9 +101,9 @@ $component-active-color:    get-color(viking);
 $component-active-bg:       $brand-primary;
 
 //** Width of the `border` for generating carets that indicate dropdowns.
-$caret-width-base:          .25rem;
+$caret-width-base:          rem-calc(4);
 //** Carets increase slightly in size for larger components.
-$caret-width-large:         calc(.25rem + 1px);
+$caret-width-large:         calc($caret-width-base + 1px);
 
 //== Buttons
 //
@@ -178,7 +179,7 @@ $input-height-large:             (ceil($font-size-large * $line-height-large) + 
 $input-height-small:             (floor($font-size-small * $line-height-small) + ($padding-small-vertical * 2) + 2);
 
 //** `.form-group` margin
-$form-group-margin-bottom:       12px;
+$form-group-margin-bottom:       rem-calc(12);
 
 $legend-color:                   $gray-dark;
 $legend-border-color:            get-color('gallery');
@@ -190,6 +191,26 @@ $input-group-addon-border-color: $input-border;
 
 //** Disabled cursor for form controls and buttons.
 $cursor-disabled:                default;
+
+//== Form states and alerts
+//
+//## Define colors for form feedback states and, by default, alerts.
+
+$state-success-text:			$brand-success;
+$state-success-bg:				get-color('peppermint');
+$state-success-border:			darken(adjust-hue($state-success-bg, -10), 5%);
+
+$state-info-text:				$brand-info;
+$state-info-bg:					get-color('link-water');
+$state-info-border:				darken(adjust-hue($state-info-bg, -10), 7%);
+
+$state-warning-text:			$brand-warning;
+$state-warning-bg:				get-color('pearl-lusta');
+$state-warning-border:			darken(adjust-hue($state-warning-bg, -10), 5%);
+
+$state-danger-text:				$brand-danger;
+$state-danger-bg:				get-color('bizarre');
+$state-danger-border:			darken(adjust-hue($state-danger-bg, -10), 5%);
 
 //== Media queries breakpoints
 //
