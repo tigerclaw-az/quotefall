@@ -5,14 +5,15 @@ describe('puzzleModel service', () => {
 
 	let pModel;
 
-	it('should be registered', inject(puzzleModel => {
-		expect(puzzleModel).not.toEqual(undefined);
-	}));
-
 	beforeEach(inject((_puzzleModel_) => {
 		pModel = _puzzleModel_;
 
-		pModel.newPuzzle('araoefaaleareofenunreseesyptozleq ot thlv  ut lus t   oly   z o ', 4);
+		pModel.newPuzzle({
+			difficulty: 1,
+			letters: 'araoefaaleareofenunreseesyptozleq ot thlv  ut lus t   oly   z o ',
+			numRows: 4,
+			title: 'sample'
+		});
 	}));
 
 	describe('newPuzzle()', () => {
@@ -36,8 +37,8 @@ describe('puzzleModel service', () => {
 
 		it('should clear puzzle data', () => {
 			pModel.clear();
-			expect(pmodel.id).toEqual(null);
-			expect(pmodel.title).toEqual('');
+			expect(pModel.id).toEqual(null);
+			expect(pModel.title).toEqual('');
 			expect(pModel.rowSize).toEqual(4);
 			expect(pModel.columnSize).toEqual(0);
 			expect(pModel.size).toEqual(0);

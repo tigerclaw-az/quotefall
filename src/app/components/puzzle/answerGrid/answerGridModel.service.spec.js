@@ -7,11 +7,12 @@ let agModel;
 describe('answerGridModel service', () => {
 	beforeEach(angular.mock.module('quotefall'));
 
-	beforeEach(() => {
+	beforeEach(inject((_$log_) => {
 		agModel = new AnswerGridModelService();
+		agModel.$log = _$log_;
 
 		agModel.init(64);
-	});
+	}));
 
 	it('should create empty grid of size 64', () => {
 		expect(agModel.grid.length).toEqual(64);

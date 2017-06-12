@@ -1,13 +1,15 @@
 /* jscs:disable */
 
+import { PuzzleStoreService } from './puzzleStore.service.js';
+
 describe('puzzleStore service', () => {
 	beforeEach(angular.mock.module('quotefall'));
 
 	let puzzleStore;
 
-	beforeEach(inject((_puzzleStore_) => {
-		puzzleStore = _puzzleStore_;
-	}));
+	beforeEach((_puzzleStore_) => {
+		puzzleStore = new PuzzleStoreService();
+	});
 
 	it('should be registered', () => {
 		expect(puzzleStore).not.toEqual(undefined);
