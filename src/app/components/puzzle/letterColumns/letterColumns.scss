@@ -31,18 +31,20 @@ $letter-column-selected-color: get-color('fountain');
 			&::after {
 				// border-bottom: 0;
 				border-bottom: .125em solid get-color('red-light');
+				bottom: .25rem;
 				content: '';
-				height: 1.25em;
-				left: 0;
+				height: .25em;
+				left: .25em;
 				position: absolute;
 				right: 0;
-				top: 50%;
 				transform: scaleX(0);
 				transform-origin: 0% 50%;
 				transition: transform .3s linear;
 			}
 
 			&.used {
+				color: lighten(get-color(black), 75);
+
 				&::after {
 					transform: translateY(-50%) rotate(-25deg) scale(1);
 				}
