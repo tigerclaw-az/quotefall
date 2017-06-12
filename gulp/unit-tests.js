@@ -17,8 +17,7 @@ var conf = require('./config'),
 
 function runTests(singleRun, done) {
 	var reporters = [
-			'kjhtml',
-			'spec'
+			'kjhtml'
 		],
 		preprocessors = {},
 		localConfig = {
@@ -36,6 +35,7 @@ function runTests(singleRun, done) {
 		});
 
 		reporters.push('coverage');
+		reporters.push('spec');
 	}
 
 	Object.assign(localConfig, {
