@@ -9,6 +9,6 @@
 			'qf-unavailable': !answerGridCtrl.isSelectedInColumn($index),
 			'qf-filled': square.letter
 		}"
-		ng-disabled="!answerGridCtrl.pc.isEditable && !answerGridCtrl.isSelectedInColumn($index)"
+		ng-disabled="!answerGridCtrl.pc.isEditable && (!answerGridCtrl.isSelectedInColumn($index) || square.isReserved)"
 	><span class="qf-answer-letter">{{square.letter}}</span></button>
 </div>
