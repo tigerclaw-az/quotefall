@@ -294,7 +294,7 @@ module.exports = {
 		 * Vue.js ESLint Overrides from vue/recommended
 		 */
 
-		'vue/attributes-order': 2,
+		'vue/attributes-order': 0,
 		// https://github.com/vuejs/eslint-plugin-vue/blob/master/docs/rules/html-indent.md
 		'vue/html-indent': [
 			'error',

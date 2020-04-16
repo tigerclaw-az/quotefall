@@ -1,22 +1,32 @@
-@import "~vue-material/dist/theme/engine"; // Import the theme engine
+@import '~vue-material/dist/theme/engine'; // Import the theme engine
 
-@include md-register-theme("default", (
-  primary: md-get-palette-color(green, A200), // The primary color of your application
-  accent: md-get-palette-color(pink, 500) // The accent or secondary color
-));
+@include md-register-theme(
+	'default',
+	(
+		background: md-get-palette-color(yellow, 400),
+		primary: md-get-palette-color(yellow, 800),
+		// The primary color of your application
+		secondary: md-get-palette-color(black, 500),
+		// The secondary color of your application
+		theme: 'dark',
+	)
+);
 
-@import "~vue-material/dist/theme/all"; // Apply the theme
+@import '~vue-material/dist/theme/all'; // Apply the theme
+
+body {
+	height: 100%;
+}
 
 #app {
 	font-family: 'Avenir', Helvetica, Arial, sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	height: 100%;
 	text-align: center;
-	color: #2c3e50;
-	// margin-top: 60px;
 }
 
 .md-app {
-	max-height: 400px;
-	border: 1px solid rgba(#000, .12);
+	border: 1px solid md-get-palette-color(black, 200);
+	height: 100%;
 }

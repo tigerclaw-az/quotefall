@@ -1,6 +1,6 @@
 <template>
 	<div v-cloak id="app" class="page-container">
-		<md-app md-waterfall>
+		<md-app md-waterfall md-mode="overlap">
 			<md-app-toolbar class="md-primary md-large">
 				<div class="md-toolbar-row">
 					<md-button class="md-icon-button" @click="isMenuOpen = !isMenuOpen">
@@ -10,20 +10,20 @@
 					<span class="md-title">Quotefalls</span>
 				</div>
 			</md-app-toolbar>
-			<md-app-drawer :md-active="isMenuOpen">
+			<md-app-drawer :md-active.sync="isMenuOpen">
 				<md-toolbar class="md-transparent" md-elevation="0">
 					Navigation
 				</md-toolbar>
 
 				<md-list>
-					<md-list-item>
+					<md-list-item to="/" exact>
 						<md-icon>move_to_inbox</md-icon>
-						<span class="md-list-item-text">Inbox</span>
+						<span class="md-list-item-text">Home</span>
 					</md-list-item>
 
-					<md-list-item>
+					<md-list-item to="/puzzles/create">
 						<md-icon>send</md-icon>
-						<span class="md-list-item-text">Sent Mail</span>
+						<span class="md-list-item-text">Create</span>
 					</md-list-item>
 
 					<md-list-item>
@@ -38,7 +38,7 @@
 				</md-list>
 			</md-app-drawer>
 			<md-app-content>
-				<!-- <router-view /> -->
+				<router-view />
 				<footer>Copyright (c) 2019</footer>
 			</md-app-content>
 		</md-app>
