@@ -1,24 +1,39 @@
 // import Vue from 'vue';
+const MUTATION_TYPES = {
+	ADD: 'ADD',
+};
 
 const state = {
-	puzzles: {},
+	puzzles: [],
 };
+
 const getters = {
 	getById: state => id => {
-		if (state.puzzles[id]) {
-			return Promise.resolve(state.puzzles[id]);
+		const puzzle = state.puzzles.find(puzzle => puzzle.id === id);
+
+		if (puzzle) {
+			return puzzle;
 		}
 
-		// Return graphql query to get puzzle with "id"
+		return {};
 	},
 };
+
 const actions = {
-	create: (state, payload) => {
-		// FIXME: Should be additive, not destructive
-		state.puzzles = payload;
+	async add({ commit, getters }, payload) {
+		const existingPuzzle = await getters.getById(payload.id);
+
+		if (!existingPuzzle.length) {
+			commit(MUTATION_TYPES.ADD, payload);
+		}
 	},
 };
-const mutations = {};
+
+const mutations = {
+	[MUTATION_TYPES.ADD](state, payload) {
+		state.puzzles = [...state.puzzles, payload];
+	},
+};
 
 export default {
 	namespaced: true,

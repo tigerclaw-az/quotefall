@@ -28,13 +28,40 @@
 		<div class="md-layout md-gutter">
 			<div class="md-layout-item">
 				<md-field>
-					<label for="quote">Quote</label>
-					<md-input v-model="quote" :maxlength="rows * columns" pattern="\w+" />
+					<label for="quote">Scrambled</label>
+					<md-input
+						v-model="scrambled"
+						:maxlength="rows * columns"
+						pattern="\w+"
+					/>
+				</md-field>
+			</div>
+			<div class="md-layout-item">
+				<md-field>
+					<label for="quote">Solution</label>
+					<md-input
+						v-model="quote"
+						:maxlength="rows * columns"
+						pattern="[_-]+"
+					/>
 				</md-field>
 			</div>
 		</div>
-		<div>
-			<puzzle-grid :columns="columns" :rows="rows" :quote="quote" />
+		<div class="md-layout md-gutter">
+			<div class="md-layout-item">
+				<puzzle-grid
+					:columns="columns"
+					:rows="rows"
+					:scrambled="scrambled"
+					:quote="quote"
+					mode="edit"
+				/>
+			</div>
+		</div>
+		<div class="md-layout md-gutter">
+			<div class="md-layout-item">
+				<button type="submit" class="md-button">Save</button>
+			</div>
 		</div>
 	</md-content>
 </template>
@@ -50,6 +77,7 @@ export default {
 	data: () => ({
 		columns: 16,
 		rows: 4,
+		scrambled: '',
 		quote: '',
 	}),
 	computed: {
@@ -63,12 +91,6 @@ export default {
 				new Array(this.columnsCount).fill(''),
 				new Array(this.columnsCount).fill(''),
 			];
-		},
-		// quote() {
-		// 	return randomStr(this.columns * this.rows);
-		// },
-		quoteSplit() {
-			return this.emptyGrid;
 		},
 	},
 };

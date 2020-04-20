@@ -188,13 +188,13 @@ module.exports = {
 		'no-trailing-spaces': 2,
 		'no-underscore-dangle': 0,
 		'no-unneeded-ternary': 0,
-		'object-curly-spacing': [2, 'always', {}],
+		'object-curly-spacing': [1, 'always', {}],
 		'one-var': 0,
 		'operator-assignment': [2, 'always'],
-		'operator-linebreak': [2, 'before'],
+		'operator-linebreak': [1, 'before'],
 		'padded-blocks': [2, 'never'],
 		'padding-line-between-statements': [
-			2,
+			1,
 			{
 				blankLine: 'always',
 				prev: '*',
@@ -294,10 +294,10 @@ module.exports = {
 		 * Vue.js ESLint Overrides from vue/recommended
 		 */
 
-		'vue/attributes-order': 0,
+		'vue/attributes-order': 1,
 		// https://github.com/vuejs/eslint-plugin-vue/blob/master/docs/rules/html-indent.md
 		'vue/html-indent': [
-			'error',
+			1,
 			'tab',
 			{
 				attribute: 1,
@@ -308,7 +308,7 @@ module.exports = {
 		],
 		'vue/html-quotes': [2, 'double'],
 		'vue/html-self-closing': 0,
-		'vue/order-in-components': 2,
+		'vue/order-in-components': 1,
 		// https://github.com/vuejs/eslint-plugin-vue/blob/master/docs/rules/name-property-casing.md
 		'vue/name-property-casing': [1, 'kebab-case'],
 		// https://github.com/vuejs/eslint-plugin-vue/blob/master/docs/rules/no-parsing-error.md
