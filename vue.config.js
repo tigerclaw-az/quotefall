@@ -3,9 +3,11 @@ module.exports = {
 		devServer: {
 			hot: true,
 			inline: true,
-			// host: 'quotefalls',
 			port: 8181,
 			open: true,
+			watchOptions: {
+				poll: true,
+			},
 		},
 	},
 	chainWebpack: config => {
@@ -22,4 +24,5 @@ module.exports = {
 		// 	/en/,
 		// ]);
 	},
+	transpileDependencies: ['vuetify'],
 };

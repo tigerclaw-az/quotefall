@@ -1,9 +1,5 @@
 import Vue from 'vue';
 
-import VueMaterial from 'vue-material';
-import 'vue-material/dist/vue-material.min.css';
-// import 'vue-material/dist/theme/default-dark.css';
-
 import Toasted from 'vue-toasted';
 import VueLogger from 'vuejs-logger';
 
@@ -12,8 +8,8 @@ import { toast as toastConfig, logger as loggerConfig } from './config';
 import App from './App.vue';
 import router from './router';
 import store from './store';
+import vuetify from './plugins/vuetify';
 
-Vue.use(VueMaterial);
 Vue.use(Toasted, {
 	router,
 	...toastConfig,
@@ -25,5 +21,6 @@ Vue.config.productionTip = process.env.VUE_APP_DEBUG;
 new Vue({
 	router,
 	store,
+	vuetify,
 	render: h => h(App),
 }).$mount('#app');

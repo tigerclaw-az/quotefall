@@ -1,0 +1,13 @@
+//================================================
+//				APP VARIABLES
+//================================================
+$column-width: 3.5;
+$letter-height: 3.5;
+
+$puzzle-background: white;
+// $letter-column-border: 1px solid md-get-color-by-theme('light', 'text-primary') !default;
+$letter-column-border: 1px solid black;
+// $letter-column-color: md-get-color-by-theme('dark', 'text-primary') !default;
+$letter-column-color: black;
+$letter-font-size: 1.25rem !default;
+$letter-column-selected-color: green;

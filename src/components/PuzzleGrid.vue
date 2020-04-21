@@ -1,26 +1,22 @@
 <template>
-	<div
-		class="qf-puzzle-container text-center"
-		:style="{ width: columns * 56 + 'px' }"
-	>
-		<section class="qf-puzzle">
-			<letters
-				:columns="columns"
-				:rows="rows"
-				:scrambled="scrambled"
-				:mode="mode"
-				:letterSelected.sync="letterSelected"
-			/>
-			<solution
-				:columns="columns"
-				:rows="rows"
-				:quote="quote"
-				:mode="mode"
-				:letter-selected="letterSelected"
-				@used="onLetterUsed()"
-			/>
-		</section>
-	</div>
+	<v-container align-center justify-center wrap class="qf-puzzle text-center">
+		<letters
+			:columns="columns"
+			:rows="rows"
+			:scrambled="scrambled"
+			:mode="mode"
+			:letter-replaced="letterReplaced"
+			:letter-selected.sync="letterSelected"
+		/>
+		<solution
+			:columns="columns"
+			:rows="rows"
+			:quote="quote"
+			:mode="mode"
+			:letter-selected="letterSelected"
+			@used="onLetterUsed($event)"
+		/>
+	</v-container>
 </template>
 
 <script>
@@ -56,11 +52,15 @@ export default {
 		},
 	},
 	data: () => ({
+		letterReplaced: {},
 		letterSelected: {},
 	}),
 	methods: {
-		onLetterUsed() {
-			// this.letterUsed = true;
+		onLetterUsed(square) {
+			if (square.value.match(/[a-z]/g)) {
+				this.letterReplaced = square;
+			}
+
 			this.letterSelected = {};
 		},
 	},
@@ -68,17 +68,18 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~@/assets/variables';
+@import '~@/styles/variables';
 
 .qf-puzzle {
 	background-color: $puzzle-background;
-	color: md-get-palette-color(black, 200);
+	box-shadow: 0px 10px 15px 1px;
+	color: black;
+	flex: 0 auto;
+	width: auto;
 
 	.qf-letter-columns,
 	.qf-solution-columns {
-		border-bottom: $letter-column-border;
-		display: flex;
-		flex-flow: wrap;
+		flex-flow: nowrap;
 		user-select: none;
 		width: 100%;
 

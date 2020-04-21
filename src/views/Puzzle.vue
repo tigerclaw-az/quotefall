@@ -1,17 +1,18 @@
 <template>
-	<md-content>
-		<md-card class="md-accent">
-			<span>Quote: {{ puzzle.id }}</span>
-			<h4>Difficulty: {{ puzzle.difficulty }}</h4>
-		</md-card>
+	<v-layout row wrap align-center justify-center>
+		<v-card color="accent">
+			<v-card-title>Quote: {{ puzzle.id }}</v-card-title>
+			<v-card-text>Difficulty: {{ puzzle.difficulty }}</v-card-text>
+		</v-card>
 
 		<PuzzleGrid
+			v-if="puzzle.id"
 			:columns="puzzle.columns"
 			:rows="puzzle.rows"
 			:scrambled="puzzle.scrambled"
 			:quote="puzzle.quote"
 		/>
-	</md-content>
+	</v-layout>
 </template>
 
 <script>
@@ -37,6 +38,11 @@ export default {
 		puzzle() {
 			return this.getPuzzle(this.id);
 		},
+	},
+	created() {
+		if (!this.$store.state.puzzles.puzzles.length) {
+			this.$router.push('/');
+		}
 	},
 };
 </script>

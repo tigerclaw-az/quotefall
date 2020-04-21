@@ -1,5 +1,5 @@
 <template>
-	<div class="qf-letter-columns">
+	<v-layout row justify-center no-gutters class="qf-letter-columns">
 		<div
 			v-for="(columnLetters, colIndex) in scrambledGrid"
 			:key="`col-${colIndex}`"
@@ -14,15 +14,17 @@
 					used: letter.isUsed,
 				}"
 			>
-				<md-button
-					:disabled="letter.value === ' '"
+				<v-btn
+					block
+					:disabled="isLetterDisabled(letter)"
+					:outlined="letterSelected.position === letter.position"
 					@click="onSelected(letter, rowIndex, colIndex)"
 				>
 					{{ letter.value }}
-				</md-button>
+				</v-btn>
 			</span>
 		</div>
-	</div>
+	</v-layout>
 </template>
 
 <script>
@@ -45,6 +47,9 @@ export default {
 			type: String,
 			default: 'solve',
 		},
+		letterReplaced: {
+			type: Object,
+		},
 		letterSelected: {
 			type: Object,
 		},
@@ -54,39 +59,55 @@ export default {
 		scrambledGrid: [],
 	}),
 	watch: {
+		letterReplaced(replaced) {
+			const returnLetter = this.scrambledGrid[replaced.column].find(
+				letters => replaced.value === letters.value
+			);
+
+			this.updateLetterPool(returnLetter, false);
+		},
 		letterSelected(to, from) {
 			if (Object.keys(to).length === 0) {
 				// this.$log.debug(from);
-				this.scrambledGrid[from.column].splice(from.row, 1, {
-					...from,
-					isUsed: true,
-				});
+				this.updateLetterPool(from, true);
 			}
 		},
-	},
-	mounted() {
-		const size = Math.ceil(this.scrambled.length / this.rows);
-		const r = Array(size);
-		let offset = 0;
-
-		for (let col = 0; col < size; col++) {
-			r[col] = this.scrambled
-				.substr(offset, this.rows)
-				.split('')
-				.map((value, index) => ({
-					value,
-					isUsed: false,
-					position: this.getPosition(index, col),
-				}));
-			offset += this.rows;
-		}
-
-		this.scrambledGrid = r;
+		scrambled() {
+			this.rebuildGrid();
+		},
 	},
 	methods: {
 		getPosition(row, col) {
 			// 4 = num rows
-			return row + col * 4 + 1;
+			return row + col * this.rows + 1;
+		},
+		isLetterDisabled(letter) {
+			return letter.value === ' ' || letter.isUsed;
+		},
+		updateLetterPool(letter, isUsed) {
+			this.scrambledGrid[letter.column].splice(letter.row, 1, {
+				...letter,
+				isUsed,
+			});
+		},
+		rebuildGrid() {
+			const size = Math.ceil(this.scrambled.length / this.rows);
+			const r = Array(size);
+			let offset = 0;
+
+			for (let col = 0; col < size; col++) {
+				r[col] = this.scrambled
+					.substr(offset, this.rows)
+					.split('')
+					.map((value, index) => ({
+						value,
+						isUsed: false,
+						position: this.getPosition(index, col),
+					}));
+				offset += this.rows;
+			}
+
+			this.scrambledGrid = r;
 		},
 		onSelected(letter, row, column) {
 			// this.letterSelected = this.getPosition(row, column);
@@ -97,34 +118,23 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~@/assets/variables';
+@import '~@/styles/variables';
 
 .qf-letter {
 	color: $letter-column-color;
-	transition: color 0.4s linear;
+	transition: color, opacity 0.5s linear;
 	width: 100%;
 
-	.md-button {
+	.v-btn {
+		border-radius: 0;
 		font-size: inherit;
 		height: inherit;
 		margin: 0;
-		min-width: inherit;
-		width: 100%;
-
-		&[disabled] {
-			// @include md-theme-property(color, text-primary, accent);
-			@include md-theme-property(background, primary);
-		}
-
-		.md-button-content {
-			font-size: inherit;
-		}
+		padding: 0 !important;
 	}
 
-
 	&::after {
-		// border-bottom: 0;
-		border-bottom: 0.125em solid md-get-palette-color(red, 500);
+		border-bottom: 0 solid red;
 		bottom: 0.25rem;
 		content: '';
 		height: 0.25em;
@@ -133,17 +143,20 @@ export default {
 		right: 0;
 		transform: scaleX(0);
 		transform-origin: 0% 50%;
-		transition: transform 0.3s linear;
+		transition: border-bottom-width, transform 0.5s linear;
 	}
 
 	&.selected {
-		background-color: $letter-column-selected-color;
+		.v-btn {
+			background-color: $letter-column-selected-color;
+		}
 	}
 
 	&.used {
-		color: md-theme-property(color, text-primary, background, 40);
+		opacity: 0.6;
 
 		&::after {
+			border-bottom-width: 0.125em;
 			transform: translateY(-50%) rotate(-25deg) scale(1);
 		}
 	}

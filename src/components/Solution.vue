@@ -1,24 +1,33 @@
 <template>
-	<div class="qf-solution-columns">
-		<div
-			class="qf-column"
+	<v-layout row justify-center no-gutters class="qf-solution-columns">
+		<v-layout
 			v-for="(col, colIndex) in solutionGrid"
 			:key="`col-${colIndex}`"
+			column
+			class="qf-column"
 		>
 			<div
-				class="qf-square"
 				v-for="(letter, rowIndex) in col"
 				:key="`square-${rowIndex}`"
+				class="qf-square"
 				:class="{
 					'qf-blank': isBlank(letter),
 					'qf-available': isAvailable(rowIndex, colIndex),
 				}"
-				@click="updateSquare($event, rowIndex, colIndex)"
+				@click="
+					updateSquare($event, {
+						value: letter,
+						row: rowIndex,
+						column: colIndex,
+					})
+				"
 			>
-				{{ letter }}
+				<p v-if="!isBlank(letter)" class="qf-square-placeholder">
+					{{ letter }}
+				</p>
 			</div>
-		</div>
-	</div>
+		</v-layout>
+	</v-layout>
 </template>
 
 <script>
@@ -49,17 +58,10 @@ export default {
 	data: () => ({
 		solutionGrid: [],
 	}),
-	mounted() {
-		const size = Math.ceil(this.quote.length / this.rows);
-		const r = Array(size);
-		let offset = 0;
-
-		for (let i = 0; i < size; i++) {
-			r[i] = this.quote.substr(offset, this.rows);
-			offset += this.rows;
-		}
-
-		this.solutionGrid = r;
+	watch: {
+		quote() {
+			this.rebuildGrid();
+		},
 	},
 	methods: {
 		isAvailable(row, col) {
@@ -70,41 +72,68 @@ export default {
 		isBlank(letter) {
 			return letter === '-' || letter === ' ';
 		},
-		updateSquare(evt, row, col) {
+		rebuildGrid() {
+			const size = Math.ceil(this.quote.length / this.rows);
+			const r = Array(size);
+			let offset = 0;
+
+			for (let i = 0; i < size; i++) {
+				r[i] = this.quote.substr(offset, this.rows);
+				offset += this.rows;
+			}
+
+			this.solutionGrid = r;
+		},
+		updateSquare(evt, square) {
 			if (Object.keys(this.letterSelected).length === 0) {
 				evt.preventDefault();
 
 				return false;
 			}
 
-			const replace = this.solutionGrid[col].split('');
+			const replace = this.solutionGrid[square.column].split('');
 
-			replace[row] = this.letterSelected.value;
-			this.solutionGrid.splice(col, 1, replace.join(''));
+			replace[square.row] = this.letterSelected.value;
+			this.solutionGrid.splice(square.column, 1, replace.join(''));
 
-			this.$emit('used');
+			this.$emit('used', square);
 		},
 	},
 };
 </script>
 
 <style lang="scss" scoped>
-@import '~@/assets/variables';
+@import '~@/styles/variables';
 
 .qf-square {
 	line-height: 1.75;
+	transition: background-color, opacity, transform 1s;
+
+	&:not(.qf-blank) {
+		opacity: 0.4;
+	}
 
 	&.qf-available:not(.qf-blank) {
-		background-color: md-get-palette-color(yellow, 400);
+		background-color: yellow;
 		cursor: pointer;
+		opacity: 1;
 
 		&:hover {
-			background-color: md-get-palette-color(green, 300);
+			background-color: $letter-column-selected-color;
+			transform: scale(1.2, 1.2);
+
+			.qf-square-placeholder {
+				transform: translateX(20px);
+			}
 		}
 	}
 
 	&.qf-blank {
-		background-color: md-get-palette-color(black, 500);
+		background-color: black;
+	}
+
+	.qf-square-placeholder {
+		margin: 0;
 	}
 }
 </style>

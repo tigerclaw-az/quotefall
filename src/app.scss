@@ -1,18 +1,3 @@
-@import '~vue-material/dist/theme/engine'; // Import the theme engine
-
-@include md-register-theme(
-	'default',
-	(
-		background: md-get-palette-color(yellow, 400),
-		primary: md-get-palette-color(yellow, 800),
-		// The primary color of your application
-		secondary: md-get-palette-color(black, 500),
-		// The secondary color of your application
-		theme: 'dark',
-	)
-);
-
-@import '~vue-material/dist/theme/all'; // Apply the theme
 
 body {
 	height: 100%;
@@ -26,7 +11,7 @@ body {
 	text-align: center;
 }
 
-.md-app {
-	border: 1px solid md-get-palette-color(black, 200);
+.v-app {
+	// border: 1px solid md-get-palette-color(black, 200);
 	height: 100%;
 }

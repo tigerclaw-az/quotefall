@@ -1,17 +1,13 @@
 <template>
-	<div class="page-home">
+	<v-layout row wrap>
 		<h2>Puzzles</h2>
-		<md-list v-for="puzzle in puzzles" :key="puzzle.id">
-			<md-list-item :to="`/puzzles/${puzzle.id}`">
-				<md-icon>error</md-icon>
-				<span class="md-list-item-text">{{ puzzle.id }}</span>
-			</md-list-item>
-			<!-- <md-list-item to="/puzzles/1234">
-				<md-icon>error</md-icon>
-				<span class="md-list-item-text">#1234</span>
-			</md-list-item> -->
-		</md-list>
-	</div>
+		<v-list v-for="puzzle in puzzles" :key="puzzle.id">
+			<v-list-item :to="`/puzzles/${puzzle.id}`">
+				<v-icon>error</v-icon>
+				<v-list-item-title>{{ puzzle.id }}</v-list-item-title>
+			</v-list-item>
+		</v-list>
+	</v-layout>
 </template>
 
 <script>

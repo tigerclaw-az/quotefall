@@ -1,48 +1,54 @@
 <template>
-	<div v-cloak id="app" class="page-container">
-		<md-app md-waterfall md-mode="overlap">
-			<md-app-toolbar class="md-primary md-large">
-				<div class="md-toolbar-row">
-					<md-button class="md-icon-button" @click="isMenuOpen = !isMenuOpen">
-						<md-icon>menu</md-icon>
-					</md-button>
+	<v-app>
+		<v-app-bar app dark>
+			<v-app-bar-nav-icon @click="isMenuOpen = !isMenuOpen">
+				<v-icon>menu</v-icon>
+			</v-app-bar-nav-icon>
 
-					<span class="md-title">Quotefalls</span>
-				</div>
-			</md-app-toolbar>
-			<md-app-drawer :md-active.sync="isMenuOpen">
-				<md-toolbar class="md-transparent" md-elevation="0">
-					Navigation
-				</md-toolbar>
+			<v-toolbar-title class="v-title">Quotefalls</v-toolbar-title>
+		</v-app-bar>
+		<v-navigation-drawer v-model="isMenuOpen" absolute temporary>
+			<v-toolbar dense>
+				<v-toolbar-title>Navigation</v-toolbar-title>
+			</v-toolbar>
 
-				<md-list>
-					<md-list-item to="/" exact>
-						<md-icon>move_to_inbox</md-icon>
-						<span class="md-list-item-text">Home</span>
-					</md-list-item>
+			<v-list>
+				<v-list-item to="/" exact>
+					<v-list-item-icon>
+						<v-icon>move_to_inbox</v-icon>
+					</v-list-item-icon>
+					<v-list-item-title class="v-list-item-text">Home</v-list-item-title>
+				</v-list-item>
 
-					<md-list-item to="/puzzles/create">
-						<md-icon>send</md-icon>
-						<span class="md-list-item-text">Create</span>
-					</md-list-item>
+				<v-list-item to="/puzzles/create">
+					<v-list-item-icon>
+						<v-icon>send</v-icon>
+					</v-list-item-icon>
+					<v-list-item-title class="v-list-item-text">Create</v-list-item-title>
+				</v-list-item>
 
-					<md-list-item>
-						<md-icon>delete</md-icon>
-						<span class="md-list-item-text">Trash</span>
-					</md-list-item>
+				<v-list-item>
+					<v-list-item-icon>
+						<v-icon>delete</v-icon>
+					</v-list-item-icon>
+					<v-list-item-title class="v-list-item-text">Trash</v-list-item-title>
+				</v-list-item>
 
-					<md-list-item>
-						<md-icon>error</md-icon>
-						<span class="md-list-item-text">Spam</span>
-					</md-list-item>
-				</md-list>
-			</md-app-drawer>
-			<md-app-content>
+				<v-list-item>
+					<v-list-item-icon>
+						<v-icon>error</v-icon>
+					</v-list-item-icon>
+					<v-list-item-title class="v-list-item-text">Spam</v-list-item-title>
+				</v-list-item>
+			</v-list>
+		</v-navigation-drawer>
+		<v-content>
+			<v-container fluid>
 				<router-view />
 				<footer>Copyright (c) 2019</footer>
-			</md-app-content>
-		</md-app>
-	</div>
+			</v-container>
+		</v-content>
+	</v-app>
 </template>
 
 <script>
