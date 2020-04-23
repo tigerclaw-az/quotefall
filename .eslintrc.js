@@ -276,7 +276,7 @@ module.exports = {
 		'require-await': 2,
 		'require-yield': 0,
 		'max-depth': 0,
-		'max-len': ["error", {"code": 100, "ignoreUrls": true}],
+		// 'max-len': ["error", {"code": 100, "ignoreUrls": true}],
 		'max-params': 0,
 		'max-statements': 0,
 		'no-bitwise': 0,
