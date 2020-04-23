@@ -7,7 +7,7 @@
 
 			<v-toolbar-title class="v-title">Quotefalls</v-toolbar-title>
 		</v-app-bar>
-		<v-navigation-drawer v-model="isMenuOpen" absolute temporary>
+		<v-navigation-drawer v-model="isMenuOpen" app temporary>
 			<v-toolbar dense>
 				<v-toolbar-title>Navigation</v-toolbar-title>
 			</v-toolbar>
