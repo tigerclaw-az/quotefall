@@ -1,32 +1,27 @@
 <template>
 	<v-layout row justify-center no-gutters class="qf-solution-columns">
-		<v-layout
-			v-for="(col, colIndex) in solutionGrid"
-			:key="`col-${colIndex}`"
-			column
-			class="qf-column"
-		>
+		<template v-for="(row, rowIndex) in solutionGrid">
 			<div
-				v-for="(letter, rowIndex) in col"
-				:key="`square-${rowIndex}`"
+				v-for="(square, colIndex) in row"
+				:key="`square-${getPosition(rowIndex, colIndex)}`"
 				class="qf-square"
 				:class="{
-					'qf-blank': isBlank(letter),
+					'qf-blank': isBlank(square),
 					'qf-available': isAvailable(rowIndex, colIndex),
 				}"
 				@click="
-					updateSquare($event, {
-						value: letter,
+					updateSquare({
+						value: square,
 						row: rowIndex,
 						column: colIndex,
 					})
 				"
 			>
-				<p v-if="!isBlank(letter)" class="qf-square-placeholder">
-					{{ letter }}
+				<p v-if="!isBlank(square)" class="qf-square-placeholder">
+					{{ square }}
 				</p>
 			</div>
-		</v-layout>
+		</template>
 	</v-layout>
 </template>
 
@@ -36,19 +31,19 @@ export default {
 	props: {
 		columns: {
 			type: Number,
-			default: 16,
+			required: true,
 		},
 		rows: {
 			type: Number,
-			default: 4,
+			required: true,
 		},
 		quote: {
-			type: String,
-			required: true,
+			type: [String, null],
+			default: '',
 		},
 		mode: {
 			type: String,
-			default: 'solve',
+			required: true,
 		},
 		letterSelected: {
 			type: Object,
@@ -59,11 +54,19 @@ export default {
 		solutionGrid: [],
 	}),
 	watch: {
-		quote() {
-			this.rebuildGrid();
+		quote: {
+			handler() {
+				if (this.quote) {
+					this.rebuildGrid();
+				}
+			},
+			immediate: true,
 		},
 	},
 	methods: {
+		getPosition(row, col) {
+			return row * this.columns + col + 1;
+		},
 		isAvailable(row, col) {
 			if (this.letterSelected.column === col) {
 				return true;
@@ -73,28 +76,29 @@ export default {
 			return letter === '-' || letter === ' ';
 		},
 		rebuildGrid() {
-			const size = Math.ceil(this.quote.length / this.rows);
-			const r = Array(size);
+			const r = Array(this.rows);
 			let offset = 0;
 
-			for (let i = 0; i < size; i++) {
-				r[i] = this.quote.substr(offset, this.rows);
-				offset += this.rows;
+			for (let row = 0; row < this.rows; row++) {
+				r[row] = this.quote.substr(offset, this.columns);
+				offset += this.columns;
 			}
 
 			this.solutionGrid = r;
 		},
-		updateSquare(evt, square) {
-			if (Object.keys(this.letterSelected).length === 0) {
-				evt.preventDefault();
-
+		updateSquare(square) {
+			if (!this.isAvailable(square.row, square.column)) {
 				return false;
 			}
 
-			const replace = this.solutionGrid[square.column].split('');
+			if (Object.keys(this.letterSelected).length === 0) {
+				return false;
+			}
 
-			replace[square.row] = this.letterSelected.value;
-			this.solutionGrid.splice(square.column, 1, replace.join(''));
+			const replace = this.solutionGrid[square.row].split('');
+
+			replace[square.column] = this.letterSelected.value;
+			this.solutionGrid.splice(square.row, 1, replace.join(''));
 
 			this.$emit('used', square);
 		},

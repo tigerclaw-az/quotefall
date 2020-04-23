@@ -7,6 +7,7 @@
 			:mode="mode"
 			:letter-replaced="letterReplaced"
 			:letter-selected.sync="letterSelected"
+			@update:letter-pool="syncLetterPool($event)"
 		/>
 		<solution
 			:columns="columns"
@@ -39,11 +40,11 @@ export default {
 			default: 4,
 		},
 		scrambled: {
-			type: String,
-			required: true,
+			type: [String, null],
+			default: '',
 		},
 		quote: {
-			type: String,
+			type: [String, null],
 			default: '',
 		},
 		mode: {
@@ -56,6 +57,9 @@ export default {
 		letterSelected: {},
 	}),
 	methods: {
+		syncLetterPool(value) {
+			this.$emit('update:letter-pool', value);
+		},
 		onLetterUsed(square) {
 			if (square.value.match(/[a-z]/g)) {
 				this.letterReplaced = square;
@@ -79,33 +83,26 @@ export default {
 
 	.qf-letter-columns,
 	.qf-solution-columns {
-		flex-flow: nowrap;
+		// flex-flow: nowrap;
 		user-select: none;
 		width: 100%;
 
-		.qf-column {
-			background-color: $puzzle-background;
-			flex: 0 1 auto;
-			text-align: center;
+		background-color: $puzzle-background;
+		text-align: center;
+
+		.qf-letter,
+		.qf-square {
+			border: $letter-column-border;
+			font-size: $letter-font-size;
+			// height: #{$letter-height / 2}em;
+			position: relative;
+			text-transform: capitalize;
 			width: #{$column-width}em;
+		}
 
-			.qf-letter,
-			.qf-square {
-				border: $letter-column-border;
-				display: block;
-				font-size: $letter-font-size;
-				height: #{$letter-height / 2}em;
-				position: relative;
-				text-transform: capitalize;
-			}
-
-			.qf-letter {
-				border-bottom: 0;
-
-				&:not(:first-child) {
-					border-top: 0;
-				}
-			}
+		.qf-letter {
+			border-bottom: 0;
+			border-top: 0;
 
 			.qf-square {
 				border: 1px solid $letter-column-border;

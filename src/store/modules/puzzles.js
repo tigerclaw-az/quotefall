@@ -23,7 +23,7 @@ const actions = {
 	async add({ commit, getters }, payload) {
 		const existingPuzzle = await getters.getById(payload.id);
 
-		if (!existingPuzzle.length) {
+		if (!existingPuzzle.id) {
 			commit(MUTATION_TYPES.ADD, payload);
 		}
 	},

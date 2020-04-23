@@ -1,13 +1,9 @@
 <template>
 	<v-layout row justify-center no-gutters class="qf-letter-columns">
-		<div
-			v-for="(columnLetters, colIndex) in scrambledGrid"
-			:key="`col-${colIndex}`"
-			class="qf-column"
-		>
+		<template v-for="(row, rowIndex) in scrambledGrid">
 			<span
-				v-for="(letter, rowIndex) in columnLetters"
-				:key="`position-${rowIndex}`"
+				v-for="(letter, colIndex) in row"
+				:key="`position-${letter.position}`"
 				class="qf-letter"
 				:class="{
 					selected: letterSelected.position === letter.position,
@@ -15,6 +11,7 @@
 				}"
 			>
 				<v-btn
+					v-if="mode === 'solve'"
 					block
 					:disabled="isLetterDisabled(letter)"
 					:outlined="letterSelected.position === letter.position"
@@ -22,8 +19,17 @@
 				>
 					{{ letter.value }}
 				</v-btn>
+				<v-text-field
+					v-if="mode === 'edit'"
+					v-model="scrambledGrid[rowIndex][colIndex].letter"
+					dense
+					:hide-details="true"
+					maxlength="1"
+					@keydown="letterOnly($event)"
+					@keyup="nextInput($event)"
+				/>
 			</span>
-		</div>
+		</template>
 	</v-layout>
 </template>
 
@@ -33,19 +39,19 @@ export default {
 	props: {
 		columns: {
 			type: Number,
-			default: 16,
+			required: true,
 		},
 		rows: {
 			type: Number,
-			default: 4,
+			required: true,
 		},
 		scrambled: {
-			type: String,
-			required: true,
+			type: [String, null],
+			default: '',
 		},
 		mode: {
 			type: String,
-			default: 'solve',
+			required: true,
 		},
 		letterReplaced: {
 			type: Object,
@@ -60,51 +66,87 @@ export default {
 	}),
 	watch: {
 		letterReplaced(replaced) {
-			const returnLetter = this.scrambledGrid[replaced.column].find(
-				letters => replaced.value === letters.value
-			);
+			this.$log.debug(replaced);
+			const returnLetter = this.scrambledGrid.find(
+				row => replaced.value === row[replaced.column].value
+			)[replaced.column];
 
 			this.updateLetterPool(returnLetter, false);
 		},
 		letterSelected(to, from) {
 			if (Object.keys(to).length === 0) {
-				// this.$log.debug(from);
 				this.updateLetterPool(from, true);
 			}
 		},
-		scrambled() {
-			this.rebuildGrid();
+		scrambled: {
+			handler() {
+				this.rebuildGrid();
+			},
+			immediate: true,
+		},
+		scrambledGrid(to) {
+			this.syncScrambled();
 		},
 	},
 	methods: {
 		getPosition(row, col) {
-			// 4 = num rows
-			return row + col * this.rows + 1;
+			return row * this.columns + col + 1;
 		},
 		isLetterDisabled(letter) {
 			return letter.value === ' ' || letter.isUsed;
 		},
+		letterOnly(evt) {
+			const keyCode = evt.keyCode ? evt.keyCode : evt.which;
+
+			if (keyCode < 65 || keyCode > 90) {
+				evt.preventDefault();
+			}
+		},
+		nextInput(evt) {
+			this.$log.debug(evt);
+
+			const target = evt.target;
+			const topLevel = target.closest('.qf-letter');
+			const sibling = topLevel.nextElementSibling;
+
+			sibling.querySelector('input').focus();
+		},
+		syncScrambled() {
+			const letterPool = this.scrambledGrid.reduce((acc, cur, idx) => {
+				let append = acc;
+
+				if (idx === 1) {
+					append = acc.map(letter => letter.letter || letter.value).join('');
+				}
+
+				const letters = cur.map(letter => letter.letter || letter.value);
+
+				return append + letters.join('');
+			});
+
+			this.$emit('update:letter-pool', letterPool);
+		},
 		updateLetterPool(letter, isUsed) {
-			this.scrambledGrid[letter.column].splice(letter.row, 1, {
+			this.$log.debug(letter);
+			this.scrambledGrid[letter.row].splice(letter.column, 1, {
 				...letter,
 				isUsed,
 			});
 		},
 		rebuildGrid() {
-			const size = Math.ceil(this.scrambled.length / this.rows);
-			const r = Array(size);
+			const r = Array(this.rows);
 			let offset = 0;
 
-			for (let col = 0; col < size; col++) {
-				r[col] = this.scrambled
-					.substr(offset, this.rows)
+			for (let row = 0; row < this.rows; row++) {
+				r[row] = this.scrambled
+					.substr(offset, this.columns)
 					.split('')
 					.map((value, index) => ({
 						value,
 						isUsed: false,
-						position: this.getPosition(index, col),
+						position: this.getPosition(row, index),
 					}));
-				offset += this.rows;
+				offset += this.columns;
 			}
 
 			this.scrambledGrid = r;
@@ -131,6 +173,26 @@ export default {
 		height: inherit;
 		margin: 0;
 		padding: 0 !important;
+	}
+
+	.v-text-field {
+		font-size: inherit;
+		margin: 0;
+		padding: 0;
+		text-transform: uppercase;
+
+		.v-input__slot {
+			margin: 0;
+
+			&::before,
+			&::after {
+				border-style: none;
+			}
+
+			input {
+				text-align: center;
+			}
+		}
 	}
 
 	&::after {
