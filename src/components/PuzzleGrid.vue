@@ -1,5 +1,11 @@
 <template>
-	<v-container align-center justify-center wrap class="qf-puzzle text-center">
+	<v-container
+		align-center
+		justify-center
+		wrap
+		class="qf-puzzle text-center"
+		:style="{ width: Math.round(38.625 * columns - 7) + 'px' }"
+	>
 		<letters
 			:columns="columns"
 			:rows="rows"
@@ -7,7 +13,6 @@
 			:mode="mode"
 			:letter-replaced="letterReplaced"
 			:letter-selected.sync="letterSelected"
-			@update:letter-pool="syncLetterPool($event)"
 		/>
 		<solution
 			:columns="columns"
@@ -57,9 +62,6 @@ export default {
 		letterSelected: {},
 	}),
 	methods: {
-		syncLetterPool(value) {
-			this.$emit('update:letter-pool', value);
-		},
 		onLetterUsed(square) {
 			if (square.value.match(/[a-z]/g)) {
 				this.letterReplaced = square;
@@ -79,11 +81,12 @@ export default {
 	box-shadow: 0px 10px 15px 1px;
 	color: black;
 	flex: 0 auto;
-	width: auto;
+	font-size: 1rem;
+	max-width: 100%;
+	padding: 0.75rem 4px;
 
 	.qf-letter-columns,
 	.qf-solution-columns {
-		// flex-flow: nowrap;
 		user-select: none;
 		width: 100%;
 
@@ -93,11 +96,9 @@ export default {
 		.qf-letter,
 		.qf-square {
 			border: $letter-column-border;
-			font-size: $letter-font-size;
-			// height: #{$letter-height / 2}em;
 			position: relative;
 			text-transform: capitalize;
-			width: #{$column-width}em;
+			width: #{$column-width}px;
 		}
 
 		.qf-letter {

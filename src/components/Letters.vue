@@ -61,7 +61,7 @@ export default {
 		},
 	},
 	data: () => ({
-		// letterSelected: -1,
+		moveNextLetter: false,
 		scrambledGrid: [],
 	}),
 	watch: {
@@ -97,19 +97,27 @@ export default {
 		},
 		letterOnly(evt) {
 			const keyCode = evt.keyCode ? evt.keyCode : evt.which;
+			this.$log.debug(keyCode);
 
-			if (keyCode < 65 || keyCode > 90) {
+			if (keyCode === 8 || keyCode === 37) {
+				evt.target.value = '';
+			} else if (keyCode !== 32 && (keyCode < 65 || keyCode > 90)) {
 				evt.preventDefault();
+			} else {
+				this.moveNextLetter = true;
 			}
 		},
 		nextInput(evt) {
-			this.$log.debug(evt);
+			if (!this.moveNextLetter) {
+				return false;
+			}
 
 			const target = evt.target;
 			const topLevel = target.closest('.qf-letter');
 			const sibling = topLevel.nextElementSibling;
 
 			sibling.querySelector('input').focus();
+			this.moveNextLetter = false;
 		},
 		syncScrambled() {
 			const letterPool = this.scrambledGrid.reduce((acc, cur, idx) => {
@@ -124,10 +132,9 @@ export default {
 				return append + letters.join('');
 			});
 
-			this.$emit('update:letter-pool', letterPool);
+			this.$parent.$emit('update:letter-pool', letterPool);
 		},
 		updateLetterPool(letter, isUsed) {
-			this.$log.debug(letter);
 			this.scrambledGrid[letter.row].splice(letter.column, 1, {
 				...letter,
 				isUsed,
@@ -179,7 +186,6 @@ export default {
 		font-size: inherit;
 		margin: 0;
 		padding: 0;
-		text-transform: uppercase;
 
 		.v-input__slot {
 			margin: 0;
@@ -191,6 +197,7 @@ export default {
 
 			input {
 				text-align: center;
+				text-transform: uppercase;
 			}
 		}
 	}

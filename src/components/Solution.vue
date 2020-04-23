@@ -1,14 +1,16 @@
 <template>
 	<v-layout row justify-center no-gutters class="qf-solution-columns">
 		<template v-for="(row, rowIndex) in solutionGrid">
-			<div
+			<v-btn
 				v-for="(square, colIndex) in row"
 				:key="`square-${getPosition(rowIndex, colIndex)}`"
+				text
 				class="qf-square"
 				:class="{
 					'qf-blank': isBlank(square),
 					'qf-available': isAvailable(rowIndex, colIndex),
 				}"
+				:disabled="mode === 'solve' && !isAvailable(rowIndex, colIndex)"
 				@click="
 					updateSquare({
 						value: square,
@@ -17,10 +19,10 @@
 					})
 				"
 			>
-				<p v-if="!isBlank(square)" class="qf-square-placeholder">
+				<span class="qf-square-placeholder">
 					{{ square }}
-				</p>
-			</div>
+				</span>
+			</v-btn>
 		</template>
 	</v-layout>
 </template>
@@ -68,9 +70,10 @@ export default {
 			return row * this.columns + col + 1;
 		},
 		isAvailable(row, col) {
-			if (this.letterSelected.column === col) {
-				return true;
-			}
+			return (
+				Object.keys(this.letterSelected).length !== 0
+				&& this.letterSelected.column === col
+			);
 		},
 		isBlank(letter) {
 			return letter === '-' || letter === ' ';
@@ -87,20 +90,23 @@ export default {
 			this.solutionGrid = r;
 		},
 		updateSquare(square) {
-			if (!this.isAvailable(square.row, square.column)) {
-				return false;
-			}
-
-			if (Object.keys(this.letterSelected).length === 0) {
-				return false;
-			}
-
 			const replace = this.solutionGrid[square.row].split('');
 
-			replace[square.column] = this.letterSelected.value;
-			this.solutionGrid.splice(square.row, 1, replace.join(''));
+			if (this.mode === 'edit') {
+				const quoteWithBlankSquare = Array.from(this.solutionGrid);
 
-			this.$emit('used', square);
+				replace[square.column] = '-';
+				quoteWithBlankSquare.splice(square.row, 1, replace.join(''));
+				this.$parent.$emit('update:quote', quoteWithBlankSquare.join(''));
+			} else {
+				if (!this.isAvailable(square.row, square.column)) {
+					return false;
+				}
+
+				replace[square.column] = this.letterSelected.value;
+				this.solutionGrid.splice(square.row, 1, replace.join(''));
+				this.$emit('used', square);
+			}
 		},
 	},
 };
@@ -110,8 +116,13 @@ export default {
 @import '~@/styles/variables';
 
 .qf-square {
+	border-radius: 0;
 	line-height: 1.75;
 	transition: background-color, opacity, transform 1s;
+
+	&.v-btn {
+		min-width: #{$column-width}px;
+	}
 
 	&:not(.qf-blank) {
 		opacity: 0.4;
