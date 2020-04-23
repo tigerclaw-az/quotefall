@@ -1,9 +1,18 @@
-// $btn-icon-padding:
+@import './theme';
+
+// Global
+$font-size-root: 18px;
+$body-font-family: 'Avenir', Helvetica, Arial, sans-serif;
+
+// v-btn
+$btn-border-radius: 0;
+$btn-outline-border-width: 1px;
+
 //================================================
 //				APP VARIABLES
 //================================================
-$column-width: 36;
-$letter-height: 36;
+$column-width: 38;
+$letter-height: 38;
 
 $puzzle-background: white;
 // $letter-column-border: 1px solid md-get-color-by-theme('light', 'text-primary') !default;
