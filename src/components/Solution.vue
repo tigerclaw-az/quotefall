@@ -4,8 +4,10 @@
 			<v-btn
 				v-for="(square, colIndex) in row"
 				:key="`square-${getPosition(rowIndex, colIndex)}`"
+				:ripple="false"
+				:outlined="!isBlank(square)"
 				text
-				class="qf-square"
+				class="qf-square elevation-5"
 				:class="{
 					'qf-blank': isBlank(square),
 					'qf-available': isAvailable(rowIndex, colIndex),
@@ -70,10 +72,7 @@ export default {
 			return row * this.columns + col + 1;
 		},
 		isAvailable(row, col) {
-			return (
-				Object.keys(this.letterSelected).length !== 0
-				&& this.letterSelected.column === col
-			);
+			return Object.keys(this.letterSelected).length !== 0 && this.letterSelected.column === col;
 		},
 		isBlank(letter) {
 			return letter === '-' || letter === ' ';
@@ -95,7 +94,8 @@ export default {
 			if (this.mode === 'edit') {
 				const quoteWithBlankSquare = Array.from(this.solutionGrid);
 
-				replace[square.column] = '-';
+				// '-' => '_' , '_' => '-'
+				replace[square.column] = this.isBlank(replace[square.column]) ? '_' : '-';
 				quoteWithBlankSquare.splice(square.row, 1, replace.join(''));
 				this.$parent.$emit('update:quote', quoteWithBlankSquare.join(''));
 			} else {
@@ -116,17 +116,18 @@ export default {
 @import '~@/styles/variables';
 
 .qf-square {
-	border-radius: 0;
 	line-height: 1.75;
 	transition: background-color, opacity, transform 1s;
 
 	&.v-btn {
+		border-color: inherit;
 		min-width: #{$column-width}px;
+		padding: 0;
 	}
 
-	&:not(.qf-blank) {
-		opacity: 0.4;
-	}
+	// &:not(.qf-blank) {
+	// 	opacity: 0.4;
+	// }
 
 	&.qf-available:not(.qf-blank) {
 		background-color: yellow;

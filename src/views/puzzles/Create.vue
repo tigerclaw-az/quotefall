@@ -1,6 +1,6 @@
 <template>
 	<v-container fluid>
-		<v-form v-model="validPuzzle" @submit.prevent="savePuzzle()">
+		<v-form @submit.prevent="createPuzzle()">
 			<v-row>
 				<v-col cols="12" md="6">
 					<v-select
@@ -33,23 +33,25 @@
 				/>
 			</v-row>
 			<v-row wrap>
-				<v-btn
-					block
-					color="primary"
-					dark
-					type="submit"
-					:disabled="!validPuzzle"
-				>
-					Save
+				<v-btn color="primary" dark type="submit" :disabled="!validPuzzle">
+					Create
 				</v-btn>
 			</v-row>
 		</v-form>
+		<v-snackbar v-model="success" color="success" :multiLine="true">
+			New Puzzle Created
+			{{ puzzleData }}
+		</v-snackbar>
+		<v-snackbar v-model="error" color="error" :multiLine="true" :timeout="0">
+			{{ error }}
+			<v-btn dark flat @click.native="value = false">Close</v-btn>
+		</v-snackbar>
 	</v-container>
 </template>
 
 <script>
 import { getUuid } from '@/utils';
-import PuzzleGrid from '../components/PuzzleGrid.vue';
+import PuzzleGrid from '@/components/PuzzleGrid.vue';
 
 export default {
 	components: {
@@ -63,6 +65,8 @@ export default {
 		validPuzzle: false,
 		quote: '',
 		scrambled: '',
+		error: null,
+		success: false,
 	}),
 	computed: {
 		columnsCount() {
@@ -71,10 +75,18 @@ export default {
 		maxChars() {
 			return this.rows * this.columns;
 		},
+		puzzleData() {
+			return {
+				id: getUuid(),
+				columns: this.columns,
+				rows: this.rows,
+				scrambled: this.scrambled,
+				quote: this.quote,
+			};
+		},
 		rules() {
 			return {
-				min: v =>
-					(v && v.length >= this.maxChars) || `Must be ${this.maxChars} length`,
+				min: v => (v && v.length >= this.maxChars) || `Must be ${this.maxChars} length`,
 			};
 		},
 	},
@@ -93,6 +105,17 @@ export default {
 			},
 			immediate: true,
 		},
+		puzzleData: {
+			handler(val) {
+				if (val.scrambled.length === this.maxChars && val.quote.length === this.maxChars) {
+					const numSpaces = this.scrambled.split(' ').length;
+					const numBlanks = this.quote.split('-').length;
+
+					this.validPuzzle = numSpaces > 1 && numSpaces === numBlanks;
+				}
+			},
+			deep: true,
+		},
 	},
 	methods: {
 		onlyLetters(evt) {
@@ -102,14 +125,19 @@ export default {
 				evt.preventDefault();
 			}
 		},
-		savePuzzle() {
-			this.$store.dispatch('puzzles/add', {
-				id: getUuid(),
-				columns: this.columns,
-				rows: this.rows,
-				scrambled: this.scrambled,
-				quote: this.quote,
-			});
+		createPuzzle() {
+			this.$store
+				.dispatch('puzzles/add', this.puzzleData)
+				.then(() => {
+					this.success = true;
+
+					setTimeout(() => {
+						this.$router.push('/');
+					}, 2000);
+				})
+				.catch(err => {
+					this.error = err;
+				});
 		},
 		syncLetterPool(value) {
 			this.scrambled = value;

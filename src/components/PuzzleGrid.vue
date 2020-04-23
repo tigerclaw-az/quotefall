@@ -3,8 +3,8 @@
 		align-center
 		justify-center
 		wrap
-		class="qf-puzzle text-center"
-		:style="{ width: Math.round(38.625 * columns - 7) + 'px' }"
+		class="qf-puzzle white text-center"
+		:style="{ width: Math.round(39.25 * columns - 7) + 'px' }"
 	>
 		<letters
 			:columns="columns"
@@ -77,8 +77,9 @@ export default {
 @import '~@/styles/variables';
 
 .qf-puzzle {
-	background-color: $puzzle-background;
-	box-shadow: 0px 10px 15px 1px;
+	border: 1px solid;
+	@include elevation(10);
+	// box-shadow: 0px 10px 15px 1px;
 	color: black;
 	flex: 0 auto;
 	font-size: 1rem;
@@ -95,13 +96,13 @@ export default {
 
 		.qf-letter,
 		.qf-square {
-			border: $letter-column-border;
 			position: relative;
 			text-transform: capitalize;
 			width: #{$column-width}px;
 		}
 
 		.qf-letter {
+			border: $letter-column-border;
 			border-bottom: 0;
 			border-top: 0;
 

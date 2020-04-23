@@ -12,7 +12,6 @@
 			>
 				<v-btn
 					v-if="mode === 'solve'"
-					block
 					:disabled="isLetterDisabled(letter)"
 					:outlined="letterSelected.position === letter.position"
 					@click="onSelected(letter, rowIndex, colIndex)"
@@ -20,8 +19,9 @@
 					{{ letter.value }}
 				</v-btn>
 				<v-text-field
-					v-if="mode === 'edit'"
+					v-else
 					v-model="scrambledGrid[rowIndex][colIndex].letter"
+					autocomplete="off"
 					dense
 					:hide-details="true"
 					maxlength="1"
@@ -84,7 +84,7 @@ export default {
 			},
 			immediate: true,
 		},
-		scrambledGrid(to) {
+		scrambledGrid() {
 			this.syncScrambled();
 		},
 	},
@@ -97,7 +97,6 @@ export default {
 		},
 		letterOnly(evt) {
 			const keyCode = evt.keyCode ? evt.keyCode : evt.which;
-			this.$log.debug(keyCode);
 
 			if (keyCode === 8 || keyCode === 37) {
 				evt.target.value = '';
