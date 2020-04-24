@@ -7,7 +7,7 @@
 				:ripple="false"
 				:outlined="!isBlank(square)"
 				text
-				class="qf-square elevation-5"
+				class="qf-square"
 				:class="{
 					'qf-blank': isBlank(square),
 					'qf-available': isAvailable(rowIndex, colIndex),
@@ -21,7 +21,7 @@
 					})
 				"
 			>
-				<span class="qf-square-placeholder">
+				<span class="qf-square-placeholder" :class="{ used: /[a-z]/.test(square) }">
 					{{ square }}
 				</span>
 			</v-btn>
@@ -113,21 +113,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '~@/styles/variables';
-
 .qf-square {
+	border: 1px solid $letter-column-border;
+	font-size: 1.25rem;
 	line-height: 1.75;
-	transition: background-color, opacity, transform 1s;
+	transition: background-color, transform 0.75s;
 
 	&.v-btn {
 		border-color: inherit;
 		min-width: #{$column-width}px;
 		padding: 0;
-	}
 
-	// &:not(.qf-blank) {
-	// 	opacity: 0.4;
-	// }
+		&:disabled {
+			color: red !important;
+		}
+	}
 
 	&.qf-available:not(.qf-blank) {
 		background-color: yellow;
@@ -139,7 +139,7 @@ export default {
 			transform: scale(1.2, 1.2);
 
 			.qf-square-placeholder {
-				transform: translateX(20px);
+				transform: rotateY(90deg);
 			}
 		}
 	}
@@ -150,6 +150,13 @@ export default {
 
 	.qf-square-placeholder {
 		margin: 0;
+		transform: rotateY(90deg);
+		transition: transform 1s;
+		transition-delay: 0.5s;
+
+		&.used {
+			transform: rotateY(0deg);
+		}
 	}
 }
 </style>

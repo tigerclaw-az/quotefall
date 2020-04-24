@@ -1,16 +1,9 @@
 <template>
 	<v-app>
-		<v-app-bar app dark>
-			<v-app-bar-nav-icon @click="isMenuOpen = !isMenuOpen">
-				<v-icon>menu</v-icon>
-			</v-app-bar-nav-icon>
-
-			<v-toolbar-title class="v-title">Quotefalls</v-toolbar-title>
-		</v-app-bar>
-		<v-navigation-drawer v-model="isMenuOpen" app temporary>
-			<v-toolbar dense>
+		<v-navigation-drawer v-model="isMenuOpen" app clipped floating stateless class="elevation-5">
+			<!-- <v-toolbar dense>
 				<v-toolbar-title>Navigation</v-toolbar-title>
-			</v-toolbar>
+			</v-toolbar> -->
 
 			<v-list>
 				<v-list-item to="/" exact>
@@ -42,10 +35,18 @@
 				</v-list-item>
 			</v-list>
 		</v-navigation-drawer>
-		<v-content>
+		<v-app-bar app clipped-left dark>
+			<v-app-bar-nav-icon @click="isMenuOpen = !isMenuOpen">
+				<v-icon>menu</v-icon>
+			</v-app-bar-nav-icon>
+
+			<v-toolbar-title class="v-title">Quotefalls</v-toolbar-title>
+		</v-app-bar>
+
+		<v-content class="ml-2">
 			<v-container fluid>
 				<router-view />
-				<footer>Copyright (c) 2019</footer>
+				<v-footer app color="accent" tag="footer">Copyright (c) 2019</v-footer>
 			</v-container>
 		</v-content>
 	</v-app>
@@ -55,7 +56,7 @@
 export default {
 	components: {},
 	data: () => ({
-		isMenuOpen: false,
+		isMenuOpen: true,
 	}),
 };
 </script>

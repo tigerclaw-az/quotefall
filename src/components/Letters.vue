@@ -1,5 +1,5 @@
 <template>
-	<v-layout row justify-center no-gutters class="qf-letter-columns">
+	<v-layout row justify-center no-gutters class="qf-letter-pool">
 		<template v-for="(row, rowIndex) in scrambledGrid">
 			<span
 				v-for="(letter, colIndex) in row"
@@ -166,40 +166,12 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~@/styles/variables';
-
 .qf-letter {
+	border: $letter-column-border;
+	border-bottom: 0;
+	border-top: 0;
 	color: $letter-column-color;
 	transition: color, opacity 0.5s linear;
-	width: 100%;
-
-	.v-btn {
-		border-radius: 0;
-		font-size: inherit;
-		height: inherit;
-		margin: 0;
-		padding: 0 !important;
-	}
-
-	.v-text-field {
-		font-size: inherit;
-		margin: 0;
-		padding: 0;
-
-		.v-input__slot {
-			margin: 0;
-
-			&::before,
-			&::after {
-				border-style: none;
-			}
-
-			input {
-				text-align: center;
-				text-transform: uppercase;
-			}
-		}
-	}
 
 	&::after {
 		border-bottom: 0 solid red;
@@ -226,6 +198,33 @@ export default {
 		&::after {
 			border-bottom-width: 0.125em;
 			transform: translateY(-50%) rotate(-25deg) scale(1);
+		}
+	}
+
+	.v-btn {
+		border-color: inherit;
+		font-size: inherit;
+		margin: 0;
+		min-width: #{$column-width}px !important;
+		padding: 0 !important;
+	}
+
+	.v-text-field {
+		font-size: inherit;
+		margin: 0;
+
+		.v-input__slot {
+			margin: 0;
+
+			&::before,
+			&::after {
+				border-style: none;
+			}
+
+			input {
+				text-align: center;
+				text-transform: uppercase;
+			}
 		}
 	}
 }

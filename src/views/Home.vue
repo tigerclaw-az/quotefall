@@ -1,13 +1,19 @@
 <template>
-	<v-layout row wrap>
-		<h2>Puzzles</h2>
-		<v-list v-for="puzzle in puzzles" :key="puzzle.id">
-			<v-list-item :to="`/puzzles/${puzzle.id}`">
-				<v-icon>error</v-icon>
-				<v-list-item-title>{{ puzzle.id }}</v-list-item-title>
-			</v-list-item>
-		</v-list>
-	</v-layout>
+	<v-row>
+		<v-col cols="12">
+			<header>
+				<h2 class="display-2">Puzzles</h2>
+			</header>
+		</v-col>
+		<v-col cols="12">
+			<v-list color="secondary">
+				<v-list-item v-for="puzzle in puzzles" :key="puzzle.id" :to="`/puzzles/${puzzle.id}`">
+					<v-icon>error</v-icon>
+					<v-list-item-title>{{ puzzle.id }}</v-list-item-title>
+				</v-list-item>
+			</v-list>
+		</v-col>
+	</v-row>
 </template>
 
 <script>

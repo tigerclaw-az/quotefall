@@ -74,8 +74,6 @@ export default {
 </script>
 
 <style lang="scss">
-@import '~@/styles/variables';
-
 .qf-puzzle {
 	border: 1px solid;
 	@include elevation(10);
@@ -86,7 +84,7 @@ export default {
 	max-width: 100%;
 	padding: 0.75rem 4px;
 
-	.qf-letter-columns,
+	.qf-letter-pool,
 	.qf-solution-columns {
 		user-select: none;
 		width: 100%;
@@ -99,16 +97,6 @@ export default {
 			position: relative;
 			text-transform: capitalize;
 			width: #{$column-width}px;
-		}
-
-		.qf-letter {
-			border: $letter-column-border;
-			border-bottom: 0;
-			border-top: 0;
-
-			.qf-square {
-				border: 1px solid $letter-column-border;
-			}
 		}
 	}
 }
