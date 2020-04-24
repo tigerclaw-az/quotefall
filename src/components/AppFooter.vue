@@ -1,3 +1,3 @@
 <template>
-	<v-footer app color="accent" tag="footer">Copyright &copy; 2020</v-footer>
+	<v-footer app dark tag="footer">Copyright &copy; 2020</v-footer>
 </template>
