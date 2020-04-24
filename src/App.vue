@@ -35,29 +35,32 @@
 				</v-list-item>
 			</v-list>
 		</v-navigation-drawer>
-		<v-app-bar app clipped-left dark>
-			<v-app-bar-nav-icon @click="isMenuOpen = !isMenuOpen">
-				<v-icon>menu</v-icon>
-			</v-app-bar-nav-icon>
 
-			<v-toolbar-title class="v-title">Quotefalls</v-toolbar-title>
-		</v-app-bar>
+		<app-top-bar></app-top-bar>
 
 		<v-content class="ml-2">
 			<v-container fluid>
 				<router-view />
-				<v-footer app color="accent" tag="footer">Copyright (c) 2019</v-footer>
+				<app-footer></app-footer>
 			</v-container>
 		</v-content>
 	</v-app>
 </template>
 
 <script>
+import AppTopBar from '@/components/AppTopBar.vue';
+import AppFooter from '@/components/AppFooter.vue';
+
 export default {
-	components: {},
-	data: () => ({
-		isMenuOpen: true,
-	}),
+	components: {
+		AppTopBar,
+		AppFooter,
+	},
+	computed: {
+		isMenuOpen() {
+			return this.$store.state.isMenuOpen;
+		},
+	},
 };
 </script>
 <style lang="scss" src="./app.scss"></style>
