@@ -6,7 +6,7 @@
 		class="qf-puzzle white text-center"
 		:style="{ width: Math.round(39.25 * columns - 7) + 'px' }"
 	>
-		<letters
+		<letter-columns
 			:columns="columns"
 			:rows="rows"
 			:scrambled="scrambled"
@@ -14,7 +14,7 @@
 			:letter-replaced="letterReplaced"
 			:letter-selected.sync="letterSelected"
 		/>
-		<solution
+		<answer-grid
 			:columns="columns"
 			:rows="rows"
 			:quote="quote"
@@ -26,14 +26,13 @@
 </template>
 
 <script>
-import Letters from './Letters.vue';
-import Solution from './Solution.vue';
+import LetterColumns from './LetterColumns.vue';
+import AnswerGrid from './AnswerGrid.vue';
 
 export default {
-	name: 'puzzle-grid',
 	components: {
-		Letters,
-		Solution,
+		LetterColumns,
+		AnswerGrid,
 	},
 	props: {
 		columns: {

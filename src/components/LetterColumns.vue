@@ -35,7 +35,6 @@
 
 <script>
 export default {
-	name: 'letters',
 	props: {
 		columns: {
 			type: Number,
