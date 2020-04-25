@@ -1,5 +1,5 @@
 <template>
-	<v-layout row justify-center no-gutters class="qf-letter-pool">
+	<v-layout row justify-center no-gutters class="qf-letter-columns">
 		<template v-for="(row, rowIndex) in scrambledGrid">
 			<span
 				v-for="(letter, colIndex) in row"
@@ -118,17 +118,22 @@ export default {
 			this.moveNextLetter = false;
 		},
 		syncScrambled() {
-			const letterPool = this.scrambledGrid.reduce((acc, cur, idx) => {
+			const firstRow = this.scrambledGrid[0].map(letter => letter.letter || letter.value).join('');
+			let letterPool = this.scrambledGrid.reduce((acc, cur, idx) => {
 				let append = acc;
 
 				if (idx === 1) {
-					append = acc.map(letter => letter.letter || letter.value).join('');
+					append = firstRow;
 				}
 
 				const letters = cur.map(letter => letter.letter || letter.value);
 
 				return append + letters.join('');
 			});
+
+			if (this.scrambledGrid.length === 1) {
+				letterPool = firstRow;
+			}
 
 			this.$parent.$emit('update:letter-pool', letterPool);
 		},
@@ -165,64 +170,68 @@ export default {
 </script>
 
 <style lang="scss">
-.qf-letter {
-	border: $letter-column-border;
-	border-bottom: 0;
-	border-top: 0;
-	color: $letter-column-color;
-	transition: color, opacity 0.5s linear;
+.qf-letter-columns {
+	border-top: $letter-column-border;
 
-	&::after {
-		border-bottom: 0 solid red;
-		bottom: 0.25rem;
-		content: '';
-		height: 0.25em;
-		left: 0.25em;
-		position: absolute;
-		right: 0;
-		transform: scaleX(0);
-		transform-origin: 0% 50%;
-		transition: border-bottom-width, transform 0.5s linear;
-	}
-
-	&.selected {
-		.v-btn {
-			background-color: $letter-column-selected-color;
-		}
-	}
-
-	&.used {
-		opacity: 0.6;
+	.qf-letter {
+		border: $letter-column-border;
+		border-bottom: 0;
+		border-top: 0;
+		color: $letter-column-color;
+		transition: color, opacity 0.5s linear;
 
 		&::after {
-			border-bottom-width: 0.125em;
-			transform: translateY(-50%) rotate(-25deg) scale(1);
+			border-bottom: 0 solid red;
+			bottom: 0.25rem;
+			content: '';
+			height: 0.25em;
+			left: 0.25em;
+			position: absolute;
+			right: 0;
+			transform: scaleX(0);
+			transform-origin: 0% 50%;
+			transition: border-bottom-width, transform 0.5s linear;
 		}
-	}
 
-	.v-btn {
-		border-color: inherit;
-		font-size: inherit;
-		margin: 0;
-		min-width: #{$column-width}px !important;
-		padding: 0 !important;
-	}
+		&.selected {
+			.v-btn {
+				background-color: $letter-column-selected-color;
+			}
+		}
 
-	.v-text-field {
-		font-size: inherit;
-		margin: 0;
+		&.used {
+			opacity: 0.6;
 
-		.v-input__slot {
+			&::after {
+				border-bottom-width: 0.125em;
+				transform: translateY(-50%) rotate(-25deg) scale(1);
+			}
+		}
+
+		.v-btn {
+			border-color: inherit;
+			font-size: inherit;
+			margin: 0;
+			min-width: #{$column-width}px !important;
+			padding: 0 !important;
+		}
+
+		.v-text-field {
+			font-size: inherit;
 			margin: 0;
 
-			&::before,
-			&::after {
-				border-style: none;
-			}
+			.v-input__slot {
+				margin: 0;
 
-			input {
-				text-align: center;
-				text-transform: uppercase;
+				&::before,
+				&::after {
+					border-style: none;
+				}
+
+				input {
+					text-align: center;
+					text-transform: uppercase;
+				}
 			}
 		}
 	}
