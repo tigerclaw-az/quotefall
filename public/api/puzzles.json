@@ -6,22 +6,27 @@
 		"difficulty": 1,
 		"quote": "_________-__-____________--____--_________________-______-_-____-_-_",
 		"columns": 16,
-		"rows": 4
+		"rows": 4,
+		"submitted": "2020-04-25T03:40:27.908Z"
 	},
 	{
 		"id": "1da0f50e-88b3-4ca2-83fd-36c8b1bb5c20",
 		"author": "B. Frozen",
 		"columns": 19,
+		"difficulty": 2,
 		"rows": 4,
 		"scrambled": "sestueyioflectntmerbthengime toabuyhany stvdals taso yeaca ri t  s  h t o i ",
-		"quote": "_-_____-__-_________-_______-____-___-____-____-__-___-________-__-____-____"
+		"quote": "_-_____-__-_________-_______-____-___-____-____-__-___-________-__-____-____",
+		"submitted": "2020-04-25T03:40:27.908Z"
 	},
 	{
 		"id": "679ab019-83a1-4cda-8d2d-b5054647a9dc",
 		"author": "C. Hanson",
 		"columns": 12,
+		"difficulty": 3,
 		"rows": 1,
 		"scrambled": "quotefalls  ",
-		"quote": "__________--"
+		"quote": "__________--",
+		"submitted": "2020-04-25T03:40:27.908Z"
 	}
 ]
