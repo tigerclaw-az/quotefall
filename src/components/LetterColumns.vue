@@ -65,7 +65,6 @@ export default {
 	}),
 	watch: {
 		letterReplaced(replaced) {
-			this.$log.debug(replaced);
 			const returnLetter = this.scrambledGrid.find(
 				row => replaced.value === row[replaced.column].value
 			)[replaced.column];
@@ -119,7 +118,7 @@ export default {
 		},
 		syncScrambled() {
 			const firstRow = this.scrambledGrid[0].map(letter => letter.letter || letter.value).join('');
-			let letterPool = this.scrambledGrid.reduce((acc, cur, idx) => {
+			const letterPool = this.scrambledGrid.reduce((acc, cur, idx) => {
 				let append = acc;
 
 				if (idx === 1) {
@@ -130,10 +129,6 @@ export default {
 
 				return append + letters.join('');
 			});
-
-			if (this.scrambledGrid.length === 1) {
-				letterPool = firstRow;
-			}
 
 			this.$parent.$emit('update:letter-pool', letterPool);
 		},
