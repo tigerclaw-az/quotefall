@@ -60,13 +60,14 @@ export default {
 	data: () => ({
 		columns: 16,
 		rows: 4,
-		columnsList: [14, 15, 16, 17, 18, 19],
-		rowsList: [3, 4, 5],
+		columnsList: [10, 12, 15, 16, 17, 18, 19],
+		rowsList: [2, 3, 4, 5],
 		validPuzzle: false,
 		quote: '',
 		scrambled: '',
 		error: null,
 		success: false,
+		puzzleId: getUuid(),
 	}),
 	computed: {
 		columnsCount() {
@@ -77,7 +78,7 @@ export default {
 		},
 		puzzleData() {
 			return {
-				id: getUuid(),
+				id: this.puzzleId,
 				columns: this.columns,
 				rows: this.rows,
 				scrambled: this.scrambled,

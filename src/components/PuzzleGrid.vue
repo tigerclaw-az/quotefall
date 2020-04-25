@@ -83,8 +83,8 @@ export default {
 	max-width: 100%;
 	padding: 0.75rem 4px;
 
-	.qf-letter-pool,
-	.qf-solution-columns {
+	.qf-letter-columns,
+	.qf-answer-grid {
 		user-select: none;
 		width: 100%;
 

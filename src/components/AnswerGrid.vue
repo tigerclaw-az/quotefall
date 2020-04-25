@@ -1,5 +1,5 @@
 <template>
-	<v-layout row justify-center no-gutters class="qf-solution-columns">
+	<v-layout row justify-center no-gutters class="qf-answer-grid">
 		<template v-for="(row, rowIndex) in solutionGrid">
 			<v-btn
 				v-for="(square, colIndex) in row"
