@@ -6,10 +6,10 @@
 			</header>
 		</v-col>
 		<v-col cols="12">
-			<v-list color="secondary">
+			<v-list color="primary">
 				<v-list-item v-for="puzzle in puzzles" :key="puzzle.id" :to="`/puzzles/${puzzle.id}`">
 					<v-icon>error</v-icon>
-					<v-list-item-title>{{ puzzle.id }}</v-list-item-title>
+					<v-list-item-title>## by {{ puzzle.author }}</v-list-item-title>
 				</v-list-item>
 			</v-list>
 		</v-col>
