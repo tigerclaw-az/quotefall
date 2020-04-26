@@ -1,5 +1,5 @@
 <template>
-	<v-navigation-drawer class="elevation-5" app dark clipped floating stateless :value="isMenuOpen">
+	<v-navigation-drawer app color="accent" clipped floating stateless :value="isMenuOpen">
 		<!-- <v-toolbar dense>
 				<v-toolbar-title>Navigation</v-toolbar-title>
 			</v-toolbar> -->
