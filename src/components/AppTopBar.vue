@@ -1,5 +1,5 @@
 <template>
-	<v-app-bar app clipped-left dark :fade-img-on-scroll="true" prominent>
+	<v-app-bar app clipped-left :fade-img-on-scroll="true" prominent>
 		<v-app-bar-nav-icon @click="toggleMenu()">
 			<v-icon>menu</v-icon>
 		</v-app-bar-nav-icon>

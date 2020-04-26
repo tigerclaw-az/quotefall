@@ -6,7 +6,7 @@
 			</header>
 		</v-col> -->
 		<v-col cols="12">
-			<v-list two-line dark subheader>
+			<v-list two-line subheader>
 				<v-list-item v-for="puzzle in puzzles" :key="puzzle.id" :to="`/puzzles/${puzzle.id}`">
 					<v-list-item-avatar>
 						<v-icon>error</v-icon>

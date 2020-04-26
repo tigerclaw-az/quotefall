@@ -33,7 +33,7 @@
 				/>
 			</v-row>
 			<v-row wrap>
-				<v-btn color="primary" dark type="submit" :disabled="!validPuzzle">
+				<v-btn color="primary" type="submit" :disabled="!validPuzzle">
 					Create
 				</v-btn>
 			</v-row>
@@ -44,7 +44,7 @@
 		</v-snackbar>
 		<v-snackbar v-model="error" color="error" :multiLine="true" :timeout="0">
 			{{ error }}
-			<v-btn dark flat @click.native="value = false">Close</v-btn>
+			<v-btn flat @click.native="value = false">Close</v-btn>
 		</v-snackbar>
 	</v-container>
 </template>
