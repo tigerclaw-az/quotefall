@@ -32,7 +32,7 @@
 					@update:quote="syncQuote($event)"
 				/>
 			</v-row>
-			<v-row wrap>
+			<v-row>
 				<v-btn color="primary" type="submit" :disabled="!validPuzzle">
 					Create
 				</v-btn>

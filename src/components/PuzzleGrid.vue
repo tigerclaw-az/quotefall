@@ -1,9 +1,8 @@
 <template>
 	<v-container
-		align-center
-		justify-center
-		wrap
-		class="qf-puzzle white text-center"
+		align="center"
+		justify="center"
+		class="qf-puzzle pa-0 text-center"
 		:style="{ width: Math.round(39.25 * columns - 7) + 'px' }"
 	>
 		<letter-columns
@@ -74,27 +73,27 @@ export default {
 
 <style lang="scss">
 .qf-puzzle {
-	border: 1px solid;
+	// border: 1px solid;
 	@include elevation(10);
-	// box-shadow: 0px 10px 15px 1px;
-	color: black;
 	flex: 0 auto;
 	font-size: 1rem;
+	height: 100%;
 	max-width: 100%;
 	padding: 0.75rem 4px;
 
 	.qf-letter-columns,
 	.qf-answer-grid {
+		background-color: #fff;
 		user-select: none;
 		width: 100%;
-
-		background-color: $puzzle-background;
 		text-align: center;
 
 		.qf-letter,
 		.qf-square {
 			position: relative;
 			text-transform: capitalize;
+			height: #{$column-width}px;
+			min-width: #{$column-width}px;
 			width: #{$column-width}px;
 		}
 	}

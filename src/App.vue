@@ -5,7 +5,7 @@
 		<app-top-bar></app-top-bar>
 
 		<v-content>
-			<v-container fluid>
+			<v-container fluid class="container--main">
 				<router-view />
 			</v-container>
 		</v-content>

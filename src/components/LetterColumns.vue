@@ -1,5 +1,5 @@
 <template>
-	<v-layout row justify-center no-gutters class="qf-letter-columns">
+	<v-row align="center" justify="center" no-gutters class="qf-letter-columns">
 		<template v-for="(row, rowIndex) in scrambledGrid">
 			<span
 				v-for="(letter, colIndex) in row"
@@ -30,7 +30,7 @@
 				/>
 			</span>
 		</template>
-	</v-layout>
+	</v-row>
 </template>
 
 <script>
@@ -206,8 +206,9 @@ export default {
 		.v-btn {
 			border-color: inherit;
 			font-size: inherit;
+			height: inherit !important;
 			margin: 0;
-			min-width: #{$column-width}px !important;
+			min-width: inherit !important;
 			padding: 0 !important;
 		}
 

@@ -1,18 +1,22 @@
 <template>
-	<v-layout row wrap align-center justify-center>
-		<v-card color="accent">
-			<v-card-title>Quote: {{ puzzle.id }}</v-card-title>
-			<v-card-text>Difficulty: {{ puzzle.difficulty }}</v-card-text>
-		</v-card>
-
-		<PuzzleGrid
-			v-if="puzzle.id"
-			:columns="puzzle.columns"
-			:rows="puzzle.rows"
-			:scrambled="puzzle.scrambled"
-			:quote="puzzle.quote"
-		/>
-	</v-layout>
+	<v-row align="center" justify="center">
+		<v-col cols="12">
+			<v-card color="secondary">
+				<v-card-title>Quote: {{ puzzle.id }}</v-card-title>
+				<v-card-text>Difficulty: {{ puzzle.difficulty }}</v-card-text>
+			</v-card>
+		</v-col>
+		<v-spacer></v-spacer>
+		<v-col cols="12">
+			<PuzzleGrid
+				v-if="puzzle.id"
+				:columns="puzzle.columns"
+				:rows="puzzle.rows"
+				:scrambled="puzzle.scrambled"
+				:quote="puzzle.quote"
+			/>
+		</v-col>
+	</v-row>
 </template>
 
 <script>
@@ -46,3 +50,9 @@ export default {
 	},
 };
 </script>
+
+<style lang="scss" scoped>
+.row {
+	height: 100%;
+}
+</style>

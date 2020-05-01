@@ -1,32 +1,34 @@
 <template>
-	<v-layout row justify-center no-gutters class="qf-answer-grid">
-		<template v-for="(row, rowIndex) in solutionGrid">
-			<v-btn
-				v-for="(square, colIndex) in row"
-				:key="`square-${getPosition(rowIndex, colIndex)}`"
-				:ripple="false"
-				:outlined="!isBlank(square)"
-				text
-				class="qf-square"
-				:class="{
-					'qf-blank': isBlank(square),
-					'qf-available': isAvailable(rowIndex, colIndex),
-				}"
-				:disabled="mode === 'solve' && !isAvailable(rowIndex, colIndex)"
-				@click="
-					updateSquare({
-						value: square,
-						row: rowIndex,
-						column: colIndex,
-					})
-				"
-			>
-				<span class="qf-square-placeholder" :class="{ used: /[a-z]/.test(square) }">
-					{{ square }}
-				</span>
-			</v-btn>
-		</template>
-	</v-layout>
+	<v-row justify-center no-gutters class="qf-answer-grid">
+		<v-col cols="12">
+			<template v-for="(row, rowIndex) in solutionGrid">
+				<v-btn
+					v-for="(square, colIndex) in row"
+					:key="`square-${getPosition(rowIndex, colIndex)}`"
+					:ripple="false"
+					:outlined="!isBlank(square)"
+					text
+					class="qf-square"
+					:class="{
+						'qf-blank': isBlank(square),
+						'qf-available': isAvailable(rowIndex, colIndex),
+					}"
+					:disabled="mode === 'solve' && !isAvailable(rowIndex, colIndex)"
+					@click="
+						updateSquare({
+							value: square,
+							row: rowIndex,
+							column: colIndex,
+						})
+					"
+				>
+					<span class="qf-square-placeholder" :class="{ used: /[a-z]/.test(square) }">
+						{{ square }}
+					</span>
+				</v-btn>
+			</template>
+		</v-col>
+	</v-row>
 </template>
 
 <script>

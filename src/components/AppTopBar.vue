@@ -6,6 +6,20 @@
 
 		<v-toolbar-title class="qf-title"><h1 class="display-4">Quotefalls</h1></v-toolbar-title>
 		<v-subheader>"drop quotes"</v-subheader>
+		<v-spacer></v-spacer>
+		<v-list class="qf-navigation">
+			<v-list-item to="/" exact>
+				<v-list-item-title class="v-list-item-text">Archives</v-list-item-title>
+			</v-list-item>
+
+			<v-list-item to="/puzzles/create" exact>
+				<v-list-item-title class="v-list-item-text">Create</v-list-item-title>
+			</v-list-item>
+
+			<v-list-item to="/help" exact>
+				<v-list-item-title class="v-list-item-text">Help</v-list-item-title>
+			</v-list-item>
+		</v-list>
 	</v-app-bar>
 </template>
 
@@ -20,4 +34,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.qf-navigation {
+	display: flex;
+}
 </style>

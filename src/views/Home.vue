@@ -1,12 +1,7 @@
 <template>
-	<v-row>
-		<!-- <v-col cols="12">
-			<header>
-				<h2 class="display-2">Puzzles</h2>
-			</header>
-		</v-col> -->
+	<v-row align="center" justify="center">
 		<v-col cols="12">
-			<v-list two-line subheader>
+			<v-list class="qf-puzzles-list" two-line subheader>
 				<v-list-item v-for="puzzle in puzzles" :key="puzzle.id" :to="`/puzzles/${puzzle.id}`">
 					<v-list-item-avatar>
 						<v-icon>error</v-icon>
@@ -42,3 +37,9 @@ export default {
 	},
 };
 </script>
+
+<style lang="scss" scoped>
+.row {
+	height: 100%;
+}
+</style>
