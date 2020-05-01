@@ -13,7 +13,7 @@
 						'qf-blank': isBlank(square),
 						'qf-available': isAvailable(rowIndex, colIndex),
 					}"
-					:disabled="mode === 'solve' && !isAvailable(rowIndex, colIndex)"
+					:disabled="mode === 'solve' && (isBlank(square) || !isAvailable(rowIndex, colIndex))"
 					@click="
 						updateSquare({
 							value: square,
