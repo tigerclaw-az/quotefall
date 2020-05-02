@@ -2,7 +2,19 @@
 	<v-container fluid>
 		<v-form @submit.prevent="createPuzzle()">
 			<v-row>
-				<v-col cols="12" md="6">
+				<v-col cols="6" md="3">
+					<v-text-field v-model="author" required name="author" label="Author" single-line></v-text-field>
+				</v-col>
+				<v-col cols="6" md="3">
+					<v-select
+						v-model="difficultyLevel"
+						label="Difficulty"
+						:items="difficultyList"
+						hint="Choose difficulty level"
+						persistent-hint
+					></v-select>
+				</v-col>
+				<v-col cols="6" md="3">
 					<v-select
 						v-model="rows"
 						label="# of Rows"
@@ -11,7 +23,7 @@
 						persistent-hint
 					></v-select>
 				</v-col>
-				<v-col cols="12" md="6">
+				<v-col cols="6" md="3">
 					<v-select
 						v-model="columns"
 						label="# of Columns"
@@ -58,11 +70,27 @@ export default {
 		PuzzleGrid,
 	},
 	data: () => ({
+		author: '',
 		columns: 16,
 		rows: 4,
+		difficultyList: [
+			{
+				key: 1,
+				text: 'Easy',
+			},
+			{
+				key: 2,
+				text: 'Hard',
+			},
+			{
+				key: 3,
+				text: 'Challenging',
+			},
+		],
 		columnsList: [10, 12, 15, 16, 17, 18, 19],
 		rowsList: [2, 3, 4, 5],
 		validPuzzle: false,
+		difficultyLevel: { key: 1, text: 'Easy' },
 		quote: '',
 		scrambled: '',
 		error: null,
@@ -79,10 +107,13 @@ export default {
 		puzzleData() {
 			return {
 				id: this.puzzleId,
+				author: this.author,
+				difficulty: this.difficultyLevel.key,
 				columns: this.columns,
 				rows: this.rows,
-				scrambled: this.scrambled,
 				quote: this.quote,
+				scrambled: this.scrambled,
+				submitted: new Date().toLocaleDateString(),
 			};
 		},
 		rules() {
@@ -131,6 +162,7 @@ export default {
 				.dispatch('puzzles/add', this.puzzleData)
 				.then(() => {
 					this.success = true;
+					this.$log.info(JSON.stringify(this.puzzleData));
 
 					setTimeout(() => {
 						this.$router.push('/');
