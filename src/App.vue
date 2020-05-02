@@ -1,7 +1,5 @@
 <template>
 	<v-app>
-		<app-sidebar></app-sidebar>
-
 		<app-top-bar></app-top-bar>
 
 		<v-content>
@@ -16,13 +14,11 @@
 <script>
 import AppTopBar from '@/components/AppTopBar.vue';
 import AppFooter from '@/components/AppFooter.vue';
-import AppSidebar from '@/components/AppSidebar.vue';
 
 export default {
 	components: {
 		AppTopBar,
 		AppFooter,
-		AppSidebar,
 	},
 };
 </script>
