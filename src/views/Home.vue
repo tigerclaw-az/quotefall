@@ -1,35 +1,23 @@
 <template>
-	<v-row align="center" justify="center">
-		<v-col cols="12">
-			<v-list class="qf-puzzles-list" two-line subheader>
-				<v-list-item v-for="puzzle in puzzles" :key="puzzle.id" :to="`/puzzles/${puzzle.id}`">
-					<v-list-item-avatar>
-						<v-icon>error</v-icon>
-					</v-list-item-avatar>
-					<v-list-item-content>
-						<v-list-item-title>## by {{ puzzle.author }}</v-list-item-title>
-						<v-list-item-subtitle>{{ puzzle.submitted }}</v-list-item-subtitle>
-					</v-list-item-content>
-				</v-list-item>
-			</v-list>
-		</v-col>
-	</v-row>
+	<v-container align-center align-content-center d-flex fill-height fluid justify-center wrap>
+		<v-list class="qf-choices">
+			<v-list-item>
+				<v-btn to="/puzzles/archives">Archives</v-btn>
+			</v-list-item>
+		</v-list>
+	</v-container>
 </template>
 
 <script>
 import axios from 'axios';
-import { mapState } from 'vuex';
 
 export default {
 	props: {},
 	data: () => ({}),
-	computed: {
-		...mapState({
-			puzzles: state => state.puzzles.puzzles,
-		}),
-	},
+
 	mounted() {
 		axios.get('./api/puzzles.json').then(response => {
+			this.$log.debug(response);
 			response.data.forEach(puzzle => {
 				this.$store.dispatch('puzzles/add', puzzle);
 			});
@@ -39,7 +27,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.row {
-	height: 100%;
+>>> .row {
+	max-width: 300px;
 }
 </style>

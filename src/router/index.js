@@ -11,15 +11,20 @@ const routes = [
 		component: Home,
 	},
 	{
+		path: '/puzzles/archives',
+		name: 'archives',
+		component: () => import(/* webpackChunkName: "puzzles-archives" */ '../views/puzzles/Archives.vue'),
+	},
+	{
 		path: '/puzzles/create',
-		name: 'new-puzzle',
+		name: 'puzzles-create',
 		component: () => import(/* webpackChunkName: "puzzles-create" */ '../views/puzzles/Create.vue'),
 	},
 	{
 		path: '/puzzles/:id',
-		name: 'puzzles',
+		name: 'puzzles-id',
 		props: true,
-		component: () => import(/* webpackChunkName: "puzzles" */ '../views/puzzles/Puzzles.vue'),
+		component: () => import(/* webpackChunkName: "puzzles-id" */ '../views/puzzles/Puzzle.vue'),
 	},
 	{
 		path: '/about',

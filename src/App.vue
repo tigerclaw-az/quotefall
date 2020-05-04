@@ -3,7 +3,7 @@
 		<app-top-bar></app-top-bar>
 
 		<v-content>
-			<v-container fluid class="container--main">
+			<v-container fill-height fluid class="container--main">
 				<router-view />
 			</v-container>
 		</v-content>

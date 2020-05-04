@@ -9,6 +9,10 @@
 		<v-spacer></v-spacer>
 		<v-list class="qf-navigation">
 			<v-list-item to="/" exact>
+				<v-list-item-title class="v-list-item-text">Home</v-list-item-title>
+			</v-list-item>
+
+			<v-list-item to="/puzzles/archives" exact>
 				<v-list-item-title class="v-list-item-text">Archives</v-list-item-title>
 			</v-list-item>
 
