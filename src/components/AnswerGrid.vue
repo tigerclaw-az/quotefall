@@ -68,6 +68,11 @@ export default {
 			immediate: true,
 		},
 	},
+	mounted() {
+		this.$root.$on('puzzle:reset', () => {
+			this.$log.debug('RESET');
+		});
+	},
 	methods: {
 		getPosition(row, col) {
 			return row * this.columns + col + 1;
@@ -100,10 +105,6 @@ export default {
 				quoteWithBlankSquare.splice(square.row, 1, replace.join(''));
 				this.$parent.$emit('update:quote', quoteWithBlankSquare.join(''));
 			} else {
-				if (!this.isAvailable(square.row, square.column)) {
-					return false;
-				}
-
 				replace[square.column] = this.letterSelected.value;
 				this.solutionGrid.splice(square.row, 1, replace.join(''));
 				this.$emit('used', square);

@@ -21,6 +21,11 @@
 			:letter-selected="letterSelected"
 			@used="onLetterUsed($event)"
 		/>
+		<v-row>
+			<v-col cols="12" justify="center">
+				<v-btn large color="primary" @click="resetGrid()">Reset</v-btn>
+			</v-col>
+		</v-row>
 	</v-container>
 </template>
 
@@ -60,6 +65,10 @@ export default {
 		letterSelected: {},
 	}),
 	methods: {
+		resetGrid() {
+			this.letterSelected = {};
+			this.$root.$emit('puzzle:reset');
+		},
 		onLetterUsed(square) {
 			if (square.value.match(/[a-z]/g)) {
 				this.letterReplaced = square;

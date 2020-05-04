@@ -86,6 +86,11 @@ export default {
 			this.syncScrambled();
 		},
 	},
+	mounted() {
+		this.$root.$on('puzzle:reset', () => {
+			this.$log.debug('RESET');
+		});
+	},
 	methods: {
 		getPosition(row, col) {
 			return row * this.columns + col + 1;
