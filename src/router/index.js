@@ -1,5 +1,8 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import axios from 'axios';
+import store from '@/store/index';
+
 import Home from '../views/Home.vue';
 
 Vue.use(VueRouter);
@@ -13,7 +16,8 @@ const routes = [
 	{
 		path: '/puzzles/archives',
 		name: 'archives',
-		component: () => import(/* webpackChunkName: "puzzles-archives" */ '../views/puzzles/Archives.vue'),
+		component: () =>
+			import(/* webpackChunkName: "puzzles-archives" */ '../views/puzzles/Archives.vue'),
 	},
 	{
 		path: '/puzzles/create',
@@ -40,6 +44,24 @@ const router = new VueRouter({
 	mode: 'history',
 	base: process.env.BASE_URL,
 	routes,
+});
+
+router.beforeEach((_to, _from, next) => {
+	if (!store.state.puzzles.puzzles.length) {
+		axios
+			.get('/api/puzzles.json')
+			.then(response => {
+				// this.$log.debug(response);
+				response.data.forEach(puzzle => {
+					store.dispatch('puzzles/add', puzzle);
+				});
+			})
+			.finally(() => {
+				next();
+			});
+	} else {
+		next();
+	}
 });
 
 export default router;

@@ -43,7 +43,7 @@ export default {
 			return this.getPuzzle(this.id);
 		},
 	},
-	created() {
+	mounted() {
 		if (!this.$store.state.puzzles.puzzles.length) {
 			this.$router.push('/');
 		}

@@ -9,20 +9,9 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
 	props: {},
 	data: () => ({}),
-
-	mounted() {
-		axios.get('./api/puzzles.json').then(response => {
-			this.$log.debug(response);
-			response.data.forEach(puzzle => {
-				this.$store.dispatch('puzzles/add', puzzle);
-			});
-		});
-	},
 };
 </script>
 
