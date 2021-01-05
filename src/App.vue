@@ -2,11 +2,11 @@
 	<v-app>
 		<app-top-bar></app-top-bar>
 
-		<v-content>
-			<v-container fill-height fluid class="container--main">
+		<v-main>
+			<v-container fill-height fluid class="container--app">
 				<router-view />
 			</v-container>
-		</v-content>
+		</v-main>
 		<app-footer></app-footer>
 	</v-app>
 </template>
