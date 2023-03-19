@@ -3,7 +3,13 @@
 		<v-form @submit.prevent="createPuzzle()">
 			<v-row>
 				<v-col cols="6" md="3">
-					<v-text-field v-model="author" required name="author" label="Author" single-line></v-text-field>
+					<v-text-field
+						v-model="author"
+						required
+						name="author"
+						label="Author"
+						single-line
+					></v-text-field>
 				</v-col>
 				<v-col cols="6" md="3">
 					<v-select

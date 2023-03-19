@@ -12,6 +12,7 @@
 			>
 				<v-btn
 					v-if="mode === 'solve'"
+					elevation="0"
 					:disabled="isLetterDisabled(letter)"
 					:outlined="letterSelected.position === letter.position"
 					@click="onSelected(letter, rowIndex, colIndex)"
@@ -72,7 +73,7 @@ export default {
 			this.updateLetterPool(returnLetter, false);
 		},
 		letterSelected(to, from) {
-			if (Object.keys(to).length === 0) {
+			if (Object.keys(from).length !== 0 && Object.keys(to).length === 0) {
 				this.updateLetterPool(from, true);
 			}
 		},
@@ -88,7 +89,8 @@ export default {
 	},
 	mounted() {
 		this.$root.$on('puzzle:reset', () => {
-			this.$log.debug('RESET');
+			// this.$log.debug('RESET');
+			this.rebuildGrid();
 		});
 	},
 	methods: {
@@ -138,6 +140,10 @@ export default {
 			this.$parent.$emit('update:letter-pool', letterPool);
 		},
 		updateLetterPool(letter, isUsed) {
+			if (!letter) {
+				return;
+			}
+
 			this.scrambledGrid[letter.row].splice(letter.column, 1, {
 				...letter,
 				isUsed,
@@ -190,7 +196,7 @@ export default {
 			right: 0;
 			transform: scaleX(0);
 			transform-origin: 0% 50%;
-			transition: border-bottom-width, transform 0.5s linear;
+			transition: transform 0.25s ease-out 0.25s;
 		}
 
 		&.selected {
@@ -204,11 +210,12 @@ export default {
 
 			&::after {
 				border-bottom-width: 0.125em;
-				transform: translateY(-50%) rotate(-25deg) scale(1);
+				transform: translateY(-100%) rotate(-25deg) scale(1);
 			}
 		}
 
 		.v-btn {
+			background-color: $puzzle-background;
 			border-color: inherit;
 			font-size: inherit;
 			height: inherit !important;

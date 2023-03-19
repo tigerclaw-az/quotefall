@@ -4,6 +4,7 @@
 			<template v-for="(row, rowIndex) in solutionGrid">
 				<v-btn
 					v-for="(square, colIndex) in row"
+					elevation="0"
 					:key="`square-${getPosition(rowIndex, colIndex)}`"
 					:ripple="false"
 					:outlined="!isBlank(square)"
@@ -12,6 +13,9 @@
 					:class="{
 						'qf-blank': isBlank(square),
 						'qf-available': isAvailable(rowIndex, colIndex),
+					}"
+					:style="{
+						'border-right-width': (colIndex + 1) % columns === 0 ? '1px' : '0',
 					}"
 					:disabled="mode === 'solve' && (isBlank(square) || !isAvailable(rowIndex, colIndex))"
 					@click="
@@ -71,6 +75,7 @@ export default {
 	mounted() {
 		this.$root.$on('puzzle:reset', () => {
 			this.$log.debug('RESET');
+			this.rebuildGrid();
 		});
 	},
 	methods: {
@@ -119,10 +124,12 @@ export default {
 	border: 1px solid $letter-column-border;
 	font-size: 1.25rem;
 	line-height: 1.75;
-	transition: background-color, transform 0.75s;
+	transition: background-color, transform 0.5s;
 
 	&.v-btn {
 		border-color: inherit;
+		border-bottom-width: 0;
+		border-right-width: 0;
 		min-width: #{$column-width}px;
 		padding: 0;
 
@@ -153,8 +160,8 @@ export default {
 	.qf-square-placeholder {
 		margin: 0;
 		transform: rotateY(90deg);
-		transition: transform 1s;
-		transition-delay: 0.5s;
+		transition: transform 0.75s;
+		transition-delay: 0.25s;
 
 		&.used {
 			transform: rotateY(0deg);

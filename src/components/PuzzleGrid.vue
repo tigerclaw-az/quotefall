@@ -1,9 +1,16 @@
 <template>
+	<!--
+		TODO:
+			1) Clear column
+			2) Undo
+			3) Put letter back
+			4) Put letter in different place if already used
+	-->
 	<v-container
 		align="center"
 		justify="center"
 		class="qf-puzzle pa-0 text-center"
-		:style="{ width: Math.round(39.25 * columns - 7) + 'px' }"
+		:style="{ width: Math.round(39.25 * columns - (columns + 4)) + 'px' }"
 	>
 		<letter-columns
 			:columns="columns"

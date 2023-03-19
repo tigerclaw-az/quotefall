@@ -4,8 +4,8 @@
 			<v-icon>menu</v-icon>
 		</v-app-bar-nav-icon> -->
 
-		<v-toolbar-title class="qf-title"><h1 class="display-4">Quotefalls</h1></v-toolbar-title>
-		<v-subheader>"drop quotes"</v-subheader>
+		<v-toolbar-title class="qf-title"><h1 class="display-3">"QUOTEFALLS"</h1></v-toolbar-title>
+		<!-- <v-subheader>"drop quotes"</v-subheader> -->
 		<v-spacer></v-spacer>
 		<v-list class="qf-navigation">
 			<v-list-item to="/" exact>
